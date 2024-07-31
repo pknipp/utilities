@@ -2,7 +2,7 @@
 
 function sigFigFormat($number, $digits) {
     echo $number;
-    echo $digits;
+    echo $digits;   
     $outputString = $number + $digits;
     return $outputString;
 }
