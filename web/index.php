@@ -48,10 +48,10 @@ foreach ($routes as $route) {
   });
 };
 
-$app->get('/html/{number}', function(string $number, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-  $data = ['number' => $number];
+$app->get('/html/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+  $data = ['number' => $number, 'digits' => $digits];
   $logger->debug('logging output from /html/{data} route');
-  return $twig->render($response, 'html.twig', ['formattedNumber' => sigFigFormat($data['number'], 3)]);
+  return $twig->render($response, 'html.twig', ['formattedNumber' => sigFigFormat($data)]);
 });
 
 $app->get('/json/{data}', function(string $data, Request $request, Response $response, LoggerInterface $logger) {
