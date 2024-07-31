@@ -50,22 +50,9 @@ foreach ($routes as $route) {
 
 $app->get('/html/{numberString}/{digitsString}', function(string $numberString, string $digitsString, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $logger->debug('logging output from /html/{number}/{digits} route');
-  $errorMessage = "";
-  $number = 0.;
-  $digits = 3;
-  if (filter_var($numberString, FILTER_VALIDATE_FLOAT)) {
-    $number = floatval($numberString);
-  } else {
-    $errorMessage = "Invalid number";
-  }
-  if (filter_var($digitsString, FILTER_VALIDATE_INT)) {
-    $digits = intval($digitsString);
-  } else {
-    $errorMessage = "Invalid digits";
-  }
-  if ($digits < 1) {
-    $errorMessage = "Digits must be positive.";
-  }
+  $number = filter_var($numberString, FILTER_VALIDATE_FLOAT);
+  $digits = filter_var($digitsString, FILTER_VALIDATE_INT);
+  $errorMessage = ($number == FALSE) ? "invalid number" : (($digits == FALSE) ? "invalid digits" : (($digits < 1) ? "digits must be positive" : ""));
   // Why cannot I use short-circuit here?
   return $twig->render($response, 'html.twig', ['formattedNumber' => (($errorMessage) ? $errorMessage : sigFigFormat($number, $digits))]);
 });
