@@ -49,9 +49,8 @@ foreach ($routes as $route) {
 };
 
 $app->get('/html/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-  $data = ['number' => $number, 'digits' => $digits];
-  $logger->debug('logging output from /html/{data} route');
-  return $twig->render($response, 'html.twig', ['formattedNumber' => sigFigFormat($data)]);
+  $logger->debug('logging output from /html/{number}/{digits} route');
+  return $twig->render($response, 'html.twig', ['formattedNumber' => sigFigFormat($number, $digits)]);
 });
 
 $app->get('/json/{data}', function(string $data, Request $request, Response $response, LoggerInterface $logger) {
