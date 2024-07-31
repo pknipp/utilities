@@ -13,6 +13,7 @@ use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
 
 require(__DIR__.'/../vendor/autoload.php');
+require('./significance.php');
 
 // Create DI container
 $container = new Container();
@@ -50,7 +51,7 @@ foreach ($routes as $route) {
 $app->get('/html/{data}', function(string $data, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $data = ['data' => $data];
   $logger->debug('logging output from /html/{data} route');
-  return $twig->render($response, 'html.twig', $data);
+  return $twig->render($response, 'html.twig', sigFigFormat($data, 3));
 });
 
 $app->get('/json/{data}', function(string $data, Request $request, Response $response, LoggerInterface $logger) {
