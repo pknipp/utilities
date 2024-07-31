@@ -67,7 +67,7 @@ $app->get('/html/{numberString}/{digitsString}', function(string $numberString, 
     $errorMessage = "Digits must be positive.";
   }
   $logger->debug("error message - number - digits = " . $errorMessage . $number . $digits);
-  return $twig->render($response, 'html.twig', ['formattedNumber' => ($errorMessage || sigFigFormat($number, $digits))]);
+  return $twig->render($response, 'html.twig', ['formattedNumber' => (($errorMessage) ? $errorMessage : sigFigFormat($number, $digits))]);
 });
 
 $app->get('/json/{data}', function(string $data, Request $request, Response $response, LoggerInterface $logger) {
