@@ -1,6 +1,6 @@
 <?php
 
 function sigFigFormat($number, $digits) {
-    $outputString = 2 * $number;
+    $outputString = $number + $digits;
     return $outputString;
 }

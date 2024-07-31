@@ -50,14 +50,23 @@ foreach ($routes as $route) {
 
 $app->get('/html/{numberString}/{digitsString}', function(string $numberString, string $digitsString, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $logger->debug('logging output from /html/{number}/{digits} route');
-  $validData = TRUE;
+  $errorMessage = "";
   $number = 0.;
+  $digits = 3;
   if (filter_var($numberString, FILTER_VALIDATE_FLOAT)) {
     $number = floatval($numberString);
   } else {
-    $validData = FALSE;
+    $errorMessage = "Invalid number";
   }
-  return $twig->render($response, 'html.twig', ['formattedNumber' => ($validData) ? sigFigFormat($number, $digitsString) : "INVALID DATA"]);
+  if (filter_var($digitsString, FILTER_VALIDATE_INT)) {
+    $digits = intval($digitsString);
+  } else {
+    $errorMessage = "Invalid digits";
+  }
+  if ($digits < 1) {
+    $errorMessage = "Digits must be positive.";
+  }
+  return $twig->render($response, 'html.twig', ['formattedNumber' => $errorMessage || sigFigFormat($number, $digits)]);
 });
 
 $app->get('/json/{data}', function(string $data, Request $request, Response $response, LoggerInterface $logger) {
