@@ -37,26 +37,15 @@ $app->get('/', function(Request $request, Response $response, LoggerInterface $l
   return $twig->render($response, 'index.twig');
 });
 
-// Figure out how to consolidate the following four routes.
-$app->get('/html', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-  $logger->debug('logging output from /html route.');
-  return $twig->render($response, 'instructions.twig');
-});
+// Each of following 4 routes does same thing: render instructions in html.
+$routes = ['/html', '/html/', '/json', '/json/'];
 
-$app->get('/html/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-  $logger->debug('logging output from /html/ route.');
-  return $twig->render($response, 'instructions.twig');
-});
-
-$app->get('/json', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-  $logger->debug('logging output from /json route.');
-  return $twig->render($response, 'instructions.twig');
-});
-
-$app->get('/json/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-  $logger->debug('logging output from /json/ route.');
-  return $twig->render($response, 'instructions.twig');
-});
+foreach ($routes as $route) {
+  $app->get($route, function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+    $logger->debug('logging output from instructions route');
+    return $twig->render($response, 'instructions.twig');
+  });
+};
 
 $app->get('/html/{data}', function(string $data, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $data = ['data' => $data];
