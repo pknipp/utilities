@@ -1,6 +1,6 @@
 <?php
 
-function sigFigFormat($data, $numDigits) {
+function sigFigFormat($data) {
     // Do something with the input string
     $outputString = strtoupper($data['number']);
     return $outputString;
