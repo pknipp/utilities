@@ -2,6 +2,6 @@
 
 function sigFigFormat($inputString, $numDigits) {
     // Do something with the input string
-    $outputString = $inputString;
+    $outputString = strtoupper($inputString);
     return $outputString;
 }
