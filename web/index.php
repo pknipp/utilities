@@ -51,7 +51,7 @@ foreach ($routes as $route) {
 $app->get('/html/{data}', function(string $data, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $data = ['data' => $data];
   $logger->debug('logging output from /html/{data} route');
-  return $twig->render($response, 'html.twig', sigFigFormat($data, 3));
+  return $twig->render($response, 'html.twig', sigFigFormat($data['data'], 3));
 });
 
 $app->get('/json/{data}', function(string $data, Request $request, Response $response, LoggerInterface $logger) {
