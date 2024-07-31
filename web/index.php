@@ -66,7 +66,7 @@ $app->get('/html/{numberString}/{digitsString}', function(string $numberString, 
   if ($digits < 1) {
     $errorMessage = "Digits must be positive.";
   }
-  $logger->debug("error message - number - digits = " . $errorMessage . $number . $digits);
+  // Why cannot I use short-circuit here?
   return $twig->render($response, 'html.twig', ['formattedNumber' => (($errorMessage) ? $errorMessage : sigFigFormat($number, $digits))]);
 });
 
