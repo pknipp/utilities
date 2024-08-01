@@ -29,7 +29,8 @@ $container->set(LoggerInterface::class, function () {
 });
 
 // Create main Slim app
-$app = Bridge::create($container);
+// $app = Bridge::create($container);
+$app = AppFactory::create();
 $app->addErrorMiddleware(true, false, false);
 
 // Our web handlers
