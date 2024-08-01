@@ -13,6 +13,7 @@ use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
 
 require(__DIR__.'/../vendor/autoload.php');
+$endpoints = ['significanceFormatter'];
 require('./significance.php');
 
 // Create DI container
