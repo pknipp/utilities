@@ -31,35 +31,50 @@ $container->set(LoggerInterface::class, function () {
 $app = Bridge::create($container);
 $app->addErrorMiddleware(true, false, false);
 
+$utilitieNames = [
+  'significanceFormatter',
+];
+$utilities = [];
+foreach ($utilities as $utility) {
+  require ('./utilities/' . $utility[$name] . 'php');
+  $utilities['makeHtml'] = makeHtml;
+};
+
 // Our web handlers
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $logger->debug('logging output.');
-  return $twig->render($response, 'utilityList.twig', ['utilities' => array(2, 3, 5)]);
+  return $twig->render($response, 'utilityList.twig', ['utilities' => $utilities]);
 });
 
 // Each of following 4 routes does same thing: render instructions in html.
 // This'll need to be changed.
-$routes = ['/html', '/html/', '/json', '/json/'];
+// $routes = ['/html', '/html/', '/json', '/json/'];
 
-foreach ($routes as $route) {
-  $app->get($route, function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-    $logger->debug('logging output from instructions route');
-    return $twig->render($response, 'instructions.twig');
+// foreach ($routes as $route) {
+  // $app->get($route, function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+    // $logger->debug('logging output from instructions route');
+    // return $twig->render($response, 'instructions.twig');
+  // });
+// };
+
+// require('./significanceFormatter.php');
+
+$name = 'significanceFormatter';
+$app->get('/' . $name . '/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+    $data = [
+      'number' => $number,
+      'digits' => $digits,
+    ];
+    $logger->debug('logging output for ' . $name);
+    return $twig->render($response, $name . '.twig',
+    utilities[$name][$makeHtml]($data));
   });
-};
 
-require('./significanceFormatter.php');
-
-$app->get('/significance-formatter/html/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-  $logger->debug('logging output from /significanceFormatter/{number}/{digits} route');
-  return $twig->render($response, 'significanceFormatter.twig', significanceFormatter($number, $digits));
-});
-
-$app->get('/significance-formatter/json/{number}/{digits}', function(string $number, $digits, Request $request, Response $response, LoggerInterface $logger) {
-  $response->getBody()->write(json_encode(significanceFormatter($number, $digits)));
-  $response = $response->withHeader('Content-Type', 'application/json');
-  $logger->debug('logging output from /significanceFormatter/json/{data} route');
-  return $response;
-});
+// $app->get('/significance-formatter/json/{number}/{digits}', function(string $number, $digits, Request $request, Response $response, LoggerInterface $logger) {
+  // $response->getBody()->write(json_encode(significanceFormatter($number, $digits)));
+  // $response = $response->withHeader('Content-Type', 'application/json');
+  // $logger->debug('logging output from /significanceFormatter/json/{data} route');
+  // return $response;
+// });
 
 $app->run();
