@@ -34,7 +34,7 @@ $app->addErrorMiddleware(true, false, false);
 // Our web handlers
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $logger->debug('logging output.');
-  return $twig->render($response, 'utilityList.twig', array(2, 3, 5));
+  return $twig->render($response, 'utilityList.twig', ['utilities' => array(2, 3, 5)]);
 });
 
 // Each of following 4 routes does same thing: render instructions in html.
