@@ -54,16 +54,16 @@ foreach ($routes as $route) {
   });
 };
 
-$app->get('/significanceFormatter/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+$app->get('/significanceFormatter/html/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $logger->debug('logging output from /significanceFormatter/{number}/{digits} route');
-  return $twig->render($response, 'significanceFormatter.twig', ['formattedNumber' => significanceFormatter($number, $digits)]);
+  return $twig->render($response, 'significanceFormatter.twig', significanceFormatter($number, $digits));
 });
 
-// $app->get('/json/{data}', function(string $data, Request $request, Response $response, LoggerInterface $logger) {
-  // $response->getBody()->write(json_encode(['data' => $data]));
-  // $response = $response->withHeader('Content-Type', 'application/json');
-  // $logger->debug('logging output from /json/{data} route');
-  // return $response;
-// });
+$app->get('/significanceFormatter/json/{number}/{digits}', function(string $data, Request $request, Response $response, LoggerInterface $logger) {
+  $response->getBody()->write(json_encode(significanceFormatter($number, $digits)));
+  $response = $response->withHeader('Content-Type', 'application/json');
+  $logger->debug('logging output from /significanceFormatter/json/{data} route');
+  return $response;
+});
 
 $app->run();
