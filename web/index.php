@@ -13,7 +13,8 @@ use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
 
 require(__DIR__.'/../vendor/autoload.php');
-require('./endpoints.php');
+// require('./endpoints.php');
+$endpoints = ['significanceFormatter'];
 foreach ($endpoints as $endpoint) {
   require('./' . $endpoint . '.php');
 }
