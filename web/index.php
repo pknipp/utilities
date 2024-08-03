@@ -14,8 +14,8 @@ use Slim\Views\Twig;
 
 require(__DIR__.'/../vendor/autoload.php');
 require('./endpoints.php');
-foreach ($endPointnames as $name) {
-  require('./' . $name . '.php');
+foreach ($endpoints as $endpoint) {
+  require('./' . $endpoint . '.php');
 }
 
 // Create DI container
