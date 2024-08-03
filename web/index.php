@@ -60,7 +60,7 @@ $app->get('/', function(Request $request, Response $response, LoggerInterface $l
 // require('./significanceFormatter.php');
 
 $name = 'significanceFormatter';
-$app->get('/' . $name . '/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+$app->get('/' . $name . '/html/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
     $data = [
       'number' => $number,
       'digits' => $digits,
