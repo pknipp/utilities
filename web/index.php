@@ -32,14 +32,14 @@ $app = Bridge::create($container);
 $app->addErrorMiddleware(true, false, false);
 
 // Our web handlers
-// $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-  // $logger->debug('logging output.');
-  // return $twig->render($response, 'index.twig');
-// });
+$app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+  $logger->debug('logging output.');
+  return $twig->render($response, 'utilityList.twig', array(2, 3, 5));
+});
 
 // Each of following 4 routes does same thing: render instructions in html.
 // This'll need to be changed.
-$routes = ['', '/', '/html', '/html/', '/json', '/json/'];
+$routes = ['/html', '/html/', '/json', '/json/'];
 
 foreach ($routes as $route) {
   $app->get($route, function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
