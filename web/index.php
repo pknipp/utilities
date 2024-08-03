@@ -71,7 +71,7 @@ $app->get('/' . $name . '/html/{number}/{digits}', function(string $number, stri
     $twigFile = $name . '.twig';
     echo $twigfile;
     return $twig->render($response, $name . '.twig',
-    $utilities[$name][$makeHtml]($data));
+    $utilities[$name]['makeHtml']($data));
     // makeHtml($data));
   });
 
