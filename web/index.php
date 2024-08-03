@@ -52,8 +52,8 @@ foreach ($routes as $route) {
   });
 };
 
-$app->get('/html/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-  $logger->debug('logging output from /html/{number}/{digits} route');
+$app->get('/significanceFormatter/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+  $logger->debug('logging output from /significanceFormatter/{number}/{digits} route');
   return $twig->render($response, 'html.twig', ['formattedNumber' => significanceFormatter($number, $digits)]);
 });
 
