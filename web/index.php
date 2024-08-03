@@ -70,7 +70,7 @@ $app->get('/' . $name . '/html/{number}/{digits}', function(string $number, stri
     $logger->debug('logging output for ' . $name);
     $twigFile = $name . '.twig';
     $logger->debug('$twigFile = ' . $twigFile);
-    $logger->debug('$utilities[$name]["makeHtml"] = ', $utilities[$name]['makeHtml']);
+    $logger->debug('$utilities[$name] = ' . $utilities[$name]);
     // function makeHtml = $utilities[$name]['makeHtml'];
     return $twig->render($response, $name . '.twig',
     makeHtml($data));
