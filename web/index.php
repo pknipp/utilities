@@ -67,6 +67,8 @@ $app->get('/' . $name . '/html/{number}/{digits}', function(string $number, stri
       'digits' => $digits,
     ];
     $logger->debug('logging output for ' . $name);
+    $twigFile = $name . '.twig';
+    echo $twigfile;
     return $twig->render($response, $name . '.twig',
     // $utilities[$name][$makeHtml]($data));
     makeHtml($data));
