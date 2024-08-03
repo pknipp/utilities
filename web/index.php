@@ -39,7 +39,7 @@ $app->get('/', function(Request $request, Response $response, LoggerInterface $l
 
 // Each of following 4 routes does same thing: render instructions in html.
 // This'll need to be changed.
-$routes = ['/html', '/html/', '/json', '/json/'];
+$routes = ['', '/', '/html', '/html/', '/json', '/json/'];
 
 foreach ($routes as $route) {
   $app->get($route, function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
