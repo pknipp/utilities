@@ -13,12 +13,6 @@ use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
 
 require(__DIR__.'/../vendor/autoload.php');
-// require('./endpoints.php');
-// $endpoints = ['significanceFormatter'];
-// foreach ($endpoints as $endpoint) {
-  // require('./' . $endpoint . '.php');
-// }
-require('./significanceFormatter.php');
 
 // Create DI container
 $container = new Container();
@@ -35,7 +29,6 @@ $container->set(LoggerInterface::class, function () {
 
 // Create main Slim app
 $app = Bridge::create($container);
-// $app = AppFactory::create();
 $app->addErrorMiddleware(true, false, false);
 
 // Our web handlers
@@ -45,6 +38,7 @@ $app->get('/', function(Request $request, Response $response, LoggerInterface $l
 });
 
 // Each of following 4 routes does same thing: render instructions in html.
+// This'll need to be changed.
 $routes = ['/html', '/html/', '/json', '/json/'];
 
 foreach ($routes as $route) {
@@ -53,6 +47,8 @@ foreach ($routes as $route) {
     return $twig->render($response, 'instructions.twig');
   });
 };
+
+require('./significanceFormatter.php');
 
 $app->get('/significanceFormatter/html/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $logger->debug('logging output from /significanceFormatter/{number}/{digits} route');
