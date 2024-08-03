@@ -14,10 +14,11 @@ use Slim\Views\Twig;
 
 require(__DIR__.'/../vendor/autoload.php');
 // require('./endpoints.php');
-$endpoints = ['significanceFormatter'];
-foreach ($endpoints as $endpoint) {
-  require('./' . $endpoint . '.php');
-}
+// $endpoints = ['significanceFormatter'];
+// foreach ($endpoints as $endpoint) {
+  // require('./' . $endpoint . '.php');
+// }
+require('./significanceFormatter.php');
 
 // Create DI container
 $container = new Container();
