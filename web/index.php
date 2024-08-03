@@ -13,8 +13,10 @@ use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
 
 require(__DIR__.'/../vendor/autoload.php');
-$endpoints = ['significanceFormatter'];
-require('./significance.php');
+require('./endpoints.php');
+foreach ($endPointnames as $name) {
+  require('./' . $name . '.php');
+}
 
 // Create DI container
 $container = new Container();
@@ -50,20 +52,16 @@ foreach ($routes as $route) {
   });
 };
 
-$app->get('/html/{numberString}/{digitsString}', function(string $numberString, string $digitsString, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+$app->get('/html/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $logger->debug('logging output from /html/{number}/{digits} route');
-  $number = filter_var($numberString, FILTER_VALIDATE_FLOAT);
-  $digits = filter_var($digitsString, FILTER_VALIDATE_INT);
-  $errorMessage = ($number == FALSE) ? "invalid number" : (($digits == FALSE) ? "invalid digits" : (($digits < 1) ? "digits must be positive" : ""));
-  // Why cannot I use short-circuit here?
-  return $twig->render($response, 'html.twig', ['formattedNumber' => (($errorMessage) ? $errorMessage : sigFigFormat($number, $digits))]);
+  return $twig->render($response, 'html.twig', ['formattedNumber' => significanceFormatter($number, $digits)]);
 });
 
-$app->get('/json/{data}', function(string $data, Request $request, Response $response, LoggerInterface $logger) {
-  $response->getBody()->write(json_encode(['data' => $data]));
-  $response = $response->withHeader('Content-Type', 'application/json');
-  $logger->debug('logging output from /json/{data} route');
-  return $response;
-});
+// $app->get('/json/{data}', function(string $data, Request $request, Response $response, LoggerInterface $logger) {
+  // $response->getBody()->write(json_encode(['data' => $data]));
+  // $response = $response->withHeader('Content-Type', 'application/json');
+  // $logger->debug('logging output from /json/{data} route');
+  // return $response;
+// });
 
 $app->run();
