@@ -39,6 +39,7 @@ foreach ($utilities as $utility) {
   require ('./utilities/' . $utility[$name] . 'php');
   $utilities['makeHtml'] = makeHtml;
 };
+require ('./utilities/significanceFormatter.php');
 
 // Our web handlers
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
@@ -67,7 +68,8 @@ $app->get('/' . $name . '/html/{number}/{digits}', function(string $number, stri
     ];
     $logger->debug('logging output for ' . $name);
     return $twig->render($response, $name . '.twig',
-    $utilities[$name][$makeHtml]($data));
+    // $utilities[$name][$makeHtml]($data));
+    makeHtml($data));
   });
 
 // $app->get('/significance-formatter/json/{number}/{digits}', function(string $number, $digits, Request $request, Response $response, LoggerInterface $logger) {
