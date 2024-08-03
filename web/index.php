@@ -59,7 +59,7 @@ $app->get('/significanceFormatter/html/{number}/{digits}', function(string $numb
   return $twig->render($response, 'significanceFormatter.twig', significanceFormatter($number, $digits));
 });
 
-$app->get('/significanceFormatter/json/{number}/{digits}', function(string $data, Request $request, Response $response, LoggerInterface $logger) {
+$app->get('/significanceFormatter/json/{number}/{digits}', function(string $number, $digits, Request $request, Response $response, LoggerInterface $logger) {
   $response->getBody()->write(json_encode(significanceFormatter($number, $digits)));
   $response = $response->withHeader('Content-Type', 'application/json');
   $logger->debug('logging output from /significanceFormatter/json/{data} route');
