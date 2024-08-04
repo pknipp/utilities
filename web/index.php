@@ -46,7 +46,7 @@ foreach ($utilities['utilities'] as $utility) {
     $utility = substr($_SERVER['REQUEST_URI'], 1);
     $logger->debug("logging output from $utility route");
     require('./utilities/' . $utility . '/makeUtility.php');
-    return $twig->render($response, 'intro.twig', makeUtility($utility));
+    return $twig->render($response, 'utilityIntro.twig', makeUtility($utility));
   });
 }
 
