@@ -60,9 +60,9 @@ $app->get("/$name/html/{number}/{digits}", function(string $number, string $digi
       'number' => $number,
       'digits' => $digits,
     ];
-    $logger->debug('logging output for ' . $name);
-    require ('./utilities/' . $name . '.php');
-    return $twig->render($response, $name . '.twig',
+    $logger->debug("logging output for $name");
+    require ("./utilities/$name.php");
+    return $twig->render($response, "$name.twig",
     makeHtml($data));
   });
 
