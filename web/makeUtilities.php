@@ -2,6 +2,6 @@
 
 function makeUtilities() {
     return [
-        ['name' => 'significanceFormatter'],
+        'significanceFormatter',
     ];
 }
