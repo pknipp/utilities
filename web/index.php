@@ -53,7 +53,8 @@ foreach (makeUtilities()['utilities'] as $utility) {
 foreach (makeUtilities()['utilities'] as $utility) {
   foreach ($options as $option) {
     $app->get("/{$utility}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-      return $twig->render($response, 'error.twig');
+      $path = $_SERVER['REQUEST_URI'];
+      return $twig->render($response, 'error.twig', ['path' => $path]);
     });
   };
 }
