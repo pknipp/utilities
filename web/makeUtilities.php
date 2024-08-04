@@ -1,7 +1,5 @@
 <?php
 
 function makeUtilities() {
-    return [
-        'significanceFormatter',
-    ];
+    return ['utilities' => ['significanceFormatter']];
 }
