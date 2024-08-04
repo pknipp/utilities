@@ -32,16 +32,13 @@ $app = Bridge::create($container);
 $app->addErrorMiddleware(true, false, false);
 
 require('./makeUtilities.php');
-$utilities = makeUtilities();
 
-// Our web handlers
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $logger->debug('logging output.');
-  // require('./makeUtilities.php');
   return $twig->render($response, 'utilityList.twig', makeUtilities());
 });
 
-foreach ($utilities['utilities'] as $utility) {
+foreach (makeUtilities()['utilities'] as $utility) {
   $app->get("/$utility", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
     $utility = substr($_SERVER['REQUEST_URI'], 1);
     $logger->debug("logging output from $utility route");
@@ -62,11 +59,12 @@ foreach ($utilities['utilities'] as $utility) {
 // };
 
 $app->get('/significanceFormatter/html/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-    $name = 'significanceFormatter';
+    // $name = 'significanceFormatter';
     $data = [
       'number' => $number,
       'digits' => $digits,
     ];
+    $name = explode('/', $_SERVER['REQUEST_URI'])[1];
     $logger->debug("logging output for $name");
     require ("./utilities/$name/makeHtml.php");
     return $twig->render($response, "utilities/$name.twig",
