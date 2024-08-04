@@ -40,7 +40,7 @@ $app->get('/', function(Request $request, Response $response, LoggerInterface $l
   $logger->debug('logging output.');
   require('./makeUtilities.php');
   $utilities = makeUtilities();
-  $logger->debug('$utilities = ' . $utilities);
+  $logger->json_encode($utilities);
   return $twig->render($response, 'utilityList.twig', $utilities);
 });
 
