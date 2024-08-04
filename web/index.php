@@ -72,8 +72,9 @@ $app->get('/' . $name . '/html/{number}/{digits}', function(string $number, stri
     // $logger->debug('$twigFile = ' . $twigFile);
     // $logger->debug('$utilities[$name] = ' . $utilities[$name]);
     // function makeHtml = $utilities[$name]['makeHtml'];
+    require ('./utilities/' . $name . '.php');
     return $twig->render($response, $name . '.twig',
-    $makeHtmls[$name]($data));
+    makeHtml($data));
     // return $twig->render($response, $name . '.twig',
     // $utilities[$name]['makeHtml']($data));
     // makeHtml($data));
