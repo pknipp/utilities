@@ -36,7 +36,7 @@ $utilityNames = [
 ];
 $makeHtmls = [];
 foreach ($utilityNames as $name) {
-  require ('./utilities/' . $name . 'php');
+  require ('./utilities/' . $name . '.php');
   $makeHtmls[$name] = makeHtml;
 };
 $logger->debug("makeHtmls = ", $makeHtmls);
