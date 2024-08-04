@@ -41,7 +41,7 @@ $app->get('/', function(Request $request, Response $response, LoggerInterface $l
   require('./makeUtilities.php');
   $utilities = [2, 3, 5]; //['significanceFormatter']; //makeUtilities();
   $logger->debug(json_encode($utilities));
-  return $twig->render($response, 'utilityList.twig', [2, 3, 5]); //$utilities);
+  return $twig->render($response, 'utilityList.twig', ['name' => "Hello world"]); //$utilities);
 });
 
 // Each of following 4 routes does same thing: render instructions in html.
