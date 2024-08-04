@@ -40,7 +40,8 @@ $app->get('/', function(Request $request, Response $response, LoggerInterface $l
   $logger->debug('logging output.');
   require('./makeUtilities.php');
   $utilities = makeUtilities();
-  return $twig->render($response, 'utilityList.twig', [2,3,5]); //$utilities);
+  logger->debug(json_encode($utilities));
+  return $twig->render($response, 'utilityList.twig', $utilities);
 });
 
 // Each of following 4 routes does same thing: render instructions in html.
