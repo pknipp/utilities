@@ -41,7 +41,7 @@ $app->get('/', function(Request $request, Response $response, LoggerInterface $l
   return $twig->render($response, 'utilityList.twig', makeUtilities());
 });
 
-print_r($utilities);
+print_r($utilities['utilities']);
 foreach ($utilities as $utility) {
   $app->get("/$utility", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
     $logger->debug("logging output from $utility route");
