@@ -36,7 +36,6 @@ require('./makeUtilities.php');
 $options = ['/', ''];
 
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-  $logger->debug('logging output.');
   return $twig->render($response, 'utilityList.twig', makeUtilities());
 });
 
@@ -51,16 +50,13 @@ foreach (makeUtilities()['utilities'] as $utility) {
   }
 }
 
-// Each of following 4 routes does same thing: render instructions in html.
-// This'll need to be changed.
-// $routes = ['/html', '/html/', '/json', '/json/'];
-
-// foreach ($routes as $route) {
-  // $app->get($route, function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-    // $logger->debug('logging output from instructions route');
-    // return $twig->render($response, 'error.twig');
-  // });
-// };
+foreach (makeUtilities()['utilities'] as $utility) {
+  foreach ($options as $option) {
+    $app->get("/{$utility}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+      return $twig->render($response, 'error.twig');
+    });
+  };
+}
 
 foreach ($options as $option) {
   $app->get("/significanceFormatter/{number}/{digits}$option", function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
@@ -69,7 +65,7 @@ foreach ($options as $option) {
       'digits' => $digits,
     ];
     $name = explode('/', $_SERVER['REQUEST_URI'])[1];
-    $logger->debug("logging output for $name");
+    $logger->debug("logging output for $name route");
     require ("./utilities/$name/makeHtml.php");
     return $twig->render($response, "utilities/$name.twig",
     makeHtml($data));
