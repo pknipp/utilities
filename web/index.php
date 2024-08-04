@@ -34,12 +34,6 @@ $app->addErrorMiddleware(true, false, false);
 $utilityNames = [
   'significanceFormatter',
 ];
-// $makeHtmls = [];
-// foreach ($utilityNames as $name) {
-  // require ('./utilities/' . $name . '.php');
-  // $makeHtmls[$name] = makeHtml;
-// };
-// $logger->debug("makeHtmls = ", $makeHtmls);
 
 // Our web handlers
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
@@ -58,7 +52,6 @@ $app->get('/', function(Request $request, Response $response, LoggerInterface $l
   // });
 // };
 
-// require('./significanceFormatter.php');
 
 $name = 'significanceFormatter';
 $app->get('/' . $name . '/html/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
@@ -68,16 +61,9 @@ $app->get('/' . $name . '/html/{number}/{digits}', function(string $number, stri
       'digits' => $digits,
     ];
     $logger->debug('logging output for ' . $name);
-    // $twigFile = $name . '.twig';
-    // $logger->debug('$twigFile = ' . $twigFile);
-    // $logger->debug('$utilities[$name] = ' . $utilities[$name]);
-    // function makeHtml = $utilities[$name]['makeHtml'];
     require ('./utilities/' . $name . '.php');
     return $twig->render($response, $name . '.twig',
     makeHtml($data));
-    // return $twig->render($response, $name . '.twig',
-    // $utilities[$name]['makeHtml']($data));
-    // makeHtml($data));
   });
 
 // $app->get('/significance-formatter/json/{number}/{digits}', function(string $number, $digits, Request $request, Response $response, LoggerInterface $logger) {
