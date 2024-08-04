@@ -61,7 +61,7 @@ $app->get('/$name/significanceFormatter/{number}/{digits}', function(string $num
     ];
     $logger->debug("logging output for $name");
     require ("./utilities/$name.php");
-    return $twig->render($response, "$name.twig",
+    return $twig->render($response, "utilities/$name.twig",
     makeHtml($data));
   });
 
