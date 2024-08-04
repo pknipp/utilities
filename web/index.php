@@ -37,7 +37,7 @@ $utilities = makeUtilities();
 // Our web handlers
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $logger->debug('logging output.');
-  require('./makeUtilities.php');
+  // require('./makeUtilities.php');
   return $twig->render($response, 'utilityList.twig', makeUtilities());
 });
 
