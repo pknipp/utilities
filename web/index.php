@@ -53,9 +53,7 @@ $app->get('/', function(Request $request, Response $response, LoggerInterface $l
   // });
 // };
 
-
-$name = 'significanceFormatter';
-$app->get("/$name/html/{number}/{digits}", function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+$app->get('/$name/significanceFormatter/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
     $name = 'significanceFormatter';
     $data = [
       'number' => $number,
