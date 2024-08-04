@@ -39,7 +39,7 @@ $utilityNames = [
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $logger->debug('logging output.');
   require('./makeUtilities.php');
-  $utilities = makeUtilities();
+  $utilities = ['significanceFormatter']; //makeUtilities();
   $logger->debug(json_encode($utilities));
   return $twig->render($response, 'utilityList.twig', $utilities);
 });
