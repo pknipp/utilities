@@ -31,20 +31,19 @@ $container->set(LoggerInterface::class, function () {
 $app = Bridge::create($container);
 $app->addErrorMiddleware(true, false, false);
 
-$utilitieNames = [
+$utilityNames = [
   'significanceFormatter',
 ];
-$utilities = [];
-foreach ($utilities as $utility) {
-  require ('./utilities/' . $utility[$name] . 'php');
-  $utilities['makeHtml'] = makeHtml;
+$makeHtmls = [];
+foreach ($utilitieNames as $name) {
+  require ('./utilities/' . $name . 'php');
+  $makeHtmls[$name] = makeHtml;
 };
-require ('./utilities/significanceFormatter.php');
 
 // Our web handlers
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $logger->debug('logging output.');
-  return $twig->render($response, 'utilityList.twig', ['utilities' => $utilities]);
+  return $twig->render($response, 'utilityList.twig', ['utilities' => $utilityNames]);
 });
 
 // Each of following 4 routes does same thing: render instructions in html.
@@ -68,12 +67,12 @@ $app->get('/' . $name . '/html/{number}/{digits}', function(string $number, stri
       'digits' => $digits,
     ];
     $logger->debug('logging output for ' . $name);
-    $twigFile = $name . '.twig';
-    $logger->debug('$twigFile = ' . $twigFile);
-    $logger->debug('$utilities[$name] = ' . $utilities[$name]);
+    // $twigFile = $name . '.twig';
+    // $logger->debug('$twigFile = ' . $twigFile);
+    // $logger->debug('$utilities[$name] = ' . $utilities[$name]);
     // function makeHtml = $utilities[$name]['makeHtml'];
     return $twig->render($response, $name . '.twig',
-    makeHtml($data));
+    makeHtmls[$name]($data));
     // return $twig->render($response, $name . '.twig',
     // $utilities[$name]['makeHtml']($data));
     // makeHtml($data));
