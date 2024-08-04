@@ -34,12 +34,12 @@ $app->addErrorMiddleware(true, false, false);
 $utilityNames = [
   'significanceFormatter',
 ];
-$makeHtmls = [];
-foreach ($utilityNames as $name) {
-  require ('./utilities/' . $name . '.php');
-  $makeHtmls[$name] = makeHtml;
-};
-$logger->debug("makeHtmls = ", $makeHtmls);
+// $makeHtmls = [];
+// foreach ($utilityNames as $name) {
+  // require ('./utilities/' . $name . '.php');
+  // $makeHtmls[$name] = makeHtml;
+// };
+// $logger->debug("makeHtmls = ", $makeHtmls);
 
 // Our web handlers
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
