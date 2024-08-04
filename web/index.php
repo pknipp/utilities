@@ -39,7 +39,9 @@ $utilityNames = [
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $logger->debug('logging output.');
   require('./makeUtilities.php');
-  return $twig->render($response, 'utilityList.twig', makeUtilities());
+  $utilities = makeUtilities();
+  $logger->debug('$utilities = ' . $utilities);
+  return $twig->render($response, 'utilityList.twig', $utilities);
 });
 
 // Each of following 4 routes does same thing: render instructions in html.
