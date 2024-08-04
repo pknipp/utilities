@@ -39,12 +39,14 @@ $app->get('/', function(Request $request, Response $response, LoggerInterface $l
 });
 
 foreach (makeUtilities()['utilities'] as $utility) {
-  $app->get("/$utility", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-    $utility = substr($_SERVER['REQUEST_URI'], 1);
-    $logger->debug("logging output from $utility route");
-    require("./utilities/{$utility}/makeUtility.php");
-    return $twig->render($response, 'utilityIntro.twig', makeUtility($utility));
-  });
+  foreach (['', '/'] as $option) {
+    $app->get("/$utility$option", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+      $utility = substr($_SERVER['REQUEST_URI'], 1);
+      $logger->debug("logging output from $utility route");
+      require("./utilities/{$utility}/makeUtility.php");
+      return $twig->render($response, 'utilityIntro.twig', makeUtility($utility));
+    });
+  }
 }
 
 // Each of following 4 routes does same thing: render instructions in html.
@@ -58,7 +60,7 @@ foreach (makeUtilities()['utilities'] as $utility) {
   // });
 // };
 
-$app->get('/significanceFormatter/html/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+$app->get('/significanceFormatter/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
     $data = [
       'number' => $number,
       'digits' => $digits,
