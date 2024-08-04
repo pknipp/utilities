@@ -32,6 +32,8 @@ $app = Bridge::create($container);
 $app->addErrorMiddleware(true, false, false);
 
 require('./makeUtilities.php');
+// Allow for possibility that user may append a slash to url.
+$options = ['/', ''];
 
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $logger->debug('logging output.');
@@ -39,7 +41,7 @@ $app->get('/', function(Request $request, Response $response, LoggerInterface $l
 });
 
 foreach (makeUtilities()['utilities'] as $utility) {
-  foreach (['', '/'] as $option) {
+  foreach ($options as $option) {
     $app->get("/$utility$option", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
       $utility = substr($_SERVER['REQUEST_URI'], 1);
       $logger->debug("logging output from $utility route");
@@ -60,7 +62,8 @@ foreach (makeUtilities()['utilities'] as $utility) {
   // });
 // };
 
-$app->get('/significanceFormatter/{number}/{digits}', function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+foreach ($options as $option) {
+  $app->get("/significanceFormatter/{number}/{digits}$option", function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
     $data = [
       'number' => $number,
       'digits' => $digits,
@@ -71,6 +74,7 @@ $app->get('/significanceFormatter/{number}/{digits}', function(string $number, s
     return $twig->render($response, "utilities/$name.twig",
     makeHtml($data));
   });
+}
 
 // $app->get('/significance-formatter/json/{number}/{digits}', function(string $number, $digits, Request $request, Response $response, LoggerInterface $logger) {
   // $response->getBody()->write(json_encode(significanceFormatter($number, $digits)));
