@@ -6,7 +6,7 @@ function makeUtilities() {
     ];
     $utilities = array();
     foreach ($names as $name) {
-        require("/utilities/$name/makeUtility.php");
+        require("./utilities/$name/makeUtility.php");
         $utilities[$name] = makeUtility($name);
     }
     return ['utilities' => $utilities];
