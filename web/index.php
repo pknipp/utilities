@@ -42,21 +42,21 @@ $app->get('/', function(Request $request, Response $response, LoggerInterface $l
 
 foreach (makeUtilities()['utilities'] as $utility) {
   foreach ($option2s as $option) {
-    $app->get("/$utility$option", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-      $utility = substr($_SERVER['REQUEST_URI'], 1);
-      $logger->debug("logging output from $utility route");
-      require("./utilities/{$utility}/makeUtility.php");
-      return $twig->render($response, 'utilityIntro.twig', makeUtility($utility));
+    $app->get("/{$utility['name']}$option", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+      $name = substr($_SERVER['REQUEST_URI'], 1);
+      $logger->debug("logging output from $name route");
+      require("./utilities/{$name}/makeUtility.php");
+      return $twig->render($response, 'utilityIntro.twig', makeUtility($name));
     });
   }
 }
 
 foreach (makeUtilities()['utilities'] as $utility) {
   foreach ($option2s as $option) {
-    $app->get("/{$utility}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+    $app->get("/{$utility['name']}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
       $path = $_SERVER['REQUEST_URI'];
-      $utility = explode("/", $path)[1];
-      return $twig->render($response, 'error.twig', ['path' => $path, 'instructions' => "/$utility"]);
+      $name = explode("/", $path)[1];
+      return $twig->render($response, 'error.twig', ['path' => $path, 'instructions' => "/$name"]);
     });
   };
 }
