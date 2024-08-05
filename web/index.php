@@ -61,9 +61,9 @@ foreach (makeUtilities()['utilities'] as $utility) {
   };
 }
 
-foreach ($options as $option) {
+foreach ($option2s as $option2) {
   // Many of the following lines need manual copying from here ...
-  $app->get("/significanceFormatter/{number}/{digits}$option", function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+  $app->get("/significanceFormatter/{number}/{digits}$option2", function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
     $data = [
       'number' => $number,
       'digits' => $digits,
@@ -71,8 +71,7 @@ foreach ($options as $option) {
     $name = explode('/', $_SERVER['REQUEST_URI'])[1];
     $logger->debug("logging output for $name route");
     require ("./utilities/$name/makeHtml.php");
-    return $twig->render($response, "utilities/$name.twig",
-    makeHtml($data));
+    return $twig->render($response, "utilities/$name.twig", makeHtml($data));
   });
 
   $app->get("/significanceFormatter/json/{number}/{digits}$option", function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
