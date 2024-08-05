@@ -55,7 +55,7 @@ foreach (makeUtilities()['utilities'] as $utility) {
     $app->get("/{$utility}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
       $path = $_SERVER['REQUEST_URI'];
       $utility = explode("/", $path)[1];
-      return $twig->render($response, 'error.twig', ['path' => $path, 'instructions' => "/$instructions"]);
+      return $twig->render($response, 'error.twig', ['path' => $path, 'instructions' => "/$utility"]);
     });
   };
 }
