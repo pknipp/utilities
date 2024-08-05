@@ -72,11 +72,13 @@ foreach ($option1s as $option1) {
         'digits' => $digits,
       ];
       // ... to here for each utility.
-      $name = explode('/', $_SERVER['REQUEST_URI'])[1];
+      $pathParts = explode('/', $_SERVER['REQUEST_URI']);
+      $isJson = $pathParts[2] == 'json';
+      $name = $pathParts[1];
       $logger->debug("logging output for $name $option1 route");
       require ("./utilities/$name/makeHtml.php");
       $output = makeHtml($data);
-      if (empty($option1)) {
+      if (isJson) {
         $response->getBody()->write(json_encode($output));
         $response = $response->withHeader('Content-Type', 'application/json');
         return $response;
