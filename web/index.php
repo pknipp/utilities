@@ -62,27 +62,31 @@ foreach (makeUtilities()['utilities'] as $utility) {
 }
 
 foreach ($options as $option) {
-  // Most of the lines of code from here to ...
+  // Many of the following lines need manual copying from here ...
   $app->get("/significanceFormatter/{number}/{digits}$option", function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
     $data = [
       'number' => $number,
       'digits' => $digits,
     ];
-    // ... here need to get mutated, but those from here to ...
     $name = explode('/', $_SERVER['REQUEST_URI'])[1];
     $logger->debug("logging output for $name route");
     require ("./utilities/$name/makeHtml.php");
     return $twig->render($response, "utilities/$name.twig",
     makeHtml($data));
   });
-  // ... here simply need to be copied, with each additional utility.
-}
 
-// $app->get('/significance-formatter/json/{number}/{digits}', function(string $number, $digits, Request $request, Response $response, LoggerInterface $logger) {
-  // $response->getBody()->write(json_encode(significanceFormatter($number, $digits)));
-  // $response = $response->withHeader('Content-Type', 'application/json');
-  // $logger->debug('logging output from /significanceFormatter/json/{data} route');
-  // return $response;
-// });
+  $app->get("/significanceFormatter/json/{number}/{digits}$option", function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+    $data = [
+      'number' => $number,
+      'digits' => $digits,
+    ];
+    $name = explode('/', $_SERVER['REQUEST_URI'])[1];
+    require ("./utilities/$name/makeHtml.php");
+    $response->getBody()->write(json_encode(makeHtml($data)));
+    $response = $response->withHeader('Content-Type', 'application/json');
+    return $response;
+  });
+  // ... to here (w/some mutation) w/each addition of a utility.
+}
 
 $app->run();
