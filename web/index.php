@@ -32,15 +32,16 @@ $app = Bridge::create($container);
 $app->addErrorMiddleware(true, false, false);
 
 require('./makeUtilities.php');
+$option1s = ['', '/json'];
 // Allow for possibility that user may append a slash to url.
-$options = ['/', ''];
+$option2s = ['', '/'];
 
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   return $twig->render($response, 'utilityList.twig', makeUtilities());
 });
 
 foreach (makeUtilities()['utilities'] as $utility) {
-  foreach ($options as $option) {
+  foreach ($option2s as $option) {
     $app->get("/$utility$option", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
       $utility = substr($_SERVER['REQUEST_URI'], 1);
       $logger->debug("logging output from $utility route");
@@ -51,7 +52,7 @@ foreach (makeUtilities()['utilities'] as $utility) {
 }
 
 foreach (makeUtilities()['utilities'] as $utility) {
-  foreach ($options as $option) {
+  foreach ($option2s as $option) {
     $app->get("/{$utility}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
       $path = $_SERVER['REQUEST_URI'];
       $utility = explode("/", $path)[1];
@@ -61,31 +62,30 @@ foreach (makeUtilities()['utilities'] as $utility) {
   };
 }
 
-foreach ($option2s as $option2) {
-  // Many of the following lines need manual copying from here ...
-  $app->get("/significanceFormatter/{number}/{digits}$option2", function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-    $data = [
-      'number' => $number,
-      'digits' => $digits,
-    ];
-    $name = explode('/', $_SERVER['REQUEST_URI'])[1];
-    $logger->debug("logging output for $name route");
-    require ("./utilities/$name/makeHtml.php");
-    return $twig->render($response, "utilities/$name.twig", makeHtml($data));
-  });
-
-  $app->get("/significanceFormatter/json/{number}/{digits}$option", function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-    $data = [
-      'number' => $number,
-      'digits' => $digits,
-    ];
-    $name = explode('/', $_SERVER['REQUEST_URI'])[1];
-    require ("./utilities/$name/makeHtml.php");
-    $response->getBody()->write(json_encode(makeHtml($data)));
-    $response = $response->withHeader('Content-Type', 'application/json');
-    return $response;
-  });
-  // ... to here (w/some mutation) w/each addition of a utility.
+// WITH EACH ADDITIONAL UTILITY, COPY THE LINES FROM HERE ...
+foreach ($option1s as $option1) {
+  foreach ($option2s as $option2) {
+    // Mutation will be needed for the lines from here ...
+    $app->get("/significanceFormatter$option1/{number}/{digits}$option2", function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+      $data = [
+        'number' => $number,
+        'digits' => $digits,
+      ];
+      // ... to here for each utility.
+      $name = explode('/', $_SERVER['REQUEST_URI'])[1];
+      $logger->debug("logging output for $name $option1 route");
+      require ("./utilities/$name/makeHtml.php");
+      $output = makeHtml($data);
+      if (empty($option1)) {
+        $response->getBody()->write(json_encode($output));
+        $response = $response->withHeader('Content-Type', 'application/json');
+        return $response;
+      } else {
+        return $twig->render($response, "utilities/$name.twig", $output);
+      }
+    });
+  }
 }
+// ... TO HERE.
 
 $app->run();
