@@ -9,5 +9,5 @@ function makeUtilities() {
         require("/utilities/$name/makeUtility.php");
         $utilities[$name] = makeUtility($name);
     }
-    return $utilities;
+    return ['utilities' => $utilities];
 }

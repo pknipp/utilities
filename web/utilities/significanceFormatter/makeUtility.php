@@ -1,8 +1,8 @@
 <?php
 
-function makeUtility($utility) {
+function makeUtility($name) {
     return [
-        'name' => $utility,
+        'name' => $name,
         'pretty' => 'Significance Formatter',
         'description' => 'This formats a number with a specified number of significant digits (aka sigfigs).',
         'background' => 'Talk about sig figs, including link to Wikipedia.',
