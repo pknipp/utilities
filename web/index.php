@@ -61,17 +61,20 @@ foreach (makeUtilities()['utilities'] as $utility) {
 }
 
 foreach ($options as $option) {
+  // Most of the lines of code from here to ...
   $app->get("/significanceFormatter/{number}/{digits}$option", function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
     $data = [
       'number' => $number,
       'digits' => $digits,
     ];
+    // ... here need to get mutated, but those from here to ...
     $name = explode('/', $_SERVER['REQUEST_URI'])[1];
     $logger->debug("logging output for $name route");
     require ("./utilities/$name/makeHtml.php");
     return $twig->render($response, "utilities/$name.twig",
     makeHtml($data));
   });
+  // ... here simply need to be copied, with each additional utility.
 }
 
 // $app->get('/significance-formatter/json/{number}/{digits}', function(string $number, $digits, Request $request, Response $response, LoggerInterface $logger) {
