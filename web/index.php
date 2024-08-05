@@ -78,7 +78,7 @@ foreach ($option1s as $option1) {
       $logger->debug("logging output for $name $option1 route");
       require ("./utilities/$name/makeHtml.php");
       $output = makeHtml($data);
-      if (isJson) {
+      if ($isJson) {
         $response->getBody()->write(json_encode($output));
         $response = $response->withHeader('Content-Type', 'application/json');
         return $response;
