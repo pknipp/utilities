@@ -2,7 +2,7 @@
 
 function makeUtilities() {
     $utilities = array();
-    require("./utilities/$name/makeUtility.php");
-    $utilities[$name] = makeSFUtility($name);
+    require("./utilities/significanceFormatter/makeUtility.php");
+    $utilities[$name] = makeSignificanceFormatterUtility($name);
     return ['utilities' => $utilities];
 }
