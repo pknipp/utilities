@@ -1,7 +1,6 @@
 <?php
-namespace utilities\web\utilities\significanceFormatter;
 
-function makeUtility($name) {
+function makeSFUtility($name) {
     return [
         'name' => $name,
         'pretty' => 'Significance Formatter',
