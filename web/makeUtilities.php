@@ -9,7 +9,7 @@ function makeUtilities() {
     $utilities = array();
     // foreach ($names as $name) {
         // require("./utilities/$name/makeUtility.php");
-        $utilities[$name] = \significanceFormatter\makeUtility($name);
+        $utilities[$name] = App\Web\Utilities\SignificanceFormatter\makeUtility  ($name);
     // }
     return ['utilities' => $utilities];
 }
