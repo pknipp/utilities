@@ -1,5 +1,6 @@
 <?php
 // use significanceFormatter\makeUtility as significanceFormatterUtility;
+use App\Web\utilities\significanceFormatter\makeUtility;
 
 function makeUtilities() {
     $names = [

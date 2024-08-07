@@ -1,4 +1,5 @@
 <?php
+namespace app\web\utilities\significanceFormatter;
 
 function makeUtility($name) {
     return [
