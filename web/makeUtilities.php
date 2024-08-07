@@ -7,9 +7,9 @@ function makeUtilities() {
         'significanceFormatter',
     ];
     $utilities = array();
-    foreach ($names as $name) {
+    // foreach ($names as $name) {
         // require("./utilities/$name/makeUtility.php");
-        $utilities[$name] = "\{$name}\makeUtility"($name);
-    }
+        $utilities[$name] = \significanceFormatter\makeUtility($name);
+    // }
     return ['utilities' => $utilities];
 }
