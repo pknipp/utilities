@@ -1,6 +1,6 @@
 <?php
 // use significanceFormatter\makeUtility as significanceFormatterUtility;
-use App\Web\utilities\significanceFormatter\makeUtility;
+// use App\Web\utilities\significanceFormatter\makeUtility;
 
 function makeUtilities() {
     $names = [
@@ -9,7 +9,7 @@ function makeUtilities() {
     $utilities = array();
     foreach ($names as $name) {
         // require("./utilities/$name/makeUtility.php");
-        $utilities[$name] = makeUtility($name);
+        $utilities[$name] = "{$name}\makeUtility($name);
     }
     return ['utilities' => $utilities];
 }
