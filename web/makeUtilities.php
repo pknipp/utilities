@@ -9,7 +9,7 @@ function makeUtilities() {
     $utilities = array();
     foreach ($names as $name) {
         // require("./utilities/$name/makeUtility.php");
-        $utilities[$name] = "{$name}\makeUtility"($name);
+        $utilities[$name] = "\{$name}\makeUtility"($name);
     }
     return ['utilities' => $utilities];
 }
