@@ -51,15 +51,15 @@ $app->get('/', function(Request $request, Response $response, LoggerInterface $l
   // }
 // }
 
-foreach (makeUtilities()['utilities'] as $utility) {
-  foreach ($option2s as $option) {
-    $app->get("/{$utility['name']}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-      $path = $_SERVER['REQUEST_URI'];
-      $name = explode("/", $path)[1];
-      return $twig->render($response, 'error.twig', ['path' => $path, 'instructions' => "/$name"]);
-    });
-  };
-}
+// foreach (makeUtilities()['utilities'] as $utility) {
+  // foreach ($option2s as $option) {
+    // $app->get("/{$utility['name']}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+      // $path = $_SERVER['REQUEST_URI'];
+      // $name = explode("/", $path)[1];
+      // return $twig->render($response, 'error.twig', ['path' => $path, 'instructions' => "/$name"]);
+    // });
+  // };
+// }
 
 // WITH EACH ADDITIONAL UTILITY, COPY THE LINES FROM HERE ...
 foreach ($option1s as $option1) {
