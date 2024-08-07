@@ -36,8 +36,9 @@ $option1s = ['', '/json'];
 // Allow for possibility that user may append a slash to url.
 $option2s = ['', '/'];
 
+$utilities = makeUtilities();
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-  return $twig->render($response, 'utilityList.twig', makeUtilities());
+  return $twig->render($response, 'utilityList.twig', $GLOBALS["utilities"]);
 });
 
 // foreach (makeUtilities()['utilities'] as $utility) {
