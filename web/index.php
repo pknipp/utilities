@@ -41,7 +41,7 @@ $app->get('/', function(Request $request, Response $response, LoggerInterface $l
   return $twig->render($response, 'utilityList.twig', $GLOBALS["utilities"]);
 });
 
-foreach (makeUtilities()['utilities'] as $utility) {
+foreach ($utilities as $utility) {
   foreach ($option2s as $option) {
     $app->get("/{$utility['name']}$option", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
       $name = substr($_SERVER['REQUEST_URI'], 1);
