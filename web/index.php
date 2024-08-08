@@ -64,31 +64,31 @@ foreach ($utilities as $utility) {
 // }
 
 // WITH EACH ADDITIONAL UTILITY, COPY THE LINES FROM HERE ...
-foreach ($option1s as $option1) {
-  foreach ($option2s as $option2) {
+// foreach ($option1s as $option1) {
+  // foreach ($option2s as $option2) {
     // Mutation will be needed for the lines from here ...
-    $app->get("/significanceFormatter$option1/{number}/{digits}$option2", function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-      $data = [
-        'number' => $number,
-        'digits' => $digits,
-      ];
+    // $app->get("/significanceFormatter$option1/{number}/{digits}$option2", function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+      // // $data = [
+        // // 'number' => $number,
+        // // 'digits' => $digits,
+      // // ];
       // ... to here for each utility.
-      $pathParts = explode('/', $_SERVER['REQUEST_URI']);
-      $isJson = $pathParts[2] == 'json';
-      $name = $pathParts[1];
-      $logger->debug("logging output for $name $option1 route");
-      require ("./utilities/$name/makeHtml.php");
-      $output = makeHtml($data);
-      if ($isJson) {
-        $response->getBody()->write(json_encode($output));
-        $response = $response->withHeader('Content-Type', 'application/json');
-        return $response;
-      } else {
-        return $twig->render($response, "utilities/$name.twig", $output);
-      }
-    });
-  }
-}
+      // $pathParts = explode('/', $_SERVER['REQUEST_URI']);
+      // // $isJson = $pathParts[2] == 'json';
+      // // // $name = $pathParts[1];
+      // // // // $logger->debug("logging output for $name $option1 route");
+      // // // // require ("./utilities/$name/makeHtml.php");
+      // // // // // $output = makeHtml($data);
+      // // // // if ($isJson) {
+        // // // // // $response->getBody()->write(json_encode($output));
+        // // // // // $response = $response->withHeader('Content-Type', 'application/json');
+        // // // // // return $response;
+      // // } else {
+        // // // return $twig->render($response, "utilities/$name.twig", $output);
+      // // }
+    // // });
+  // }
+// }
 // ... TO HERE.
 
 $app->run();
