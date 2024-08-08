@@ -39,19 +39,19 @@ $option2s = ['', '/'];
 $utilities = makeUtilities();
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $logger->debug(json_encode($GLOBALS["utilities"]));
-  return $twig->render($response, 'utilityList.twig', $GLOBALS["utilities"]);
+  return $twig->render($response, 'utilityList.twig', ['utilities' => $GLOBALS["utilities"]]);
 });
 
-// foreach ($utilities as $utility) {
-  // foreach ($option2s as $option) {
-    // $app->get("/{$utility['name']}$option", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-      // $name = substr($_SERVER['REQUEST_URI'], 1);
-      // $logger->debug("logging output from $name route");
-      // require("./utilities/{$name}/makeUtility.php");
-      // return $twig->render($response, 'utilityIntro.twig', $GLOBALS["utilities"][$name]);
-    // });
-  // }
-// }
+foreach ($utilities as $utility) {
+  foreach ($option2s as $option) {
+    $app->get("/{$utility['name']}$option", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+      $name = substr($_SERVER['REQUEST_URI'], 1);
+      $logger->debug("logging output from $name route");
+      require("./utilities/{$name}/makeUtility.php");
+      return $twig->render($response, 'utilityIntro.twig', $GLOBALS["utilities"][$name]);
+    });
+  }
+}
 
 // foreach (makeUtilities()['utilities'] as $utility) {
   // foreach ($option2s as $option) {
