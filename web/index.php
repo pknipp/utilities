@@ -31,9 +31,8 @@ $container->set(LoggerInterface::class, function () {
 $app = Bridge::create($container);
 $app->addErrorMiddleware(true, false, false);
 
-$option1s = ['', '/json'];
 // Allow for possibility that user may append a slash to url.
-$option2s = ['', '/'];
+$options = ['', '/'];
 
 require('./makeUtilities.php');
 $utilities = makeUtilities();
@@ -44,18 +43,17 @@ $app->get('/', function(Request $request, Response $response, LoggerInterface $l
 });
 
 foreach ($utilities as $utility) {
-  foreach ($option2s as $option) {
+  foreach ($options as $option) {
     $app->get("/{$utility['name']}$option", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
       $name = explode("/", $_SERVER['REQUEST_URI'])[1];
       $logger->debug("logging output from $name route");
-      // require("./utilities/{$name}/makeUtility.php");
       return $twig->render($response, 'utilityIntro.twig', $GLOBALS["utilities"][$name]);
     });
   }
 }
 
 foreach ($utilities as $utility) {
-  foreach ($option2s as $option) {
+  foreach ($options as $option) {
     $app->get("/{$utility['name']}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
       $path = $_SERVER['REQUEST_URI'];
       $name = explode("/", $path)[1];
@@ -65,8 +63,8 @@ foreach ($utilities as $utility) {
 }
 
 // WITH EACH ADDITIONAL UTILITY, COPY THE LINES FROM HERE ...
-foreach ($option1s as $option1) {
-  foreach ($option2s as $option2) {
+foreach (['', '/json'] as $option1) {
+  foreach ($options as $option2) {
     // Mutation will be needed for the lines from here ...
     $app->get("/significanceFormatter{$option1}/{number}/{digits}$option2", function(string $number, string $digits, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
       $data = [
@@ -78,9 +76,8 @@ foreach ($option1s as $option1) {
       $logger->debug(json_encode($pathParts));
       $isJson = $pathParts[2] == 'json';
       $name = $pathParts[1];
-      // $logger->debug("logging output for $name $option1 route");
-      require ("./utilities/$name/makeHtml.php");
-      $output = makeHtml($data);
+      require ("./utilities/$name/makeResponse.php");
+      $output = makeResponse($data);
       if ($isJson) {
         $response->getBody()->write(json_encode($output));
         $response = $response->withHeader('Content-Type', 'application/json');

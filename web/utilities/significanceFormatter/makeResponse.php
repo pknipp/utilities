@@ -1,6 +1,6 @@
 <?php
 
-function makeHtml($data) {
+function makeResponse($data) {
     $numberString = $data['number'];
     $digitsString = $data['digits'];
     $number = filter_var($data['number'], FILTER_VALIDATE_FLOAT);
