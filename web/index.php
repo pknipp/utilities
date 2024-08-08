@@ -75,6 +75,7 @@ foreach ($option1s as $option1) {
       ];
       // ... to here for each utility.
       $pathParts = explode('/', $_SERVER['REQUEST_URI']);
+      $logger->debug(json_encode($pathParts));
       $isJson = $pathParts[2] == 'json';
       $name = $pathParts[1];
       // $logger->debug("logging output for $name $option1 route");
