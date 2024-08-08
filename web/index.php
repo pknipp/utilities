@@ -31,12 +31,13 @@ $container->set(LoggerInterface::class, function () {
 $app = Bridge::create($container);
 $app->addErrorMiddleware(true, false, false);
 
-require('./makeUtilities.php');
 $option1s = ['', '/json'];
 // Allow for possibility that user may append a slash to url.
 $option2s = ['', '/'];
 
+require('./makeUtilities.php');
 $utilities = makeUtilities();
+
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
   $logger->debug(json_encode($GLOBALS["utilities"]));
   return $twig->render($response, 'utilityList.twig', ['utilities' => $GLOBALS["utilities"]]);
@@ -53,15 +54,15 @@ foreach ($utilities as $utility) {
   }
 }
 
-// foreach (makeUtilities()['utilities'] as $utility) {
-  // foreach ($option2s as $option) {
-    // $app->get("/{$utility['name']}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-      // $path = $_SERVER['REQUEST_URI'];
-      // $name = explode("/", $path)[1];
-      // return $twig->render($response, 'error.twig', ['path' => $path, 'instructions' => "/$name"]);
-    // });
-  // };
-// }
+foreach ($utilities as $utility) {
+  foreach ($option2s as $option) {
+    $app->get("/{$utility['name']}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+      $path = $_SERVER['REQUEST_URI'];
+      $name = explode("/", $path)[1];
+      return $twig->render($response, 'error.twig', ['path' => $path, 'instructions' => "/$name"]);
+    });
+  };
+}
 
 // WITH EACH ADDITIONAL UTILITY, COPY THE LINES FROM HERE ...
 // foreach ($option1s as $option1) {
