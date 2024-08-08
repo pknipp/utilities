@@ -38,7 +38,7 @@ $option2s = ['', '/'];
 
 $utilities = makeUtilities();
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-  $logger->debug($GLOBALS["utilities"]);
+  $logger->debug(json_encode($GLOBALS["utilities"]));
   return $twig->render($response, 'utilityList.twig', $GLOBALS["utilities"]);
 });
 
