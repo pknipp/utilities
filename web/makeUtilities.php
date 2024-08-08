@@ -8,5 +8,4 @@ function makeUtilities() {
     $utilities[$name] = makeSignificanceFormatterUtility($name);
 
     return $utilities;
-    // return ['utilities' => $utilities];
 }
