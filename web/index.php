@@ -79,7 +79,7 @@ foreach ($option1s as $option1) {
       $isJson = $pathParts[2] == 'json';
       $name = $pathParts[1];
       // $logger->debug("logging output for $name $option1 route");
-      // require ("./utilities/$name/makeHtml.php");
+      require ("./utilities/$name/makeHtml.php");
       $output = makeHtml($data);
       if ($isJson) {
         $response->getBody()->write(json_encode($output));
