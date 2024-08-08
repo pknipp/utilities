@@ -80,7 +80,7 @@ foreach (['', '/json'] as $option1) {
       $output = makeResponse($data);
       if ($isJson) {
         $response->getBody()->write(json_encode($output));
-        $response = $response->withHeader('Content-Type', 'application/json');
+        $response = $response->withHeader('Content-Type', 'application/json', 'charset=UTF-8');
         return $response;
       } else {
         return $twig->render($response, "utilities/$name.twig", $output);
