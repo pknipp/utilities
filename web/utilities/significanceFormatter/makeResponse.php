@@ -12,6 +12,6 @@ function makeResponse($data) {
     $digits = filter_var($data['digits'], FILTER_VALIDATE_INT);
     // following is temporary
     $outputString = strval($number);
-    $outputString = $sign . $outputString . \u03BC;
+    $outputString = $sign . $outputString . "\u03BC";
     return ['formattedNumber' => $outputString];
 }
