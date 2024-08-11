@@ -24,7 +24,7 @@ function makeResponse($data) {
     }
     $mantissa = $number / pow(10, 3 * $triple);
     $digits = filter_var($data['digits'], FILTER_VALIDATE_INT);
-    $mantissa = round($mantissa, $digits -1 - $exponent);
+    $mantissa = round($mantissa, $digits + 3 * $triple -1 - $exponent);
     $outputString = $sign . strval($mantissa) . $prefix;
     return ['formattedNumber' => $outputString];
 }
