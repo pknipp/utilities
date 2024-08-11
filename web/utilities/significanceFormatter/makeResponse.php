@@ -26,7 +26,11 @@ function makeResponse($data) {
     $mantissa = $number / pow(10, 3 * $triple);
     $digits = filter_var($data['digits'], FILTER_VALIDATE_INT);
     $fac = pow(10, $exponent - 3 * $triples);
+    $logger->debug("$mantissa = ", $mantissa);
+    $logger->debug("$fac = ", $fac);
+    $logger->debug("$digits = ", $digits);
     $mantissa = round($mantissa / $fac, $digits - 1) * $fac;
+    $logger->debug("$mantissa = ", $mantissa);
     $outputString = $sign . strval($mantissa) . $prefix;
     return ['formattedNumber' => $outputString];
 }
