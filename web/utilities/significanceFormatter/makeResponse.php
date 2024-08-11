@@ -22,8 +22,8 @@ function makeResponse($data) {
         $triple = max($triple, 1 - count($prefixesNegative));
         $prefix = $prefixesNegative[-$triple];
     }
-    $exponent = 3 * $triple;
-    $mantissa = $number / pow(10, $exponent);
+    // $exponent = 3 * $triple;
+    $mantissa = $number / pow(10, 1 * $triple);
     $digits = filter_var($data['digits'], FILTER_VALIDATE_INT);
     $mantissa = round($mantissa, $digits - 1);
     $outputString = $sign . strval($mantissa) . $prefix;
