@@ -9,8 +9,8 @@ function makeResponse($data) {
         $sign = '-';
         $number = abs($number);
     }
-    $prefixesPositive = ['', 'k', 'M', 'G', 'T', 'P', 'E'];
-    $prefixesNegative = ['', 'm', 'micro', 'n', 'p', 'f', 'a'];
+    $prefixesPositive = ['', 'k']; //'k', 'M', 'G', 'T', 'P', 'E'];
+    $prefixesNegative = ['', 'm']; //, 'micro', 'n', 'p', 'f', 'a'];
     $log10Number = log10($number);
     $exponent = floor($log10Number);
     $triple = floor($exponent / 3);
