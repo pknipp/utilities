@@ -22,9 +22,10 @@ function makeResponse($data) {
         $triple = max($triple, 1 - count($prefixesNegative));
         $prefix = $prefixesNegative[-$triple];
     }
-    $mantissa = $number / pow(10, 3 * $triple);
+    $exponent = 3 * $triple;
+    $mantissa = $number / pow(10, 3 * $exponent);
     $digits = filter_var($data['digits'], FILTER_VALIDATE_INT);
-    $mantissa = round($mantissa, $digits + 3 * $triple -1 - $exponent);
+    $mantissa = round($mantissa, $digits - 1);
     $outputString = $sign . strval($mantissa) . $prefix;
     return ['formattedNumber' => $outputString];
 }
