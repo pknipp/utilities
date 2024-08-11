@@ -20,7 +20,7 @@ function makeResponse($data) {
         $prefix = $prefixesPositive[$triple];
     } elseif ($triple < 0) {
         $triple = max($triple, 1 - count($prefixesNegative));
-        $prefix = $prefixesNegative[$triple];
+        $prefix = $prefixesNegative[-$triple];
     }
     $mantissa = $number / pow(10, 3 * $triple);
     $digits = filter_var($data['digits'], FILTER_VALIDATE_INT);
