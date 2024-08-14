@@ -26,10 +26,10 @@ function makeResponse($data) {
     $triples = floor($exponent / 3);
     $prefix = '';
     if ($triples > 0) {
-        $triple = min($triples, count($prefixesPositive) - 1);
+        $triples = min($triples, count($prefixesPositive) - 1);
         $prefix = $prefixesPositive[$triples];
     } elseif ($triples < 0) {
-        $triple = max($triples, 1 - count($prefixesNegative));
+        $triples = max($triples, 1 - count($prefixesNegative));
         $prefix = $prefixesNegative[-$triples];
     }
     $fac = pow(10, $exponent - 3 * $triples);
