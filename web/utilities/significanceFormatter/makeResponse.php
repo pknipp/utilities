@@ -9,9 +9,8 @@ function makeResponse($data) {
         $sign = '-';
         $number = abs($number);
     }
-    // uncomment following two lines after completion of testing
-    $prefixesPositive = ['', 'k']; //'k', 'M', 'G', 'T', 'P', 'E'];
-    $prefixesNegative = ['', 'm']; //, 'micro', 'n', 'p', 'f', 'a'];
+    $prefixesPositive = ['', 'k', 'M', 'G', 'T', 'P', 'E'];
+    $prefixesNegative = ['', 'm', 'micro', 'n', 'p', 'f', 'a'];
     $log10Number = log10($number);
     $digits = filter_var($data['digits'], FILTER_VALIDATE_INT);
     $precision = $digits - 1;
@@ -23,10 +22,9 @@ function makeResponse($data) {
         $mantissa /= 10;
         $exponent++;
     }
-    // $mantissa *= pow(10, $precision);
-
     $triples = floor($exponent / 3);
     $prefix = '';
+    // Accommodate max/min prefixes.
     if ($triples > 0) {
         $triples = min($triples, count($prefixesPositive) - 1);
         $prefix = $prefixesPositive[$triples];
