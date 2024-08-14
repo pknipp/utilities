@@ -34,7 +34,7 @@ function makeResponse($data) {
         $triples = max($triples, 1 - count($prefixesNegative));
         $prefix = $prefixesNegative[-$triples];
     }
-    $fac = 1; //pow(10, $exponent - 3 * $triples);
+    $fac = pow(10, $exponent - 3 * $triples);
     $mantissa = round($mantissa / $fac, $precision) * $fac;
     $outputString = $sign . strval($mantissa) . $prefix;
     return ['formattedNumber' => $outputString];
