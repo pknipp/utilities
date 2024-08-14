@@ -22,7 +22,8 @@ function makeResponse($data) {
         $mantissa /= 10;
         $exponent++;
     }
-    $mantissa *= pow(10, $offset);
+    // $mantissa *= pow(10, $offset);
+
     $triples = floor($exponent / 3);
     $prefix = '';
     if ($triples > 0) {
