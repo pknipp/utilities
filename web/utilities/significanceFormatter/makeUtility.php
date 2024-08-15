@@ -16,8 +16,8 @@ function makeSignificanceFormatterUtility($name) {
                             <th scope="col" colspan="2">Outputs</th>
                         </tr>
                         <tr>
-                            <th scope="col">number</th>
-                            <th scope="col">prefix</th>
+                            <th scope="col"><tt>numberString</tt></th>
+                            <th scope="col"><tt>prefix</tt></th>
                         </tr>
                     </thead>
                     <tbody>
