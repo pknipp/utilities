@@ -10,7 +10,7 @@ function makeResponse($data) {
         $number = abs($number);
     }
     $prefixesPositive = ['', 'k', 'M', 'G', 'T', 'P', 'E'];
-    $prefixesNegative = ['', 'm', '\u03BC', 'n', 'p', 'f', 'a'];
+    $prefixesNegative = ['', 'm', 'µ', 'n', 'p', 'f', 'a'];
     $log10Number = log10($number);
     $digits = filter_var($data['digits'], FILTER_VALIDATE_INT);
     $precision = $digits - 1;

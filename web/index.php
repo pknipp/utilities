@@ -79,7 +79,7 @@ foreach (['', '/json'] as $option1) {
       require ("./utilities/{$name}/makeResponse.php");
       $output = makeResponse($data);
       if ($isJson) {
-        $response->getBody()->write(json_encode($output, JSON_UNESCAPED_UNICODE));
+        $response->getBody()->write(json_encode($output));
         $response = $response->withHeader('Content-Type', 'application/json');
         return $response;
       } else {
