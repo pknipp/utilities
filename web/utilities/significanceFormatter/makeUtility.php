@@ -13,17 +13,21 @@ function makeSignificanceFormatterUtility($name) {
                     <thead>
                         <tr>
                             <th scope="col" rowspan="2">Input</th>
-                            <th scope="col" colspan="2">Outputs</th>
+                            <th scope="col" colspan="3">Outputs</th>
                         </tr>
                         <tr>
-                            <th scope="col"><tt>numberString</tt></th>
+                            <th scope="col"><tt>sign</tt></th>
+                            <th scope="col"><tt>number</tt></th>
                             <th scope="col"><tt>prefix</tt></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>
-                                <tt>/9987/3</tt>
+                                <tt>/-9987/3</tt>
+                            </td>
+                            <td>
+                                <tt>-</tt>
                             </td>
                             <td>
                                 <tt>9.99</tt>
@@ -37,6 +41,9 @@ function makeSignificanceFormatterUtility($name) {
                                 <tt>/9987/2</tt>
                             </td>
                             <td>
+                                (nothing)
+                            </td>
+                            <td>
                                 10
                             </td>
                             <td>
@@ -45,7 +52,10 @@ function makeSignificanceFormatterUtility($name) {
                         </tr>
                         <tr>
                             <td>
-                                <tt>/99/3</tt>
+                                <tt>/-99/3</tt>
+                            </td>
+                            <td>
+                                <tt>-</tt>
                             </td>
                             <td>
                                 9.90

@@ -2,12 +2,12 @@
 
 {% block content %}
 <div>
-    Here is how to use the 2-element output array for the significance-formatted number to render quantities having various types of units:
+    Here is how to use the 3-element output array for the significance-formatted number to render quantities having various types of units:
     <div>
         <ul>
-            <li>no units: {{numberString}}{{prefix}}</li>
-            <li>dollars: ${{numberString}}{{prefix}}</li>
-            <li>grams: {{numberString}} {{prefix}}g</li>
+            <li>no units: {{sign}}{{number}}{{prefix}}</li>
+            <li>dollars: {{sign}}${{number}}{{prefix}}</li>
+            <li>grams: {{sign}}{{number}} {{prefix}}g</li>
         </ul>
     </div>
 </div>
