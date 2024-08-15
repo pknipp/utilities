@@ -3,7 +3,7 @@
 {% block content %}
 <div class="text-center">
     List of utilities provided by this API:
-    <ul class="text-center">
+    <ul>
         {% for utility in utilities %}
             <li><a href="{{utility.name}}">{{ utility.pretty }}</a>: {{utility.description}}</li>
         {% endfor %}
