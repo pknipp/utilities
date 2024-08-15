@@ -6,10 +6,12 @@
         ultilities provided by this API
     </h3>
 </div>
-<ul>
-    {% for utility in utilities %}
-        <li><a href="{{utility.name}}">{{ utility.pretty }}</a>: {{utility.description|raw}}</li>
-    {% endfor %}
-</ul>
+<div>
+    <ul>
+        {% for utility in utilities %}
+            <li><a href="{{utility.name}}">{{ utility.pretty }}</a>: {{utility.description|raw}}</li>
+        {% endfor %}
+    </ul>
+</div<
 
 {% endblock %}
