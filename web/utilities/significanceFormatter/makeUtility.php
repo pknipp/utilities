@@ -23,10 +23,10 @@ function makeSignificanceFormatterUtility($name) {
                     <tbody>
                         <tr>
                             <td>
-                                <tt>/1234/3</tt>
+                                <tt>/9987/3</tt>
                             </td>
                             <td>
-                                <tt>1.23</tt>
+                                <tt>9.99</tt>
                             </td>
                             <td>
                                 <tt>k</tt>
@@ -34,10 +34,21 @@ function makeSignificanceFormatterUtility($name) {
                         </tr>
                         <tr>
                             <td>
-                                <tt>/99.7/2</tt>
+                                <tt>/9987/2</tt>
                             </td>
                             <td>
-                                100
+                                10
+                            </td>
+                            <td>
+                                k
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <tt>/99/3</tt>
+                            </td>
+                            <td>
+                                9.90
                             </td>
                             <td>
                                 (nothing)
