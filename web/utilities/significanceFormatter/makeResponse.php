@@ -33,6 +33,5 @@ function makeResponse($data) {
         $prefix = $prefixesNegative[-$triples];
     }
     $mantissa = round($mantissa, $precision) * pow(10, $exponent - 3 * $triples);
-    $outputString = $sign . strval($mantissa) . $prefix;
-    return ['formattedNumber' => $outputString];
+    return ['numberString' => $sign . strval($mantissa), 'prefix' => $prefix];
 }
