@@ -38,8 +38,8 @@ require('./makeUtilities.php');
 $utilities = makeUtilities();
 
 $app->get('/', function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-  $logger->debug(json_encode($GLOBALS["utilities"]));
-  return $twig->render($response, 'utilityList.twig', ['utilities' => $GLOBALS["utilities"]]);
+  $logger->debug(json_encode($GLOBALS['utilities']));
+  return $twig->render($response, 'utilityList.twig', ['utilities' => $GLOBALS['utilities']]);
 });
 
 foreach ($utilities as $utility) {
@@ -47,7 +47,7 @@ foreach ($utilities as $utility) {
     $app->get("/{$utility['name']}$option", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
       $name = explode("/", $_SERVER['REQUEST_URI'])[1];
       $logger->debug("logging output from $name route");
-      return $twig->render($response, 'utilityIntro.twig', $GLOBALS["utilities"][$name]);
+      return $twig->render($response, 'utilityIntro.twig', $GLOBALS['utilities'][$name]);
     });
   }
 }
@@ -56,8 +56,8 @@ foreach ($utilities as $utility) {
   foreach ($options as $option) {
     $app->get("/{$utility['name']}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
       $path = $_SERVER['REQUEST_URI'];
-      $name = explode("/", $path)[1];
-      return $twig->render($response, 'error.twig', ['path' => $path, 'instructions' => "/$name"]);
+      $name = explode('/', $path)[1];
+      return $twig->render($response, 'error.twig', ['path' => $path, 'instructions' => "/{$name}"]);
     });
   };
 }
@@ -76,14 +76,14 @@ foreach (['', '/json'] as $option1) {
       $logger->debug(json_encode($pathParts));
       $isJson = $pathParts[2] == 'json';
       $name = $pathParts[1];
-      require ("./utilities/$name/makeResponse.php");
+      require ("./utilities/{$name}/makeResponse.php");
       $output = makeResponse($data);
       if ($isJson) {
         $response->getBody()->write(json_encode($output));
         $response = $response->withHeader('Content-Type', 'application/json');
         return $response;
       } else {
-        return $twig->render($response, "utilities/$name.twig", $output);
+        return $twig->render($response, "utilities/{$name}.twig", $output);
       }
     });
   }
