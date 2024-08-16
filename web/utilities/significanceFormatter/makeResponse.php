@@ -4,7 +4,7 @@ function makeResponse($data) {
     $numberString = $data['number'];
     $digitsString = $data['digits'];
     $numberValidated = filter_var($numberString, FILTER_VALIDATE_FLOAT);
-    if (!numberValidated) {
+    if (!$numberValidated) {
         return ['error' => "{$numberString} param cannot be parsed as a number."];
     }
     $sign = '';
