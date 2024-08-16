@@ -56,7 +56,7 @@ foreach ($utilities as $utility) {
   foreach ($options as $option) {
     $app->get("/{$utility['name']}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger) {
       $response->getBody()->write(json_encode(
-        ['error' => "You need to type some input(s) after {$_SERVER['REQUEST_URI']}"],
+        ['errors' => ["You need to type some input(s) after {$_SERVER['REQUEST_URI']}"]],
         JSON_UNESCAPED_UNICODE,
       ));
       $response = $response->withHeader('Content-Type', 'application/json');
