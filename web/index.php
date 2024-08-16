@@ -86,13 +86,13 @@ foreach (['', '/json'] as $option1) {
         $response = $response->withHeader('Content-Type', 'application/json');
         return $response;
       } else {
-        if (array_key_exists('message', $output)) {
-          return $twig->render($response, "utilities/{$name}.twig", $output['message']);
-        } else {
+        if ($output['errors']) {
           $response->getBody()->write(json_encode(json_encode($output)));
           $response = $response->withHeader('Content-Type', 'application/json');
           return $response;
-        }
+        } else {
+          return $twig->render($response, "utilities/{$name}.twig", $output['message']);
+        } 
       }
     });
   }

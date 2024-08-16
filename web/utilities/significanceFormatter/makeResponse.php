@@ -1,6 +1,7 @@
 <?php
 
 function makeResponse($data) {
+    $errors = [];
     $numberString = $data['number'];
     $digitsString = $data['digits'];
     $number = filter_var($data['number'], FILTER_VALIDATE_FLOAT);
@@ -38,5 +39,8 @@ function makeResponse($data) {
     if ($zerosNeeded > 0) {
         $mantissa .= (($hasDecimalPt ? '' : '.') . str_repeat('0', $zerosNeeded));
     }
-    return ['message' => ['sign' => $sign, 'mantissa' => $mantissa, 'prefix' => $prefix]];
+    return [
+        'errors' => $errors,
+        'message' => ['sign' => $sign, 'mantissa' => $mantissa, 'prefix' => $prefix],
+    ];
 }
