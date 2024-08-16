@@ -56,16 +56,13 @@ foreach ($utilities as $utility) {
   foreach ($options as $option) {
     $app->get("/{$utility['name']}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
       $path = $_SERVER['REQUEST_URI'];
-      $name = explode('/', $path)[1];
-      return $twig->render(
-        $response,
-        'error.twig',
-        [
-          'path' => $path,
-          'instructions' => "/{$name}",
-          'error' => "Error: you need to type some input(s) after {$path}",
-        ],
-      );
+      // $name = explode('/', $path)[1];
+      $response->getBody()->write(json_encode(
+        ['error' => "You need to type some input(s) after {$path}"],
+        JSON_UNESCAPED_UNICODE,
+      ));
+      $response = $response->withHeader('Content-Type', 'application/json');
+      return $response;
     });
   };
 }
