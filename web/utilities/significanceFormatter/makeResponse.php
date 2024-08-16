@@ -10,30 +10,27 @@ function makeResponse($data) {
     if (!($numberValidated || $numberString == '0')) {
         return ['error' => "One param ({$numberString}) cannot be parsed as a number."];
     }
+    if ($numberValidated == 0) {
+        return [
+            'error' => '',
+            'message' => ['sign' => '', 'mantissa' => '0', 'prefix' => ''],
+        ];
+    }
     $sign = '';
     if ($numberValidated < 0) {
         $sign = '-';
         $numberValidated = abs($numberValidated);
     }
+    $prefixesPositive = ['', 'k', 'M', 'G', 'T', 'P', 'E'];
+    $prefixesNegative = ['', 'm', 'µ', 'n', 'p', 'f', 'a'];
+    //Invoking log10 is the easiest way to count digits to left of decimal point.
+    $log10Number = log10($numberValidated);
     $digitsValidated = filter_var($digitsString, FILTER_VALIDATE_INT);
     if ($digitsValidated == false) {
         return ['error' => "Number of significant digits ({$digitsString}) cannot be parsed as an integer."];
     } else if ($digitsValidated < 1) {
         return ['error' => "Number of significant digits ({$digitsValidated}) must be positive."];
     }
-    if ($numberValidated == 0) {
-        if ($digitsValidated > 1) {
-            $mantissa .= ('.' . str_repeat('0', $digitsValidated - 1));
-        }
-        return [
-            'error' => '',
-            'message' => ['sign' => '', 'mantissa' => $mantissa, 'prefix' => ''],
-        ];
-    }
-    $prefixesPositive = ['', 'k', 'M', 'G', 'T', 'P', 'E'];
-    $prefixesNegative = ['', 'm', 'µ', 'n', 'p', 'f', 'a'];
-    //Invoking log10 is the easiest way to count digits to left of decimal point.
-    $log10Number = log10($numberValidated);
     $precision = $digitsValidated - 1;
     $exponent = floor($log10Number);
     $mantissa = $numberValidated / pow(10, $exponent);
