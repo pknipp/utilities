@@ -4,7 +4,7 @@ function makeResponse($data) {
     $numberString = $data['number'];
     $digitsString = $data['digits'];
     $numberValidated = filter_var($numberString, FILTER_VALIDATE_FLOAT);
-    if (!$numberValidated) {
+    if ($numberValidated == false) {
         return ['error' => "One param ({$numberString}) cannot be parsed as a number."];
     }
     $sign = '';
@@ -17,7 +17,7 @@ function makeResponse($data) {
     //Invoking log10 is the easiest way to count digits to left of decimal point.
     $log10Number = log10($numberValidated);
     $digitsValidated = filter_var($digitsString, FILTER_VALIDATE_INT);
-    if (!$digitsValidated) {
+    if ($digitsValidated == false) {
         return ['error' => "Number of significant digits ({$digitsString}) cannot be parsed as an integer."];
     } else if ($digitsValidated < 1) {
         return ['error' => "Number of significant digits ({$digitsValidated}) must be positive."];
