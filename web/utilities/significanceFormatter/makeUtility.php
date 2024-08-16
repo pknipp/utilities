@@ -58,7 +58,7 @@ function makeSignificanceFormatterUtility($name) {
                                 <tt>-</tt>
                             </td>
                             <td>
-                                9.90
+                                99.0
                             </td>
                             <td>
                                 (nothing)

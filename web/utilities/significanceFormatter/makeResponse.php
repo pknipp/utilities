@@ -35,8 +35,8 @@ function makeResponse($data) {
     $mantissa = strval(round($mantissa, $precision) * pow(10, $exponent - 3 * $triples));
     $hasDecimalPt = str_contains($mantissa, '.');
     $zerosNeeded = $digits - (strlen($mantissa) - ($hasDecimalPt ? 1 : 0));
-    // if ($zerosNeeded > 0) {
-        // $mantissa .= (($hasDecimalPt ? '' : '.') . str_repeat('0', $zerosNeeded));
-    // }
+    if ($zerosNeeded > 0) {
+        $mantissa .= (($hasDecimalPt ? '' : '.') . str_repeat('0', $zerosNeeded));
+    }
     return ['sign' => $sign, 'mantissa' => $mantissa, 'prefix' => $prefix];
 }
