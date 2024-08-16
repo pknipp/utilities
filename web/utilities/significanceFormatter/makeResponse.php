@@ -1,6 +1,8 @@
 <?php
 
 function makeResponse($data) {
+    // The following initialization ensures that scoping is satisfied.
+    $mantissa = 0;
     $numberString = $data['number'];
     $digitsString = $data['digits'];
     //This ternary seems necessary to catch this corner case.
@@ -13,16 +15,25 @@ function makeResponse($data) {
         $sign = '-';
         $numberValidated = abs($numberValidated);
     }
-    $prefixesPositive = ['', 'k', 'M', 'G', 'T', 'P', 'E'];
-    $prefixesNegative = ['', 'm', 'µ', 'n', 'p', 'f', 'a'];
-    //Invoking log10 is the easiest way to count digits to left of decimal point.
-    $log10Number = log10($numberValidated);
     $digitsValidated = filter_var($digitsString, FILTER_VALIDATE_INT);
     if ($digitsValidated == false) {
         return ['error' => "Number of significant digits ({$digitsString}) cannot be parsed as an integer."];
     } else if ($digitsValidated < 1) {
         return ['error' => "Number of significant digits ({$digitsValidated}) must be positive."];
     }
+    if ($numberValidated == 0) {
+        if ($digits > 1) {
+            $mantissa .= ('.' . str_repeat('0', $digits - 1));
+        }
+        return [
+            'error' => '',
+            'message' => ['sign' => '', 'mantissa' => $mantissa, 'prefix' => ''],
+        ];
+    }
+    $prefixesPositive = ['', 'k', 'M', 'G', 'T', 'P', 'E'];
+    $prefixesNegative = ['', 'm', 'µ', 'n', 'p', 'f', 'a'];
+    //Invoking log10 is the easiest way to count digits to left of decimal point.
+    $log10Number = log10($numberValidated);
     $precision = $digitsValidated - 1;
     $exponent = floor($log10Number);
     $mantissa = $numberValidated / pow(10, $exponent);
