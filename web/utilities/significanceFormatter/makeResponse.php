@@ -1,22 +1,24 @@
 <?php
 
 function makeResponse($data) {
-    $errors = [];
     $numberString = $data['number'];
     $digitsString = $data['digits'];
-    $number = filter_var($data['number'], FILTER_VALIDATE_FLOAT);
+    $numberValidated = filter_var($numberString, FILTER_VALIDATE_FLOAT);
+    if (!numberValidated) {
+        return ['error' => "{$numberString} param cannot be parsed as a number."];
+    }
     $sign = '';
-    if ($number < 0) {
+    if ($numberValidated < 0) {
         $sign = '-';
-        $number = abs($number);
+        $numberValidated = abs($numberValidated);
     }
     $prefixesPositive = ['', 'k', 'M', 'G', 'T', 'P', 'E'];
     $prefixesNegative = ['', 'm', 'µ', 'n', 'p', 'f', 'a'];
-    $log10Number = log10($number);
+    $log10Number = log10($numberValidated);
     $digits = filter_var($data['digits'], FILTER_VALIDATE_INT);
     $precision = $digits - 1;
     $exponent = floor($log10Number);
-    $mantissa = $number / pow(10, $exponent);
+    $mantissa = $numberValidated / pow(10, $exponent);
     $decimal_dust = pow(10, -8);
     // edge case: rounding causes mantissa to shift up to 10.
     if (abs(round($mantissa, $precision) - 10) < $decimal_dust) {
@@ -40,7 +42,7 @@ function makeResponse($data) {
         $mantissa .= (($hasDecimalPt ? '' : '.') . str_repeat('0', $zerosNeeded));
     }
     return [
-        'errors' => $errors,
+        'error' => '',
         'message' => ['sign' => $sign, 'mantissa' => $mantissa, 'prefix' => $prefix],
     ];
 }

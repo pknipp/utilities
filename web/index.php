@@ -56,7 +56,7 @@ foreach ($utilities as $utility) {
   foreach ($options as $option) {
     $app->get("/{$utility['name']}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger) {
       $response->getBody()->write(json_encode(
-        ['errors' => ["You need to type some input(s) after {$_SERVER['REQUEST_URI']}"]],
+        ['error' => "You need to type some input(s) after {$_SERVER['REQUEST_URI']}"],
         JSON_UNESCAPED_UNICODE,
       ));
       $response = $response->withHeader('Content-Type', 'application/json');
@@ -86,13 +86,13 @@ foreach (['', '/json'] as $option1) {
         $response = $response->withHeader('Content-Type', 'application/json');
         return $response;
       } else {
-        if ($output['errors']) {
+        if ($output['error']) {
           $response->getBody()->write(json_encode(json_encode($output)));
           $response = $response->withHeader('Content-Type', 'application/json');
           return $response;
         } else {
           return $twig->render($response, "utilities/{$name}.twig", $output['message']);
-        } 
+        }
       }
     });
   }
