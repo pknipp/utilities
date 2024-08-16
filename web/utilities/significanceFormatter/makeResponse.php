@@ -22,8 +22,8 @@ function makeResponse($data) {
         return ['error' => "Number of significant digits ({$digitsValidated}) must be positive."];
     }
     if ($numberValidated == 0) {
-        if ($digits > 1) {
-            $mantissa .= ('.' . str_repeat('0', $digits - 1));
+        if ($digitsValidated > 1) {
+            $mantissa .= ('.' . str_repeat('0', $digitsValidated - 1));
         }
         return [
             'error' => '',
