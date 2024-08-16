@@ -54,11 +54,9 @@ foreach ($utilities as $utility) {
 
 foreach ($utilities as $utility) {
   foreach ($options as $option) {
-    $app->get("/{$utility['name']}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-      $path = $_SERVER['REQUEST_URI'];
-      // $name = explode('/', $path)[1];
+    $app->get("/{$utility['name']}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger) {
       $response->getBody()->write(json_encode(
-        ['error' => "You need to type some input(s) after {$path}"],
+        ['error' => "You need to type some input(s) after {$_SERVER['REQUEST_URI']}"],
         JSON_UNESCAPED_UNICODE,
       ));
       $response = $response->withHeader('Content-Type', 'application/json');
@@ -91,15 +89,9 @@ foreach (['', '/json'] as $option1) {
         if (array_key_exists('message', $output)) {
           return $twig->render($response, "utilities/{$name}.twig", $output['message']);
         } else {
-          return $twig->render(
-            $response,
-            'error.twig',
-            [
-              'path' => $path,
-              'instructions' => "/{$name}",
-              'error' => "Error: you need to type some input(s) after {$path}",
-            ],
-          );
+          $response->getBody()->write(json_encode(json_encode($output)));
+          $response = $response->withHeader('Content-Type', 'application/json');
+          return $response;
         }
       }
     });
