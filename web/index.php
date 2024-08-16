@@ -57,7 +57,15 @@ foreach ($utilities as $utility) {
     $app->get("/{$utility['name']}/json{$option}", function(Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
       $path = $_SERVER['REQUEST_URI'];
       $name = explode('/', $path)[1];
-      return $twig->render($response, 'error.twig', ['path' => $path, 'instructions' => "/{$name}"]);
+      return $twig->render(
+        $response,
+        'error.twig',
+        [
+          'path' => $path,
+          'instructions' => "/{$name}",
+          'error' => "Error: you need to type some input(s) after {$path}",
+        ],
+      );
     });
   };
 }
@@ -83,7 +91,19 @@ foreach (['', '/json'] as $option1) {
         $response = $response->withHeader('Content-Type', 'application/json');
         return $response;
       } else {
-        return $twig->render($response, "utilities/{$name}.twig", $output);
+        if (array_key_exists('message', $output)) {
+          return $twig->render($response, "utilities/{$name}.twig", $output['message']);
+        } else {
+          return $twig->render(
+            $response,
+            'error.twig',
+            [
+              'path' => $path,
+              'instructions' => "/{$name}",
+              'error' => "Error: you need to type some input(s) after {$path}",
+            ],
+          );
+        }
       }
     });
   }

@@ -38,5 +38,5 @@ function makeResponse($data) {
     if ($zerosNeeded > 0) {
         $mantissa .= (($hasDecimalPt ? '' : '.') . str_repeat('0', $zerosNeeded));
     }
-    return ['sign' => $sign, 'mantissa' => $mantissa, 'prefix' => $prefix];
+    return ['message' => ['sign' => $sign, 'mantissa' => $mantissa, 'prefix' => $prefix]];
 }
