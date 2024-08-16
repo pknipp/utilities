@@ -5,7 +5,7 @@ function makeResponse($data) {
     $digitsString = $data['digits'];
     //This ternary seems necessary to catch this corner case.
     $numberValidated = ($numberString == '0' ? 0 : filter_var($numberString, FILTER_VALIDATE_FLOAT));
-    if ($numberValidated == false) {
+    if (!$numberValidated) {
         return ['error' => "One param ({$numberString}) cannot be parsed as a number."];
     }
     $sign = '';
