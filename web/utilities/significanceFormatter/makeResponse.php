@@ -27,7 +27,7 @@ function makeResponse($data) {
     $log10Number = log10($numberValidated);
     $digitsValidated = filter_var($digitsString, FILTER_VALIDATE_INT);
     if ($digitsValidated == false) {
-        return ['error' => "Number of significant digits ({$digitsString}) cannot be parsed as an integer."];
+        return ['error' => "Number of significant digits ({$digitsString}) is not a positive integer."];
     } else if ($digitsValidated < 1) {
         return ['error' => "Number of significant digits ({$digitsValidated}) must be positive."];
     }
