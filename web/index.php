@@ -99,4 +99,33 @@ foreach (['', '/json'] as $option1) {
 }
 // ... TO HERE.
 
+foreach (['', '/json'] as $option1) {
+  foreach ($options as $option2) {
+    $app->get("/ordinalFormatter{$option1}/{number}$option2", function(string $number, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+      $data = [
+        'number' => $number,
+      ];
+      $pathParts = explode('/', $_SERVER['REQUEST_URI']);
+      $logger->debug(json_encode($pathParts));
+      $isJson = $pathParts[2] == 'json';
+      $name = $pathParts[1];
+      require ("./utilities/{$name}/makeResponse.php");
+      $output = makeResponse($data);
+      if ($isJson) {
+        $response->getBody()->write(json_encode($output, JSON_UNESCAPED_UNICODE));
+        $response = $response->withHeader('Content-Type', 'application/json');
+        return $response;
+      } else {
+        if ($output['error']) {
+          $response->getBody()->write(json_encode(json_encode($output)));
+          $response = $response->withHeader('Content-Type', 'application/json');
+          return $response;
+        } else {
+          return $twig->render($response, "utilities/{$name}.twig", $output['message']);
+        }
+      }
+    });
+  }
+}
+
 $app->run();

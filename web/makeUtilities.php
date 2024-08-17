@@ -7,5 +7,9 @@ function makeUtilities() {
     require("./utilities/{$name}/makeUtility.php");
     $utilities[$name] = makeSignificanceFormatterUtility($name);
 
+    $name = 'ordinalFormatter';
+    require("./utilities/{$name}/makeUtility.php");
+    $utilities[$name] = makeOrdinalFormatterUtility($name);
+
     return $utilities;
 }
