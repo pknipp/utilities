@@ -1,6 +1,6 @@
 <?php
 
-function makeSignificanceFormatterUtility($name) {
+function makeSignificanceFormatter($name) {
     return [
         'name' => $name,
         'pretty' => 'Significance Formatter',

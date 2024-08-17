@@ -1,6 +1,6 @@
 <?php
 
-function makeAxisMakerUtility($name) {
+function makeAxisMaker($name) {
     return [
         'name' => $name,
         'pretty' => 'Axis Maker',

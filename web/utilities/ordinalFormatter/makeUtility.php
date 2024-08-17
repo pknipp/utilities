@@ -1,6 +1,6 @@
 <?php
 
-function makeOrdinalFormatterUtility($name) {
+function makeOrdinalFormatter($name) {
     return [
         'name' => $name,
         'pretty' => 'Ordinal Formatter',

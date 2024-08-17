@@ -5,11 +5,11 @@ function makeUtilities() {
 
     $name = 'significanceFormatter';
     require("./utilities/{$name}/makeUtility.php");
-    $utilities[$name] = makeSignificanceFormatterUtility($name);
+    $utilities[$name] = makeSignificanceFormatter($name);
 
     $name = 'ordinalFormatter';
     require("./utilities/{$name}/makeUtility.php");
-    $utilities[$name] = makeOrdinalFormatterUtility($name);
+    $utilities[$name] = makeOrdinalFormatter($name);
 
     $name = 'axisMaker';
     require("./utilities/{$name}/makeUtility.php");
