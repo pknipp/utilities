@@ -10,7 +10,7 @@ function makeResponse($data) {
     }
     if ($numberValidated < 0) {
         return [
-            'error' => "Paramn ({$numberString}) cannot be negative.",
+            'error' => "Param ({$numberString}) cannot be negative.",
         ];
     }
     $n100 = $numberValidated % 100;
