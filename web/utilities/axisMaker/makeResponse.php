@@ -1,60 +1,35 @@
 <?php
 
 function makeResponse($data) {
-    // The following initialization ensures that scoping is satisfied.
-    $mantissa = 0;
-    $numberString = $data['number'];
-    $digitsString = $data['digits'];
-    //This ternary seems necessary to catch this corner case.
-    $numberValidated = ($numberString == '0' ? 0 : filter_var($numberString, FILTER_VALIDATE_FLOAT));
-    if (!($numberValidated || $numberString == '0')) {
-        return ['error' => "One param ({$numberString}) cannot be parsed as a number."];
+    $xOrY = $data['xOrY'];
+    $isY;
+    if ($xOrY == 'x') {
+        $isY = false;
+    } elseif ($xOrY == 'y') {
+        $isY = true;
+    } else {
+        return ['error' => "First param ({$xOrY}) equals neither 'x' nor 'y'."];
     }
-    if ($numberValidated == 0) {
-        return [
-            'error' => '',
-            'message' => ['sign' => '', 'mantissa' => '0', 'prefix' => ''],
-        ];
+    $sizeString = $data['size'];
+    $size = filter_var(sizeString, FILTER_VALIDATE_FLOAT);
+    if (!$size) {
+        return ['error' => "Second param ({$sizeString}) cannot be parsed as a number."];
     }
-    $sign = '';
-    if ($numberValidated < 0) {
-        $sign = '-';
-        $numberValidated = abs($numberValidated);
+    if ($size <= 0) {
+        return ['error' => "Size ({$size}) is not a positive number."];
     }
-    $prefixesPositive = ['', 'k', 'M', 'G', 'T', 'P', 'E'];
-    $prefixesNegative = ['', 'm', 'µ', 'n', 'p', 'f', 'a'];
-    //Invoking log10 is the easiest way to count digits to left of decimal point.
-    $log10Number = log10($numberValidated);
-    $digitsValidated = filter_var($digitsString, FILTER_VALIDATE_INT);
-    if ($digitsValidated == false) {
-        return ['error' => "Number of significant digits ({$digitsString}) is not a positive integer."];
-    } else if ($digitsValidated < 1) {
-        return ['error' => "Number of significant digits ({$digitsValidated}) must be positive."];
+    $minString = $data['min'];
+    $min = filter_var($minString, FILTER_VALIDATE_FLOAT);
+    if (!$min) {
+        return ['error' => "Third param ({$minString}) cannot be parsed as a number."];
     }
-    $precision = $digitsValidated - 1;
-    $exponent = floor($log10Number);
-    $mantissa = $numberValidated / pow(10, $exponent);
-    $decimal_dust = pow(10, -8);
-    // edge case: (eventual) rounding causes mantissa to shift up to 10.
-    if (abs(round($mantissa, $precision) - 10) < $decimal_dust) {
-        $mantissa /= 10;
-        $exponent++;
+    $maxString = $data['max'];
+    $max = filter_var($maxString, FILTER_VALIDATE_FLOAT);
+    if (!$max) {
+        return ['error' => "Fourth param ({$maxString}) cannot be parsed as a number"];
     }
-    $triples = floor($exponent / 3);
-    $prefix = '';
-    // Accommodate max/min prefixes.
-    if ($triples > 0) {
-        $triples = min($triples, count($prefixesPositive) - 1);
-        $prefix = $prefixesPositive[$triples];
-    } elseif ($triples < 0) {
-        $triples = max($triples, 1 - count($prefixesNegative));
-        $prefix = $prefixesNegative[-$triples];
-    }
-    $mantissa = strval(round($mantissa, $precision) * pow(10, $exponent - 3 * $triples));
-    $hasDecimalPt = str_contains($mantissa, '.');
-    $zerosNeeded = $digitsValidated - (strlen($mantissa) - ($hasDecimalPt ? 1 : 0));
-    if ($zerosNeeded > 0) {
-        $mantissa .= (($hasDecimalPt ? '' : '.') . str_repeat('0', $zerosNeeded));
+    if ($max <= $min) {
+        return ['error' => "Max ({$max}) is not greater than min ({$min})."];
     }
     return [
         'error' => '',
