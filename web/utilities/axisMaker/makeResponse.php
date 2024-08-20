@@ -10,37 +10,39 @@ function makeResponse($data) {
     // } else {
         // return ['error' => "First param ({$xOrY}) equals neither 'x' nor 'y'."];
     // }
-    $sizeString = $data['size'];
-    $size = filter_var($sizeString, FILTER_VALIDATE_FLOAT);
-    if (!$size) {
-        return ['error' => "Second param ({$sizeString}) cannot be parsed as a number."];
+    $widthString = $data['width'];
+    $width = filter_var($widthString, FILTER_VALIDATE_FLOAT);
+    if (!$width) {
+        return ['error' => "1st param ({$widthString}) cannot be parsed as a number."];
     }
-    if ($size <= 0) {
-        return ['error' => "Size ({$size}) is not a positive number."];
+    if ($width <= 0) {
+        return ['error' => "Width ({$width}) is not a positive number."];
     }
-    $minString = $data['min'];
-    $min = filter_var($minString, FILTER_VALIDATE_FLOAT);
-    if (!$min) {
-        return ['error' => "Third param ({$minString}) cannot be parsed as a number."];
+    $xMinString = $data['xMin'];
+    $xMin = filter_var($xMinString, FILTER_VALIDATE_FLOAT);
+    if (!$xMin) {
+        return ['error' => "2nd param ({$xMinString}) cannot be parsed as a number."];
     }
-    $maxString = $data['max'];
-    $max = filter_var($maxString, FILTER_VALIDATE_FLOAT);
-    if (!$max) {
-        return ['error' => "Fourth param ({$maxString}) cannot be parsed as a number"];
+    $xMaxString = $data['xMax'];
+    $xMax = filter_var($xMaxString, FILTER_VALIDATE_FLOAT);
+    if (!$xMax) {
+        return ['error' => "3rd param ({$xMaxString}) cannot be parsed as a number"];
     }
-    if ($max <= $min) {
-        return ['error' => "Max ({$max}) is not greater than min ({$min})."];
+    if ($xMax <= $xMin) {
+        return ['error' => "xMax ({$xMax}) is not greater than xMin ({$xMin})."];
     }
-    $output = tickNumbers($min, $max);
-    return [
+    $output = tickNumbers($xMin, $xMax);
+    $returnMe = [
         'error' => '',
         'message' => [
-            'size' => $size,
-            'del' => $output['del'],
-            'min' => $output['min'],
-            'n' => $output['n'],
+            'width' => $width,
+            'dX' => $output['del'],
+            'xMin' => $output['xMin'],
+            'nX' => $output['n'],
         ],
     ];
+    $returnMe['height'] = 600;
+    return $returnMe;
 }
 
 function tickNumbers($min, $max) {

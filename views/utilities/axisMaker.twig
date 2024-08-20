@@ -3,24 +3,24 @@
 
 {% block content %}
 <svg
-    height={{40}}
-    width={{size + 150}}
+    height={{height + 40}}
+    width={{width + 150}}
 >
     <g
-        transform="translate(100, 0)"
+        transform="translate(100, 10)"
     >
         <rect
-            height={{40}}
-            width=${size}
+            height={{height}}
+            width=${width}
             fill="transparent"
             stroke="black"
         />
-        {% for i in range(0, n) %}
+        {% for i in range(0, nX) %}
             <g
-              transform="translate({{i * size / n}}, 0)"
+              transform="translate({{i * width / nX}}, 0)"
             >
                 <line y2="10" stroke="black" />
-                <text y="25" text-anchor="middle" dy="0.32em">{{min + i * del}}</text>
+                <text y="25" text-anchor="middle" dy="0.32em">{{xMin + i * dX}}</text>
             </g>
         {% endfor %}
     </g>
