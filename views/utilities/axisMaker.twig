@@ -39,14 +39,14 @@
             </g>
             {% for i in range(0, nY) %}
                 <g
-                  transform="translate({{-i * height / nY}}, 0)"
+                  transform="translate(0, {{-i * height / nY}})"
                 >
                     <line x="-10" stroke="black" />
                     <text x="-25" text-anchor="middle" dy="0.32em">{{yMin + i * dY}}</text>
                 </g>
             {% endfor %}
             <g
-                transform="translate({{height / 2}}, 50) rotate(-90)"
+                transform="translate(50, {{height / 2}}) rotate(-90)"
             >
                 <text
                   text-anchor="middle"
