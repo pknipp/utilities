@@ -40,25 +40,25 @@ function makeResponse($data) {
 function tickNumbers($min, $max) {
     // The following is utilized by storybook.
     $nMax = 14.14;
-    $dx = ($max - $min) / $nMax;
-    $pow = 10 ** floor(log10($dx));
-    $dx /= $pow;
-    if ($dx > 5) {
-        $dx = 10;
+    $del = ($max - $min) / $nMax;
+    $pow = 10 ** floor(log10($del));
+    $del /= $pow;
+    if ($del > 5) {
+        $del = 10;
     // The following is used on some scales.
-    // } elseif ($dx > 2.5) {
-        // $dx = 5;
-    } elseif ($dx > 2) {
-        $dx = 5;
+    // } elseif ($del > 2.5) {
+        // $del = 5;
+    } elseif ($del > 2) {
+        $del = 5;
     } else {
-        $dx = 2;
+        $del = 2;
     }
-    $dx *= $pow;
-    $nMax = ceil($xMax / $dx);
-    $nMin = floor($xMin / $dx);
+    $del *= $pow;
+    $nMax = ceil($xMax / $del);
+    $nMin = floor($xMin / $del);
     return [
-        'dx' => $dx,
-        'xMin' => $nMin * $dx,
-        'xMax' => $nMax * $dx,
+        'del' => $del,
+        'min' => $nMin * $del,
+        'max' => $nMax * $del,
     ];
 }
