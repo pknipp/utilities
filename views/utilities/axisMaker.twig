@@ -9,12 +9,12 @@
     <g
         transform="translate(10, 0)"
     >
-        {% for number in range(-1, n) %}
+        {% for i in range(0, n) %}
             <g
-              transform="translate({{loop.index * size / n}}, 0)"
+              transform="translate({{i * size / n}}, 0)"
             >
                 <line y2="10" stroke="black" />
-                <text y="25" text-anchor="middle" dy="0.32em">{{min + loop.index * del}}</text>
+                <text y="25" text-anchor="middle" dy="0.32em">{{min + i * del}}</text>
             </g>
         {% endfor %}
     </g>
