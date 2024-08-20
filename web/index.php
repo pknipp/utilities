@@ -129,11 +129,11 @@ foreach (['', '/json'] as $option1) {
 }
 
 foreach ($options as $option) {
-  $app->get("/axisMaker/{xMin}/{xMax}/{xLabel}$option", function(string $width, string $xMin, string $xMax, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+  $app->get("/axisMaker/{xMin}/{xMax}/{xWidth}/{xLabel}$option", function(string $width, string $xMin, string $xMax, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
     $data = [
-      'width' => $width,
       'xMin' => $xMin,
       'xMax' => $xMax,
+      'width' => $width,
       'xLabel' => $xLabel,
     ];
     $name = explode('/', $_SERVER['REQUEST_URI'])[1];
