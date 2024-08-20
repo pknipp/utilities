@@ -15,14 +15,18 @@
             fill="transparent"
             stroke="black"
         />
-        {% for i in range(0, nX) %}
-            <g
-              transform="translate({{i * width / nX}}, 0)"
-            >
-                <line y2="10" stroke="black" />
-                <text y="25" text-anchor="middle" dy="0.32em">{{xMin + i * dX}}</text>
-            </g>
-        {% endfor %}
+        <g
+            transform="translate(0, {{height}})"
+        >
+            {% for i in range(0, nX) %}
+                <g
+                  transform="translate({{i * width / nX}}, 0)"
+                >
+                    <line y2="10" stroke="black" />
+                    <text y="25" text-anchor="middle" dy="0.32em">{{xMin + i * dX}}</text>
+                </g>
+            {% endfor %}
+        </g>
     </g>
 </svg>
 {% endblock %}

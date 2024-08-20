@@ -1,15 +1,6 @@
 <?php
 
 function makeResponse($data) {
-    // $xOrY = $data['xOrY'];
-    // $isY;
-    // if ($xOrY == 'x') {
-        // $isY = false;
-    // } elseif ($xOrY == 'y') {
-        // $isY = true;
-    // } else {
-        // return ['error' => "First param ({$xOrY}) equals neither 'x' nor 'y'."];
-    // }
     $widthString = $data['width'];
     $width = filter_var($widthString, FILTER_VALIDATE_FLOAT);
     if (!$width) {
