@@ -131,7 +131,6 @@ foreach (['', '/json'] as $option1) {
 foreach ($options as $option2) {
   $app->get("/axisMaker/{xOrY}/{size}/{min}/{max}$option", function(string $xOrY, string $size, string $min, string $max, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
     $data = [
-      'xOrY' => $xOrY,
       'size' => $size,
       'min' => $min,
       'max' => $max,
