@@ -130,6 +130,7 @@ foreach (['', '/json'] as $option1) {
 
 foreach ($options as $option) {
   $app->get("/axisMaker/{width}/{xMin}/{xMax}$option", function(string $width, string $xMin, string $xMax, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+    $logger->debug("width = ", $width);
     $data = [
       'width' => $width,
       'xMin' => $xMin,
