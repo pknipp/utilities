@@ -26,6 +26,17 @@
                     <text y="25" text-anchor="middle" dy="0.32em">{{xMin + i * dX}}</text>
                 </g>
             {% endfor %}
+            <g
+                transform="translate({{width / 2}}, 20)"
+            >
+                <text
+                  text-anchor="middle"
+                  dy="0.32em"
+                  font-size="20"
+                >
+                    {{xLabel}}
+                </text>
+            </g>
         </g>
     </g>
 </svg>
