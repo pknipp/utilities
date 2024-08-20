@@ -27,7 +27,7 @@ function makeResponse($data) {
         'error' => '',
         'message' => [
             'width' => $width,
-            'xLabel' => $xLabel,
+            'xLabel' => $data['xLabel'],
             'dX' => $output['del'],
             'xMin' => $output['min'],
             'nX' => $output['n'],
