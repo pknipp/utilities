@@ -41,7 +41,7 @@ function makeResponse($data) {
             'nX' => $output['n'],
         ],
     ];
-    $returnMe['message']['height'] = 600;
+    $returnMe['message']['height'] = 700;
     return $returnMe;
 }
 

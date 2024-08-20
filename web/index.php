@@ -130,7 +130,6 @@ foreach (['', '/json'] as $option1) {
 
 foreach ($options as $option) {
   $app->get("/axisMaker/{width}/{xMin}/{xMax}$option", function(string $width, string $xMin, string $xMax, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
-    $logger->debug($width);
     $data = [
       'width' => $width,
       'xMin' => $xMin,
@@ -138,14 +137,12 @@ foreach ($options as $option) {
     ];
     $name = explode('/', $_SERVER['REQUEST_URI'])[1];
     require ("./utilities/{$name}/makeResponse.php");
-    $logger->debug($width);
     $output = makeResponse($data);
     if ($output['error']) {
       $response->getBody()->write(json_encode(json_encode($output)));
       $response = $response->withHeader('Content-Type', 'application/json');
       return $response;
     } else {
-      $logger->debug($width);
       return $twig->render($response, "utilities/{$name}.twig", $output['message']);
     }
   });
