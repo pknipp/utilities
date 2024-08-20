@@ -143,6 +143,7 @@ foreach ($options as $option) {
       $response = $response->withHeader('Content-Type', 'application/json');
       return $response;
     } else {
+      $logger->debug("width = ", $width);
       return $twig->render($response, "utilities/{$name}.twig", $output['message']);
     }
   });
