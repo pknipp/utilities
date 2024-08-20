@@ -22,19 +22,46 @@ function makeResponse($data) {
     if ($xMax <= $xMin) {
         return ['error' => "xMax ({$xMax}) is not greater than xMin ({$xMin})."];
     }
-    $output = tickNumbers($xMin, $xMax);
-    $returnMe = [
+
+    $heightString = $data['height'];
+    $height = filter_var($heightString, FILTER_VALIDATE_FLOAT);
+    if (!$height) {
+        return ['error' => "5th param ({$heightString}) cannot be parsed as a number."];
+    }
+    if ($height <= 0) {
+        return ['error' => "Height ({$height}) is not a positive number."];
+    }
+    $yMinString = $data['yMin'];
+    $yMin = filter_var($yMinString, FILTER_VALIDATE_FLOAT);
+    if (!$yMin) {
+        return ['error' => "6th param ({$yMinString}) cannot be parsed as a number."];
+    }
+    $yMaxString = $data['yMax'];
+    $yMax = filter_var($yMaxString, FILTER_VALIDATE_FLOAT);
+    if (!$yMax) {
+        return ['error' => "7th param ({$yMaxString}) cannot be parsed as a number"];
+    }
+    if ($yMax <= $yMin) {
+        return ['error' => "yMax ({$yMax}) is not greater than yMin ({$yMin})."];
+    }
+
+    $outputX = tickNumbers($xMin, $xMax);
+    $outputY = tickNumbers($yMin, $yMax);
+    return [
         'error' => '',
         'message' => [
             'width' => $width,
             'xLabel' => $data['xLabel'],
-            'dX' => $output['del'],
-            'xMin' => $output['min'],
-            'nX' => $output['n'],
+            'dX' => $outputX['del'],
+            'xMin' => $outputX['min'],
+            'nX' => $outputX['n'],
+            'height' => $height,
+            'yLabel' => $data['yLabel'],
+            'dY' => $outputX['del'],
+            'yMin' => $outputX['min'],
+            'nY' => $outputX['n'],
         ],
     ];
-    $returnMe['message']['height'] = 700;
-    return $returnMe;
 }
 
 function tickNumbers($min, $max) {
