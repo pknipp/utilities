@@ -137,6 +137,7 @@ foreach ($options as $option) {
     ];
     $name = explode('/', $_SERVER['REQUEST_URI'])[1];
     require ("./utilities/{$name}/makeResponse.php");
+    $logger->debug("width = ", $width);
     $output = makeResponse($data);
     if ($output['error']) {
       $response->getBody()->write(json_encode(json_encode($output)));
