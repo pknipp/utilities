@@ -37,7 +37,7 @@ function makeResponse($data) {
         'message' => [
             'width' => $width,
             'dX' => $output['del'],
-            'xMin' => $output['xMin'],
+            'xMin' => $output['min'],
             'nX' => $output['n'],
         ],
     ];
