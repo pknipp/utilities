@@ -40,12 +40,12 @@
                 </text>
             </g>
             <g>
-                {% for i in range(0, nY) %}
+                {% for j in range(0, nY) %}
                     <g
-                      transform="translate(0, {{i * height / nY}})"
+                      transform="translate(0, {{-j * height / nY}})"
                     >
                         <line x="-10" stroke="black" />
-                        <text x="-25" text-anchor="middle" dy="0.32em">{{yMin + i * dY}}</text>
+                        <text x="-25" text-anchor="middle" dy="0.32em">{{yMin + j * dY}}</text>
                     </g>
                 {% endfor %}
             </g>
