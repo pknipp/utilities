@@ -1,14 +1,22 @@
 {% extends "layout.html" %}
 
-{% block content %}
-<div>
-    {{del}}
-</div>
-<div>
-    {{min}}
-</div>
-<div>
-    {{n}}
-</div>
 
+{% block content %}
+<svg
+    height={{40}}
+    width={{size + 20}}
+>
+    <g
+        transform="translate(10, 0)"
+    >
+        {% for number in range(0, n) %}
+            <g
+              transform="translate({{loop.index * size / n}}, 0)"
+            >
+                <line y2="10" stroke="black" />
+                <text y="25" text-anchor="middle" dy="0.32em">{{min + loop.index * del}}</text>
+            </g>
+        {% endfor %}
+    </g>
+</svg>
 {% endblock %}

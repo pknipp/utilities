@@ -31,9 +31,15 @@ function makeResponse($data) {
     if ($max <= $min) {
         return ['error' => "Max ({$max}) is not greater than min ({$min})."];
     }
+    $output = tickNumbers($min, $max);
     return [
         'error' => '',
-        'message' => tickNumbers($min, $max),
+        'message' => [
+            'size' => $size,
+            'del' => $output['del'],
+            'min' => $output['min'],
+            'n' => $output['n'],
+        ],
     ];
 }
 
