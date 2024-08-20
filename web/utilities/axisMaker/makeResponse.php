@@ -54,8 +54,8 @@ function tickNumbers($min, $max) {
         $del = 2;
     }
     $del *= $pow;
-    $nMax = ceil($xMax / $del);
-    $nMin = floor($xMin / $del);
+    $nMax = ceil($max / $del);
+    $nMin = floor($min / $del);
     return [
         'del' => $del,
         'min' => $nMin * $del,
