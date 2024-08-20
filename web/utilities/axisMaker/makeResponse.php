@@ -57,9 +57,9 @@ function makeResponse($data) {
             'nX' => $outputX['n'],
             'height' => $height,
             'yLabel' => $data['yLabel'],
-            'dY' => $outputX['del'],
-            'yMin' => $outputX['min'],
-            'nY' => $outputX['n'],
+            'dY' => $outputY['del'],
+            'yMin' => $outputY['min'],
+            'nY' => $outputY['n'],
         ],
     ];
 }
