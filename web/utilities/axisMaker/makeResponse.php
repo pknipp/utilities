@@ -11,7 +11,7 @@ function makeResponse($data) {
         // return ['error' => "First param ({$xOrY}) equals neither 'x' nor 'y'."];
     // }
     $sizeString = $data['size'];
-    $size = filter_var(sizeString, FILTER_VALIDATE_FLOAT);
+    $size = filter_var($sizeString, FILTER_VALIDATE_FLOAT);
     if (!$size) {
         return ['error' => "Second param ({$sizeString}) cannot be parsed as a number."];
     }
