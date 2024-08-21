@@ -9,19 +9,6 @@ function makeResponse($data) {
     if ($width <= 0) {
         return ['error' => "Width ({$width}) is not a positive number."];
     }
-    // $xMinString = $data['xMin'];
-    // $xMin = filter_var($xMinString, FILTER_VALIDATE_FLOAT);
-    // if (!$xMin) {
-        // return ['error' => "2nd param ({$xMinString}) cannot be parsed as a number."];
-    // }
-    // $xMaxString = $data['xMax'];
-    // $xMax = filter_var($xMaxString, FILTER_VALIDATE_FLOAT);
-    // if (!$xMax) {
-        // return ['error' => "3rd param ({$xMaxString}) cannot be parsed as a number"];
-    // }
-    // if ($xMax <= $xMin) {
-        // return ['error' => "xMax ({$xMax}) is not greater than xMin ({$xMin})."];
-    // }
 
     $heightString = $data['height'];
     $height = filter_var($heightString, FILTER_VALIDATE_FLOAT);
@@ -31,19 +18,6 @@ function makeResponse($data) {
     if ($height <= 0) {
         return ['error' => "Height ({$height}) is not a positive number."];
     }
-    // $yMinString = $data['yMin'];
-    // $yMin = filter_var($yMinString, FILTER_VALIDATE_FLOAT);
-    // if (!$yMin) {
-        // return ['error' => "6th param ({$yMinString}) cannot be parsed as a number."];
-    // }
-    // $yMaxString = $data['yMax'];
-    // $yMax = filter_var($yMaxString, FILTER_VALIDATE_FLOAT);
-    // if (!$yMax) {
-        // return ['error' => "7th param ({$yMaxString}) cannot be parsed as a number"];
-    // }
-    // if ($yMax <= $yMin) {
-        // return ['error' => "yMax ({$yMax}) is not greater than yMin ({$yMin})."];
-    // }
 
     $xys = parseXys($data['xys'], INF, -INF, INF, -INF);
     $outputX = tickNumbers($xys['xMin'], $xys['xMax']);
@@ -64,6 +38,10 @@ function makeResponse($data) {
             'yMin' => $outputY['min'],
             'nY' => $outputY['n'],
             'xys' => $xys,
+            'mx' => $outputX['m'],
+            'bx' => $outputX['b'],
+            'my' => $outputY['m'],
+            'by' => $outputY['b'],
         ],
     ];
 }
@@ -148,10 +126,6 @@ function parseXys($xysString, $xMin, $xMax, $yMin, $yMax) {
         $yMax = max($y, $yMax);
         array_push($xys, [$x, $y]);
     };
-    echo $xMin;
-    echo $xMax;
-    echo $yMin;
-    echo $yMax;
     return [
         'error' => '',
         'xys' => $xys,
