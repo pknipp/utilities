@@ -26,6 +26,7 @@ function makeResponse($data) {
         $outputX = tickNumbers($xys['xMin'], $xys['xMax']);
         $outputY = tickNumbers($xys['yMin'], $xys['yMax']);
         return [
+            'error' => '',
             'message' => [
                 'width' => $width,
                 'xLabel' => $data['xLabel'],
