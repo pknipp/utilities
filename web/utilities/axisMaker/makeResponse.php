@@ -52,7 +52,7 @@ function tickNumbers($min, $max) {
     $nMax = 14.14;
     // The following enables the plotting of vertical or horizontal lines.
     $tiny = 10 ** -8;
-    $del = ($max - $min) / $nMax + $tiny;
+    $del = ($max - $min + $tiny) / $nMax;
     $pow = 10 ** floor(log10($del));
     $del /= $pow;
     if ($del > 5) {
@@ -72,8 +72,8 @@ function tickNumbers($min, $max) {
         'del' => $del,
         'min' => $nMin * $del,
         'n' => $nMax - $nMin,
-        'm' => 1 / ($nMax - $nMin) / $del,
-        'b' => $nMin / ($nMin - $nMax),
+        'm' => 1 / ($nMax - $nMin + $tiny) / $del,
+        'b' => $nMin / ($nMin - $nMax + $tiny),
     ];
 }
 
