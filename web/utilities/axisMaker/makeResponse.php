@@ -98,7 +98,7 @@ function tickNumbers($min, $max) {
 
 function parseXys($xysString, $xMin, $xMax, $yMin, $yMax) {
     $error = '';
-    $xYsString = preg_replace('/\s+/', '', $xYsString);
+    $xysString = preg_replace('/\s+/', '', $xysString);
     if (strlen($xysString) < 2) {
         return ['error' => "Last param ({$xysString}) should have at least two characters."];
     }
@@ -112,21 +112,21 @@ function parseXys($xysString, $xMin, $xMax, $yMin, $yMax) {
         return ['error' => "Trailing character of last param should be ']', not {$rightChar}."];
     }
     $xysString = substr($xysString, 0, -1);
-    if (empty($xYsString)) {
+    if (empty($xysString)) {
         return [];
     }
-    $leftChar = substr($xYsString);
+    $leftChar = substr($xysString);
     if (leftChar !== '(') {
         return ['error' => "The 2nd leading character of the last param should be '(', not {$leftChar}."];
     }
-    $xYsString = substr($xYsString, 1);
-    $rightChar = substr($xYsString, -1);
+    $xysString = substr($xysString, 1);
+    $rightChar = substr($xysString, -1);
     if (rightChar !== ')') {
         return ['error' => "The penultimate character of the last param should be ')', not {$rightChar}."];
     }
-    $xYsString = substr_replace($xYsString, '', -1);
-    $leftChar = array_shift($xYsString);
-    $xyStrings = explode('),(', $xYsString);
+    $xysString = substr_replace($xysString, '', -1);
+    $leftChar = array_shift($xysString);
+    $xyStrings = explode('),(', $xysString);
     $xys = [];
     foreach ($xyStrings as $xyString) {
         $xy = explode(',', $xyString);
