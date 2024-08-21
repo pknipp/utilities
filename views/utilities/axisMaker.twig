@@ -63,8 +63,8 @@
             <g>
                 {% for xy in xys %}
                     <circle
-                        cx={{(mx * xy[0] + bx) * width}}
-                        cy={{(my * xy[1] + by) * height}}
+                        cx={{width * (mx * xy[0] + bx)}}
+                        cy={{-height * (my * xy[1] + by)}}
                         r=20
                         fill="transparent"
                         stroke="black"
