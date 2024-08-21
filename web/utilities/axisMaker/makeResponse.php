@@ -3,7 +3,7 @@
 function makeResponse($data) {
     $widthString = $data['width'];
     $width = filter_var($widthString, FILTER_VALIDATE_FLOAT);
-    if (!$width) {
+    if ($width === false) {
         return ['error' => "1st param ({$widthString}) cannot be parsed as a number."];
     }
     if ($width <= 0) {
@@ -12,7 +12,7 @@ function makeResponse($data) {
 
     $heightString = $data['height'];
     $height = filter_var($heightString, FILTER_VALIDATE_FLOAT);
-    if (!$height) {
+    if ($height === false) {
         return ['error' => "3rd param ({$heightString}) cannot be parsed as a number."];
     }
     if ($height <= 0) {
