@@ -116,12 +116,12 @@ function parseXys($xysString, $xMin, $xMax, $yMin, $yMax) {
         return [];
     }
     $leftChar = substr($xysString, 0, 1);
-    if (leftChar !== '(') {
+    if ($leftChar !== '(') {
         return ['error' => "The 2nd leading character of the last param should be '(', not {$leftChar}."];
     }
     $xysString = substr($xysString, 1);
     $rightChar = substr($xysString, -1, 1);
-    if (rightChar !== ')') {
+    if ($rightChar !== ')') {
         return ['error' => "The penultimate character of the last param should be ')', not {$rightChar}."];
     }
     $xysString = substr($xysString, 0, -1);
