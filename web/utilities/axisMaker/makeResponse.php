@@ -125,7 +125,6 @@ function parseXys($xysString, $xMin, $xMax, $yMin, $yMax) {
         return ['error' => "The penultimate character of the last param should be ')', not {$rightChar}."];
     }
     $xysString = substr($xysString, 0, -1);
-    $leftChar = array_shift($xysString);
     $xyStrings = explode('),(', $xysString);
     $xys = [];
     foreach ($xyStrings as $xyString) {
