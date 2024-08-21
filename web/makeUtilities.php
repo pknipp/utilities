@@ -11,9 +11,9 @@ function makeUtilities() {
     require("./utilities/{$name}/makeUtility.php");
     $utilities[$name] = makeOrdinalFormatter($name);
 
-    $name = 'axisMaker';
+    $name = 'grapher';
     require("./utilities/{$name}/makeUtility.php");
-    $utilities[$name] = makeAxisMaker($name);
+    $utilities[$name] = makeGrapher($name);
 
     return $utilities;
 }
