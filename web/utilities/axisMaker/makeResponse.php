@@ -51,9 +51,7 @@ function makeResponse($data) {
 function tickNumbers($min, $max) {
     // The following is utilized by storybook.
     $nMax = 14.14;
-    // The following enables the plotting of vertical or horizontal lines.
-    $tiny = 10 ** -8;
-    $del = ($max - $min + $tiny) / $nMax;
+    $del = ($max - $min) / $nMax;
     $pow = 10 ** floor(log10($del));
     $del /= $pow;
     if ($del > 5) {
@@ -73,8 +71,8 @@ function tickNumbers($min, $max) {
         'del' => $del,
         'min' => $nMin * $del,
         'n' => $nMax - $nMin,
-        'm' => 1 / ($nMax - $nMin + $tiny) / $del,
-        'b' => $nMin / ($nMin - $nMax + $tiny),
+        'm' => 1 / ($nMax - $nMin) / $del,
+        'b' => $nMin / ($nMin - $nMax),
     ];
 }
 
@@ -107,6 +105,9 @@ function parseXys($xysString, $xMin, $xMax, $yMin, $yMax) {
     }
     $xysString = substr($xysString, 0, -1);
     $xyStrings = explode('),(', $xysString);
+    if (count($xyStrings) === 1) {
+        return ['error' => 'This cannot set up axes to plot a single point.'];
+    }
     $xys = [];
     foreach ($xyStrings as $xyString) {
         $xy = explode(',', $xyString);
@@ -129,6 +130,12 @@ function parseXys($xysString, $xMin, $xMax, $yMin, $yMax) {
         $yMax = max($y, $yMax);
         array_push($xys, [$x, $y]);
     };
+    if ($xMin === $xMax) {
+        return ['error' => "This cannot create a horizontal axis for a vertical line."];
+    }
+    if ($yMin === $yMax) {
+        return ['error' => "This cannot create a vertical axis for a horizontal line."];
+    }
     return [
         'error' => '',
         'xys' => $xys,
