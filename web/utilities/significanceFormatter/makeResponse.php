@@ -8,8 +8,7 @@ function makeResponse($data) {
     $numberValidated = filter_var($numberString, FILTER_VALIDATE_FLOAT);
     if ($numberValidated === false) {
         return ['error' => "One param ({$numberString}) cannot be parsed as a number."];
-    }
-    if ($numberValidated === 0) {
+    } elseif ($numberValidated === 0) {
         return [
             'error' => '',
             'message' => [
