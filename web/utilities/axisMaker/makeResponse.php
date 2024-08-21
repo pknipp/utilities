@@ -13,7 +13,7 @@ function makeResponse($data) {
     $heightString = $data['height'];
     $height = filter_var($heightString, FILTER_VALIDATE_FLOAT);
     if (!$height) {
-        return ['error' => "5th param ({$heightString}) cannot be parsed as a number."];
+        return ['error' => "3rd param ({$heightString}) cannot be parsed as a number."];
     }
     if ($height <= 0) {
         return ['error' => "Height ({$height}) is not a positive number."];
