@@ -5,15 +5,18 @@ function makeResponse($data) {
     $mantissa = 0;
     $numberString = $data['number'];
     $digitsString = $data['digits'];
-    //This ternary seems necessary to catch this corner case.
-    $numberValidated = ($numberString == '0' ? 0 : filter_var($numberString, FILTER_VALIDATE_FLOAT));
-    if (!($numberValidated || $numberString == '0')) {
+    $numberValidated = filter_var($numberString, FILTER_VALIDATE_FLOAT);
+    if ($numberValidated === false) {
         return ['error' => "One param ({$numberString}) cannot be parsed as a number."];
     }
-    if ($numberValidated == 0) {
+    if ($numberValidated === 0) {
         return [
             'error' => '',
-            'message' => ['sign' => '', 'mantissa' => '0', 'prefix' => ''],
+            'message' => [
+                'sign' => '',
+                'mantissa' => '0',
+                'prefix' => '',
+            ],
         ];
     }
     $sign = '';
@@ -26,7 +29,7 @@ function makeResponse($data) {
     //Invoking log10 is the easiest way to count digits to left of decimal point.
     $log10Number = log10($numberValidated);
     $digitsValidated = filter_var($digitsString, FILTER_VALIDATE_INT);
-    if ($digitsValidated == false) {
+    if ($digitsValidated === false) {
         return ['error' => "Number of significant digits ({$digitsString}) is not a positive integer."];
     } else if ($digitsValidated < 1) {
         return ['error' => "Number of significant digits ({$digitsValidated}) must be positive."];
@@ -58,6 +61,10 @@ function makeResponse($data) {
     }
     return [
         'error' => '',
-        'message' => ['sign' => $sign, 'mantissa' => $mantissa, 'prefix' => $prefix],
+        'message' => [
+            'sign' => $sign,
+            'mantissa' => $mantissa,
+            'prefix' => $prefix,
+        ],
     ];
 }
