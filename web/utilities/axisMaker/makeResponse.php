@@ -108,7 +108,7 @@ function parseXys($xysString, $xMin, $xMax, $yMin, $yMax) {
     foreach ($xyStrings as $xyString) {
         $xy = explode(',', $xyString);
         if (count($xy) !== 2) {
-            return ['error' => "{$xyString} has {count($xy)} values, not 2."];
+            return ['error' => $xyString . ' has ' . count($xy) . ' values, not 2.'];
         }
         $xString = $xy[0];
         $yString = $xy[1];
