@@ -91,7 +91,7 @@ function parseXys($xysString, $xMin, $xMax, $yMin, $yMax) {
     }
     $xysString = substr($xysString, 0, -1);
     if (empty($xysString)) {
-        return [];
+        return ['error' => 'No data are included.'];
     }
     $leftChar = substr($xysString, 0, 1);
     if ($leftChar !== '(') {
