@@ -9,6 +9,14 @@ function makeResponse($data) {
     if ($width <= 0) {
         return ['error' => "Width ({$width}) is not a positive number."];
     }
+    $showZeroX = $data['showZeroX'];
+    if ($showZeroX === 'true' || $showZeroX === 'True' || $showZeroX === 'TRUE' || $showZeroX === 'T') {
+        $showZeroX = true;
+    } elseif ($showZeroX === 'false' || $showZeroX === 'False' || $showZeroX === 'FALSE' || $showZeroX === 'F') {
+        $showZeroX = false;
+    } else {
+        return ['error' => "{$showZeroX} is not a valid boolean."];
+    }
 
     $heightString = $data['height'];
     $height = filter_var($heightString, FILTER_VALIDATE_FLOAT);
@@ -18,8 +26,16 @@ function makeResponse($data) {
     if ($height <= 0) {
         return ['error' => "Height ({$height}) is not a positive number."];
     }
+    $showZeroY = $data['showZeroY'];
+    if ($showZeroY === 'true' || $showZeroY === 'True' || $showZeroY === 'TRUE' || $showZeroY === 'T') {
+        $showZeroY = true;
+    } elseif ($showZeroY === 'false' || $showZeroY === 'False' || $showZeroY === 'FALSE' || $showZeroY === 'F') {
+        $showZeroY = false;
+    } else {
+        return ['error' => "{$showZeroY} is not a valid boolean."];
+    }
 
-    $xys = parseXys($data['xys'], INF, -INF, INF, -INF);
+    $xys = parseXys($data['xys'], INF, -INF, INF, -INF, $showZeroX, $showZeroY);
     if (!empty($xys['error'])) {
         return ['error' => $xys['error']];
     } else {
@@ -49,7 +65,7 @@ function makeResponse($data) {
 }
 
 function tickNumbers($min, $max) {
-    // The following is utilized by storybook.
+    // The following value is utilized by storybook.
     $nMax = 14.14;
     $del = ($max - $min) / $nMax;
     $pow = 10 ** floor(log10($del));
@@ -76,7 +92,7 @@ function tickNumbers($min, $max) {
     ];
 }
 
-function parseXys($xysString, $xMin, $xMax, $yMin, $yMax) {
+function parseXys($xysString, $xMin, $xMax, $yMin, $yMax, $showZeroX, $showZeroY) {
     $xysString = preg_replace('/\s+/', '', $xysString);
     if (strlen($xysString) < 2) {
         return ['error' => "Last param ({$xysString}) should have at least two characters."];
@@ -133,8 +149,22 @@ function parseXys($xysString, $xMin, $xMax, $yMin, $yMax) {
     if ($xMin === $xMax) {
         return ['error' => "This cannot create a horizontal axis for a vertical line."];
     }
+    if ($showZeroX && $xMin * $xMax > 0) {
+        if ($xMin > 0) {
+            $xMin = 0;
+        } else {
+            $xMax = 0;
+        }
+    }
     if ($yMin === $yMax) {
         return ['error' => "This cannot create a vertical axis for a horizontal line."];
+    }
+    if ($showZeroY && $yMin * $yMax > 0) {
+        if ($yMin > 0) {
+            $yMin = 0;
+        } else {
+            $yMax = 0;
+        }
     }
     return [
         'error' => '',
