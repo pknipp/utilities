@@ -45,11 +45,7 @@ function makeResponse($data) {
         // return ['error' => "yMax ({$yMax}) is not greater than yMin ({$yMin})."];
     // }
 
-    $xMin = INF;
-    $yMin = INF;
-    $xMax = -INF;
-    $yMax = -INF;
-    $xys = parseXys($data['xYsString'], $xMin, $xMax, $yMin, $yMax);
+    $xys = parseXys($data['xYsString'], INF, -INF, INF, -INF);
     $outputX = tickNumbers($xys['xMin'], $xys['xMax']);
     $outputY = tickNumbers($xys['yMin'], $xys['yMax']);
 
@@ -151,6 +147,10 @@ function parseXys($xYsString, $xMin, $xMax, $yMin, $yMax) {
         $yMax = max($y, $yMax);
         $xys.push([$x, $y]);
     };
+    echo $xMin;
+    echo $xMax;
+    echo $yMin;
+    echo $yMax;
     return [
         'error' => '',
         'xys' => $xys,
