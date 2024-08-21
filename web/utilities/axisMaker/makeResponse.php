@@ -50,7 +50,9 @@ function makeResponse($data) {
 function tickNumbers($min, $max) {
     // The following is utilized by storybook.
     $nMax = 14.14;
-    $del = ($max - $min) / $nMax;
+    // The following enables the plotting of vertical or horizontal lines.
+    $tiny = 10 ** -8;
+    $del = ($max - $min) / $nMax + $tiny;
     $pow = 10 ** floor(log10($del));
     $del /= $pow;
     if ($del > 5) {
