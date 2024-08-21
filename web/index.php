@@ -129,16 +129,17 @@ foreach (['', '/json'] as $option1) {
 }
 
 foreach ($options as $option) {
-  $app->get("/axisMaker/{xMin}/{xMax}/{width}/{xLabel}/{yMin}/{yMax}/{height}/{yLabel}$option", function(string $xMin, string $xMax, string $width, string $xLabel, string $yMin, string $yMax, string $height, string $yLabel, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+  $app->get("/axisMaker/{width}/{xLabel}/{height}/{yLabel}/{xys}$option", function(string $xMin, string $xMax, string $width, string $xLabel, string $yMin, string $yMax, string $height, string $yLabel, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
     $data = [
-      'xMin' => $xMin,
-      'xMax' => $xMax,
+      // 'xMin' => $xMin,
+      // 'xMax' => $xMax,
       'width' => $width,
       'xLabel' => $xLabel,
-      'yMin' => $yMin,
-      'yMax' => $yMax,
+      // 'yMin' => $yMin,
+      // 'yMax' => $yMax,
       'height' => $height,
       'yLabel' => $yLabel,
+      'xys' => $xys,
     ];
     $name = explode('/', $_SERVER['REQUEST_URI'])[1];
     require ("./utilities/{$name}/makeResponse.php");
