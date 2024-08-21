@@ -146,7 +146,7 @@ function parseXys($xysString, $xMin, $xMax, $yMin, $yMax) {
         }
         $yMin = min($y, $yMin);
         $yMax = max($y, $yMax);
-        $xys.push([$x, $y]);
+        array_push($xys, [$x, $y]);
     };
     echo $xMin;
     echo $xMax;
