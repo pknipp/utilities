@@ -96,20 +96,22 @@ function tickNumbers($min, $max) {
     ];
 }
 
-function parseXys($xYsString, $xMin, $xMax, $yMin, $yMax) {
+function parseXys($xysString, $xMin, $xMax, $yMin, $yMax) {
     $error = '';
-    if (strlen($xYsString) < 2) {
-        return ['error' => "Last param ({$xYsString}) should have at least two characters."];
+    $xYsString = preg_replace('/\s+/', '', $xYsString);
+    if (strlen($xysString) < 2) {
+        return ['error' => "Last param ({$xysString}) should have at least two characters."];
     }
-    $leftChar = array_shift($xYsString);
+    $leftChar = substr($xysString, 0, 1);
     if ($leftChar !== '[') {
         return ['error' => "Leading character of last param should be '[', not {$leftChar}."];
     }
-    $rightChar = array_pop($xYsString);
+    $xysString = substr($xysString, 1);
+    $rightChar = substr($xysString, -1, 1);
     if ($rightChar !== ']') {
         return ['error' => "Trailing character of last param should be ']', not {$rightChar}."];
     }
-    $xYsString = preg_replace('/\s+/', '', $xYsString);
+    $xysString = substr($xysString, 0, -1);
     if (empty($xYsString)) {
         return [];
     }
