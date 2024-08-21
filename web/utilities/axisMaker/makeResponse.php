@@ -25,7 +25,7 @@ function makeResponse($data) {
 
     $xys = (empty($xys['error'])) ? $xys['xys'] : [];
     return [
-        'error' => '',
+        'error' => $xys['error'],
         'message' => [
             'width' => $width,
             'xLabel' => $data['xLabel'],
