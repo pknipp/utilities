@@ -20,30 +20,31 @@ function makeResponse($data) {
     }
 
     $xys = parseXys($data['xys'], INF, -INF, INF, -INF);
-    $outputX = tickNumbers($xys['xMin'], $xys['xMax']);
-    $outputY = tickNumbers($xys['yMin'], $xys['yMax']);
-
-    $xys = (empty($xys['error'])) ? $xys['xys'] : [];
-    return [
-        'error' => $xys['error'],
-        'message' => [
-            'width' => $width,
-            'xLabel' => $data['xLabel'],
-            'dX' => $outputX['del'],
-            'xMin' => $outputX['min'],
-            'nX' => $outputX['n'],
-            'height' => $height,
-            'yLabel' => $data['yLabel'],
-            'dY' => $outputY['del'],
-            'yMin' => $outputY['min'],
-            'nY' => $outputY['n'],
-            'xys' => $xys,
-            'mx' => $outputX['m'],
-            'bx' => $outputX['b'],
-            'my' => $outputY['m'],
-            'by' => $outputY['b'],
-        ],
-    ];
+    if (!empty($xys['error'])) {
+        return ['error' => $xys['error']];
+    } else {
+        $outputX = tickNumbers($xys['xMin'], $xys['xMax']);
+        $outputY = tickNumbers($xys['yMin'], $xys['yMax']);
+        return [
+            'message' => [
+                'width' => $width,
+                'xLabel' => $data['xLabel'],
+                'dX' => $outputX['del'],
+                'xMin' => $outputX['min'],
+                'nX' => $outputX['n'],
+                'height' => $height,
+                'yLabel' => $data['yLabel'],
+                'dY' => $outputY['del'],
+                'yMin' => $outputY['min'],
+                'nY' => $outputY['n'],
+                'xys' => $xys['xys'],
+                'mx' => $outputX['m'],
+                'bx' => $outputX['b'],
+                'my' => $outputY['m'],
+                'by' => $outputY['b'],
+            ],
+        ];
+    }
 }
 
 function tickNumbers($min, $max) {
@@ -75,7 +76,6 @@ function tickNumbers($min, $max) {
 }
 
 function parseXys($xysString, $xMin, $xMax, $yMin, $yMax) {
-    $error = '';
     $xysString = preg_replace('/\s+/', '', $xysString);
     if (strlen($xysString) < 2) {
         return ['error' => "Last param ({$xysString}) should have at least two characters."];
@@ -114,13 +114,13 @@ function parseXys($xysString, $xMin, $xMax, $yMin, $yMax) {
         $yString = $xy[1];
         $x = filter_var($xString, FILTER_VALIDATE_FLOAT);
         if ($x === false) {
-            return ['error' => "One value ({$xString}) cannot be parsed as a number."];
+            return ['error' => "One x-value ({$xString}) cannot be parsed as a number."];
         }
         $xMin = min($x, $xMin);
         $xMax = max($x, $xMax);
         $y = filter_var($yString, FILTER_VALIDATE_FLOAT);
         if ($y === false) {
-            return ['error' => "One value ({$yString}) cannot be parsed as a number."];
+            return ['error' => "One y-value ({$yString}) cannot be parsed as a number."];
         }
         $yMin = min($y, $yMin);
         $yMax = max($y, $yMax);
