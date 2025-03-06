@@ -68,7 +68,6 @@
                         fill="transparent"
                         stroke="black"
                     />
-                    {% if loop.index0 != 0 %}
                         <line
                             x1={{width * (mx * xys[loop.index0 - 1][0] + bx)}}
                             x2={{width * (mx * xys[loop.index0][0] + bx)}}
@@ -76,7 +75,6 @@
                             y2={{0 - height * (my * xys[loop.index0][0] + by)}}
                             stroke="black"
                         />
-                    {% endif %}
                 {% endfor %}
             </g>
         </g>
