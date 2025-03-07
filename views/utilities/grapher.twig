@@ -71,9 +71,9 @@
                     {% if loop.index1 != xys|length %}
                         <line
                             x1={{width * (mx * xys[loop.index0][0] + bx)}}
-                            x2={{width * (mx * xys[loop.index1][0] + bx)}}
+                            x2={{width * (mx * xys[loop.index][0] + bx)}}
                             y1={{0 - height * (my * xys[(loop.index0)][1] + by)}}
-                            y2={{0 - height * (my * xys[loop.index1][1] + by)}}
+                            y2={{0 - height * (my * xys[loop.index][1] + by)}}
                             stroke="black"
                         />
                     {% endif %}
