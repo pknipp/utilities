@@ -68,7 +68,7 @@
                         fill="transparent"
                         stroke="black"
                     />
-                    {% if loop.index1 != xys|length %}
+                    {% if loop.index != xys|length %}
                         <line
                             x1={{width * (mx * xys[loop.index0][0] + bx)}}
                             x2={{width * (mx * xys[loop.index][0] + bx)}}
