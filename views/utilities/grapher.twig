@@ -69,6 +69,15 @@
                             fill="transparent"
                             stroke="black"
                         />
+                    {% else %}
+                        <text
+                            x={{width * (mx * xy[0] + bx)}}
+                            y={{0 - height * (my * xy[1] + by)}}
+                            text-anchor="middle"
+                            dy="0.32em"
+                        >
+                            {{xy[2]}}
+                        </text>
                     {% endif %}
                     {% if loop.index != xys|length %}
                         <line
