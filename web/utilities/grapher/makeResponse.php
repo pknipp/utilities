@@ -127,8 +127,8 @@ function parseXys($xysString, $xMin, $xMax, $yMin, $yMax, $showZeroX, $showZeroY
     $xys = [];
     foreach ($xyStrings as $xyString) {
         $xy = explode(',', $xyString);
-        if (count($xy) !== 2) {
-            return ['error' => $xyString . ' has ' . count($xy) . ' values, not 2.'];
+        if (count($xy) !== 2 && count($xy) !== 3) {
+            return ['error' => $xyString . ' has ' . count($xy) . ' values, not 2 or 3.'];
         }
         $xString = $xy[0];
         $yString = $xy[1];
@@ -144,7 +144,7 @@ function parseXys($xysString, $xMin, $xMax, $yMin, $yMax, $showZeroX, $showZeroY
         }
         $yMin = min($y, $yMin);
         $yMax = max($y, $yMax);
-        array_push($xys, [$x, $y]);
+        array_push($xys, (count($xy) == 2) ? [$x, $y] : [$x, $y, $xy[2]]);
     };
     if ($xMin === $xMax) {
         return ['error' => "This cannot create a horizontal axis for a vertical line."];
