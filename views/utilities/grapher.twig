@@ -61,13 +61,15 @@
             </g>
             <g>
                 {% for xy in xys %}
-                    <circle
-                        cx={{width * (mx * xy[0] + bx)}}
-                        cy={{0 - height * (my * xy[1] + by)}}
-                        r={{height / 200}}
-                        fill="transparent"
-                        stroke="black"
-                    />
+                    {% if xy|length == 2 %}
+                        <circle
+                            cx={{width * (mx * xy[0] + bx)}}
+                            cy={{0 - height * (my * xy[1] + by)}}
+                            r={{height / 200}}
+                            fill="transparent"
+                            stroke="black"
+                        />
+                    {% endif %}
                     {% if loop.index != xys|length %}
                         <line
                             x1={{width * (mx * xys[loop.index0][0] + bx)}}
