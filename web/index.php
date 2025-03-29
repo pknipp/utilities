@@ -129,7 +129,7 @@ foreach (['', '/json'] as $option1) {
 }
 
 foreach ($options as $option) {
-  $app->get("/grapher/{width}/{xLabel}/{showZeroX}/{height}/{yLabel}/{showZeroY}/{xys}$option", function(string $width, string $xLabel, string $showZeroX, string $height, string $yLabel, string $showZeroY, string $xys, string $lines, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+  $app->get("/grapher/{width}/{xLabel}/{showZeroX}/{height}/{yLabel}/{showZeroY}/{xys}/{lines}$option", function(string $width, string $xLabel, string $showZeroX, string $height, string $yLabel, string $showZeroY, string $xys, string $lines, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
     $data = [
       'width' => $width,
       'xLabel' => $xLabel,
