@@ -5,11 +5,10 @@ function makeResponse($data) {
     $width = filter_var($widthString, FILTER_VALIDATE_FLOAT);
     if ($width === false) {
         return ['error' => "1st param ({$widthString}) cannot be parsed as a number."];
-    }
-    if ($width <= 0) {
+    } else if ($width <= 0) {
         return ['error' => "Width ({$width}) is not a positive number."];
     }
-    
+
     $result = parseBool($data['showZeroX']);
     if (!empty($result['error'])) {
         return $result;
@@ -20,8 +19,7 @@ function makeResponse($data) {
     $height = filter_var($heightString, FILTER_VALIDATE_FLOAT);
     if ($height === false) {
         return ['error' => "3rd param ({$heightString}) cannot be parsed as a number."];
-    }
-    if ($height <= 0) {
+    } else if ($height <= 0) {
         return ['error' => "Height ({$height}) is not a positive number."];
     }
 
@@ -99,7 +97,7 @@ function tickNumbers($min, $max) {
 function parseBool($bool) {
     if (in_array($bool, ['true', 'True', 'TRUE', 'T'])) {
         return ['error' => '', 'value' => true];
-    } elseif (in_array($bool, [ 'false', 'False', 'FALSE', 'F'])) {
+    } else if (in_array($bool, [ 'false', 'False', 'FALSE', 'F'])) {
         return ['error' => '', 'value' => false];
     } else {
         return ['error' => "{$bool} is not a valid boolean."];
