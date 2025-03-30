@@ -95,6 +95,7 @@ function tickNumbers($min, $max) {
     return [
         'del' => $del,
         'min' => $nMin * $del,
+        'max' => $nMax * $del,
         'n' => $nMax - $nMin,
         'm' => 1 / ($nMax - $nMin) / $del,
         'b' => $nMin / ($nMin - $nMax),
