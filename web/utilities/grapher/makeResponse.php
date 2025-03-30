@@ -57,7 +57,7 @@ function makeResponse($data) {
                 'dX' => $outputX['del'],
                 'xMin' => $outputX['min'],
                 'nX' => $outputX['n'],
-                'height' => $height,
+                'height' => ($squareAspectRatio) ? ($outputY['max'] - $outputY['min']) * $width / ($outputX['max'] - $outputX['min']): $height,
                 'yLabel' => $data['yLabel'],
                 'dY' => $outputY['del'],
                 'yMin' => $outputY['min'],
@@ -100,6 +100,13 @@ function tickNumbers($min, $max) {
         'b' => $nMin / ($nMin - $nMax),
     ];
 }
+
+// function parseBool($boolString) {
+    // return [
+        // 'error' => '',
+        // 'bool' => $bool,
+    // ];
+// }
 
 function parseXys($xysString, $xMin, $xMax, $yMin, $yMax, $showZeroX, $showZeroY) {
     $xysString = preg_replace('/\s+/', '', $xysString);
