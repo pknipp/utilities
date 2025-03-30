@@ -32,7 +32,7 @@ function makeResponse($data) {
         return ['error' => "Height ({$height}) is not a positive number."];
     }
 
-    $result = parseBool($data['showZeroY']); 
+    $result = parseBool($data['showZeroY']);
     if (!empty($result['error'])) {
         return $result;
     }
@@ -42,7 +42,7 @@ function makeResponse($data) {
     if (!empty($result['error'])) {
         return $result;
     }
-    $showZeroX = $result['squareAspectRatio'];
+    $squareAspectRatio = $result['value'];
 
     // $squareAspectRatio = $data['squareAspectRatio'];
     // if ($squareAspectRatio === 'true' || $squareAspectRatio === 'True' || $squareAspectRatio === 'TRUE' || $squareAspectRatio === 'T') {
