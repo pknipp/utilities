@@ -17,7 +17,6 @@ function makeResponse($data) {
     } else {
         return ['error' => "{$showZeroX} is not a valid boolean."];
     }
-
     $heightString = $data['height'];
     $height = filter_var($heightString, FILTER_VALIDATE_FLOAT);
     if ($height === false) {
@@ -33,6 +32,15 @@ function makeResponse($data) {
         $showZeroY = false;
     } else {
         return ['error' => "{$showZeroY} is not a valid boolean."];
+    }
+
+    $squareAspectRatio = $data['squareAspectRatio'];
+    if ($squareAspectRatio === 'true' || $squareAspectRatio === 'True' || $squareAspectRatio === 'TRUE' || $squareAspectRatio === 'T') {
+        $squareAspectRatio = true;
+    } elseif ($squareAspectRatio === 'false' || $squareAspectRatio === 'False' || $squareAspectRatio === 'FALSE' || $squareAspectRatio === 'F') {
+        $squareAspectRatio = false;
+    } else {
+        return ['error' => "{$squareAspectRatio} is not a valid boolean."];
     }
 
     $xys = parseXys($data['xys'], INF, -INF, INF, -INF, $showZeroX, $showZeroY);
