@@ -29,7 +29,7 @@ function makeResponse($data) {
     if (!empty($showZeroY['error'])) {
         return $showZeroY;
     }
-    $showZeroY = result.value;
+    $showZeroY = $result['value'];
 
     // if ($showZeroY === 'true' || $showZeroY === 'True' || $showZeroY === 'TRUE' || $showZeroY === 'T') {
         // $showZeroY = true;
