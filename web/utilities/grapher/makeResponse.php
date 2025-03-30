@@ -27,7 +27,7 @@ function makeResponse($data) {
     }
     $result = parseBool($data['showZeroY']); //$data['showZeroY'];
     if (!empty($result['error'])) {
-        echo "ERROR: ", $result;
+        // echo "ERROR: ", $result;
         return $result;
     }
     $showZeroY = $result['value'];
