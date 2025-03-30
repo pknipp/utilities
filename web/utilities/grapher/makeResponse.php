@@ -102,13 +102,13 @@ function tickNumbers($min, $max) {
     ];
 }
 
-function parseBool($boolString) {
-    if ($boolString === 'true' || $boolString === 'True' || $boolString === 'TRUE' || $boolString === 'T') {
+function parseBool($bool) {
+    if (in_array($bool, ['true', 'True', 'TRUE', 'T'])) {
         return [
             'error' => '',
             'value' => true,
         ];
-    } elseif ($boolString === 'false' || $boolString === 'False' || $boolString === 'FALSE' || $boolString === 'F') {
+    } elseif (in_array($bool, [ 'false', 'False', 'FALSE', 'F'])) {
         return [
             'error' => '',
             'value' => false,
