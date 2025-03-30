@@ -36,7 +36,7 @@ function makeResponse($data) {
     }
 
     $xys = parseXys($data['xys'], INF, -INF, INF, -INF, $showZeroX, $showZeroY);
-    $lines = parseLines($data['lines']);
+    // $lines = parseLines($data['lines']);
     if (!empty($xys['error'])) {
         return ['error' => $xys['error']];
     } else {
