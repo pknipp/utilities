@@ -178,59 +178,59 @@ function parseXys($xysString, $xMin, $xMax, $yMin, $yMax, $showZeroX, $showZeroY
     ];
 }
 
-function parseLines($linesString) {
-    $linesString = preg_replace('/\s+/', '', $linesString);
-    if (strlen($linesString) < 2) {
-        return ['error' => "Last param ({$linesString}) should have at least two characters."];
-    }
-    $leftChar = substr($linesString, 0, 1);
-    if ($leftChar !== '[') {
-        return ['error' => "Leading character of last param should be '[', not {$leftChar}."];
-    }
-    $linesString = substr($linesString, 1);
-    $rightChar = substr($linesString, -1, 1);
-    if ($rightChar !== ']') {
-        return ['error' => "Trailing character of last param should be ']', not {$rightChar}."];
-    }
-    $linesString = substr($linesString, 0, -1);
-    if (empty($linesString)) {
-        return ['error' => 'No data are included.'];
-    }
-    $leftChar = substr($linesString, 0, 1);
-    if ($leftChar !== '(') {
-        return ['error' => "The 2nd leading character of the last param should be '(', not {$leftChar}."];
-    }
-    $linesString = substr($linesString, 1);
-    $rightChar = substr($linesString, -1, 1);
-    if ($rightChar !== ')') {
-        return ['error' => "The penultimate character of the last param should be ')', not {$rightChar}."];
-    }
-    $linesString = substr($linesString, 0, -1);
-    $lineStrings = explode('),(', $linesString);
-    if (count($lineStrings) === 1) {
-        return ['error' => 'This cannot render a line with a single point.'];
-    }
-    $lines = [];
-    foreach ($lineStrings as $lineString) {
-        $line = explode(',', $lineString);
-        if (count($line) !== 2) {
-            return ['error' => $lineString . ' has ' . count($line) . ' values, not 2.'];
-        }
-        $xString = $line[0];
-        $yString = $line[1];
-        $x = filter_var($xString, FILTER_VALIDATE_FLOAT);
-        if ($x === false) {
-            return ['error' => "One x-value ({$xString}) cannot be parsed as a number."];
-        }
-        $y = filter_var($yString, FILTER_VALIDATE_FLOAT);
-        if ($y === false) {
-            return ['error' => "One y-value ({$yString}) cannot be parsed as a number."];
-        }
-        array_push($lines, [$x, $y]);
-    };
+// function parseLines($linesString) {
+    // $linesString = preg_replace('/\s+/', '', $linesString);
+    // if (strlen($linesString) < 2) {
+        // return ['error' => "Last param ({$linesString}) should have at least two characters."];
+    // }
+    // $leftChar = substr($linesString, 0, 1);
+    // if ($leftChar !== '[') {
+        // return ['error' => "Leading character of last param should be '[', not {$leftChar}."];
+    // }
+    // $linesString = substr($linesString, 1);
+    // $rightChar = substr($linesString, -1, 1);
+    // if ($rightChar !== ']') {
+        // return ['error' => "Trailing character of last param should be ']', not {$rightChar}."];
+    // }
+    // $linesString = substr($linesString, 0, -1);
+    // if (empty($linesString)) {
+        // return ['error' => 'No data are included.'];
+    // }
+    // $leftChar = substr($linesString, 0, 1);
+    // if ($leftChar !== '(') {
+        // return ['error' => "The 2nd leading character of the last param should be '(', not {$leftChar}."];
+    // }
+    // $linesString = substr($linesString, 1);
+    // $rightChar = substr($linesString, -1, 1);
+    // if ($rightChar !== ')') {
+        // return ['error' => "The penultimate character of the last param should be ')', not {$rightChar}."];
+    // }
+    // $linesString = substr($linesString, 0, -1);
+    // $lineStrings = explode('),(', $linesString);
+    // if (count($lineStrings) === 1) {
+        // return ['error' => 'This cannot render a line with a single point.'];
+    // }
+    // $lines = [];
+    // foreach ($lineStrings as $lineString) {
+        // $line = explode(',', $lineString);
+        // if (count($line) !== 2) {
+            // return ['error' => $lineString . ' has ' . count($line) . ' values, not 2.'];
+        // }
+        // $xString = $line[0];
+        // $yString = $line[1];
+        // $x = filter_var($xString, FILTER_VALIDATE_FLOAT);
+        // if ($x === false) {
+            // return ['error' => "One x-value ({$xString}) cannot be parsed as a number."];
+        // }
+        // $y = filter_var($yString, FILTER_VALIDATE_FLOAT);
+        // if ($y === false) {
+            // return ['error' => "One y-value ({$yString}) cannot be parsed as a number."];
+        // }
+        // array_push($lines, [$x, $y]);
+    // };
 
-    return [
-        'error' => '',
-        'lines' => $lines,
-    ];
-}
+    // return [
+        // 'error' => '',
+        // 'lines' => $lines,
+    // ];
+// }
