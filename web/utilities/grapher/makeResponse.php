@@ -25,7 +25,7 @@ function makeResponse($data) {
     if ($height <= 0) {
         return ['error' => "Height ({$height}) is not a positive number."];
     }
-    $showZeroY = parseBool($showZeroY); //$data['showZeroY'];
+    $showZeroY = parseBool($data[$showZeroY]); //$data['showZeroY'];
     if (!empty($showZeroY['error'])) {
         return $showZeroY;
     }
