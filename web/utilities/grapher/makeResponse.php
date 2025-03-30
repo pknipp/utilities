@@ -25,14 +25,17 @@ function makeResponse($data) {
     if ($height <= 0) {
         return ['error' => "Height ({$height}) is not a positive number."];
     }
-    $showZeroY = $data['showZeroY'];
-    if ($showZeroY === 'true' || $showZeroY === 'True' || $showZeroY === 'TRUE' || $showZeroY === 'T') {
-        $showZeroY = true;
-    } elseif ($showZeroY === 'false' || $showZeroY === 'False' || $showZeroY === 'FALSE' || $showZeroY === 'F') {
-        $showZeroY = false;
-    } else {
-        return ['error' => "{$showZeroY} is not a valid boolean."];
+    $showZeroY = parseBool($showZeroY); //$data['showZeroY'];
+    if (!empty($showZeroY['error'])) {
+        return $showZeroY;
     }
+    // if ($showZeroY === 'true' || $showZeroY === 'True' || $showZeroY === 'TRUE' || $showZeroY === 'T') {
+        // $showZeroY = true;
+    // } elseif ($showZeroY === 'false' || $showZeroY === 'False' || $showZeroY === 'FALSE' || $showZeroY === 'F') {
+        // $showZeroY = false;
+    // } else {
+        // return ['error' => "{$showZeroY} is not a valid boolean."];
+    // }
 
     $squareAspectRatio = $data['squareAspectRatio'];
     if ($squareAspectRatio === 'true' || $squareAspectRatio === 'True' || $squareAspectRatio === 'TRUE' || $squareAspectRatio === 'T') {
@@ -104,17 +107,11 @@ function tickNumbers($min, $max) {
 
 function parseBool($bool) {
     if (in_array($bool, ['true', 'True', 'TRUE', 'T'])) {
-        return [
-            'error' => '',
-            'value' => true,
-        ];
+        return ['error' => '', 'value' => true];
     } elseif (in_array($bool, [ 'false', 'False', 'FALSE', 'F'])) {
-        return [
-            'error' => '',
-            'value' => false,
-        ];
+        return ['error' => '', 'value' => false];
     } else {
-        return ['error' => "{$showZeroX} is not a valid boolean."];
+        return ['error' => "{$bool} is not a valid boolean."];
     }
 }
 
