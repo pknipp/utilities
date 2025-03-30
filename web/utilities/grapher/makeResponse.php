@@ -25,10 +25,12 @@ function makeResponse($data) {
     if ($height <= 0) {
         return ['error' => "Height ({$height}) is not a positive number."];
     }
-    $showZeroY = parseBool($data['showZeroY']); //$data['showZeroY'];
+    $result = parseBool($data['showZeroY']); //$data['showZeroY'];
     if (!empty($showZeroY['error'])) {
         return $showZeroY;
     }
+    $showZeroY = result.value;
+
     // if ($showZeroY === 'true' || $showZeroY === 'True' || $showZeroY === 'TRUE' || $showZeroY === 'T') {
         // $showZeroY = true;
     // } elseif ($showZeroY === 'false' || $showZeroY === 'False' || $showZeroY === 'FALSE' || $showZeroY === 'F') {
