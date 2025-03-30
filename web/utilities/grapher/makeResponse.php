@@ -102,12 +102,21 @@ function tickNumbers($min, $max) {
     ];
 }
 
-// function parseBool($boolString) {
-    // return [
-        // 'error' => '',
-        // 'bool' => $bool,
-    // ];
-// }
+function parseBool($boolString) {
+    if ($boolString === 'true' || $boolString === 'True' || $boolString === 'TRUE' || $boolString === 'T') {
+        return [
+            'error' => '',
+            'value' => true,
+        ];
+    } elseif ($boolString === 'false' || $boolString === 'False' || $boolString === 'FALSE' || $boolString === 'F') {
+        return [
+            'error' => '',
+            'value' => false,
+        ];
+    } else {
+        return ['error' => "{$showZeroX} is not a valid boolean."];
+    }
+}
 
 function parseXys($xysString, $xMin, $xMax, $yMin, $yMax, $showZeroX, $showZeroY) {
     $xysString = preg_replace('/\s+/', '', $xysString);
