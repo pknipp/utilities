@@ -9,14 +9,20 @@ function makeResponse($data) {
     if ($width <= 0) {
         return ['error' => "Width ({$width}) is not a positive number."];
     }
-    $showZeroX = $data['showZeroX'];
-    if ($showZeroX === 'true' || $showZeroX === 'True' || $showZeroX === 'TRUE' || $showZeroX === 'T') {
-        $showZeroX = true;
-    } elseif ($showZeroX === 'false' || $showZeroX === 'False' || $showZeroX === 'FALSE' || $showZeroX === 'F') {
-        $showZeroX = false;
-    } else {
-        return ['error' => "{$showZeroX} is not a valid boolean."];
+    // $showZeroX = $data['showZeroX'];
+    // if ($showZeroX === 'true' || $showZeroX === 'True' || $showZeroX === 'TRUE' || $showZeroX === 'T') {
+        // $showZeroX = true;
+    // } elseif ($showZeroX === 'false' || $showZeroX === 'False' || $showZeroX === 'FALSE' || $showZeroX === 'F') {
+        // $showZeroX = false;
+    // } else {
+        // return ['error' => "{$showZeroX} is not a valid boolean."];
+    // }
+    $result = parseBool($data['showZeroX']);
+    if (!empty($result['error'])) {
+        return $result;
     }
+    $showZeroX = $result['value'];
+
     $heightString = $data['height'];
     $height = filter_var($heightString, FILTER_VALIDATE_FLOAT);
     if ($height === false) {
@@ -25,29 +31,27 @@ function makeResponse($data) {
     if ($height <= 0) {
         return ['error' => "Height ({$height}) is not a positive number."];
     }
-    $result = parseBool($data['showZeroY']); //$data['showZeroY'];
+
+    $result = parseBool($data['showZeroY']); 
     if (!empty($result['error'])) {
-        // echo "ERROR: ", $result;
         return $result;
     }
     $showZeroY = $result['value'];
 
-    // if ($showZeroY === 'true' || $showZeroY === 'True' || $showZeroY === 'TRUE' || $showZeroY === 'T') {
-        // $showZeroY = true;
-    // } elseif ($showZeroY === 'false' || $showZeroY === 'False' || $showZeroY === 'FALSE' || $showZeroY === 'F') {
-        // $showZeroY = false;
-    // } else {
-        // return ['error' => "{$showZeroY} is not a valid boolean."];
-    // }
-
-    $squareAspectRatio = $data['squareAspectRatio'];
-    if ($squareAspectRatio === 'true' || $squareAspectRatio === 'True' || $squareAspectRatio === 'TRUE' || $squareAspectRatio === 'T') {
-        $squareAspectRatio = true;
-    } elseif ($squareAspectRatio === 'false' || $squareAspectRatio === 'False' || $squareAspectRatio === 'FALSE' || $squareAspectRatio === 'F') {
-        $squareAspectRatio = false;
-    } else {
-        return ['error' => "{$squareAspectRatio} is not a valid boolean."];
+    $result = parseBool($data['squareAspectRatio']);
+    if (!empty($result['error'])) {
+        return $result;
     }
+    $showZeroX = $result['squareAspectRatio'];
+
+    // $squareAspectRatio = $data['squareAspectRatio'];
+    // if ($squareAspectRatio === 'true' || $squareAspectRatio === 'True' || $squareAspectRatio === 'TRUE' || $squareAspectRatio === 'T') {
+        // $squareAspectRatio = true;
+    // } elseif ($squareAspectRatio === 'false' || $squareAspectRatio === 'False' || $squareAspectRatio === 'FALSE' || $squareAspectRatio === 'F') {
+        // $squareAspectRatio = false;
+    // } else {
+        // return ['error' => "{$squareAspectRatio} is not a valid boolean."];
+    // }
 
     $xys = parseXys($data['xys'], INF, -INF, INF, -INF, $showZeroX, $showZeroY);
     if (!empty($xys['error'])) {
