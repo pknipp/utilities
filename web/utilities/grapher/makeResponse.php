@@ -54,7 +54,7 @@ function makeResponse($data) {
                 'yLabel' => $data['yLabel'],
                 'dY' => $outputY['del'],
                 'yMin' => $outputY['min'],
-                'yMax' => $outputY['min'],
+                'yMax' => $outputY['max'],
                 'nY' => $outputY['n'],
                 'xys' => $xys['xys'],
                 'lines' => $lines['lines'],
