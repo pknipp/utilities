@@ -40,11 +40,11 @@ function makeResponse($data) {
         return ['error' => $xys['error']];
     } else {
         $outputX = tickNumbers($xys['xMin'], $xys['xMax']);
-        $xMin = $outputX['xMin'];
-        $xMax = $outputX['xMax'];
+        $xMin = $outputX['min'];
+        $xMax = $outputX['max'];
         $outputY = tickNumbers($xys['yMin'], $xys['yMax']);
-        $yMin = $outputY['yMin'];
-        $yMax = $outputY['yMax'];
+        $yMin = $outputY['min'];
+        $yMax = $outputY['max'];
         return [
             'error' => '',
             'message' => [
