@@ -40,21 +40,25 @@ function makeResponse($data) {
         return ['error' => $xys['error']];
     } else {
         $outputX = tickNumbers($xys['xMin'], $xys['xMax']);
+        $xMin = $outputX['xMin'];
+        $xMax = $outputX['xMax'];
         $outputY = tickNumbers($xys['yMin'], $xys['yMax']);
+        $yMin = $outputY['yMin'];
+        $yMax = $outputY['yMax'];
         return [
             'error' => '',
             'message' => [
                 'width' => $width,
                 'xLabel' => $data['xLabel'],
                 'dX' => $outputX['del'],
-                'xMin' => $outputX['min'],
-                'xMax' => $outputX['max'],
+                'xMin' => $xMin,
+                'xMax' => $xMax,
                 'nX' => $outputX['n'],
-                'height' => ($squareAspectRatio) ? ($outputY['max'] - $outputY['min']) * $width / ($outputX['max'] - $outputX['min']): $height,
+                'height' => ($squareAspectRatio) ? ($yMax - $yMin) * $width / ($xMax - $xMin): $height,
                 'yLabel' => $data['yLabel'],
                 'dY' => $outputY['del'],
-                'yMin' => $outputY['min'],
-                'yMax' => $outputY['max'],
+                'yMin' => $yMin,
+                'yMax' => $yMax,
                 'nY' => $outputY['n'],
                 'xys' => $xys['xys'],
                 'lines' => $lines['lines'],
