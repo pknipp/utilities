@@ -129,7 +129,7 @@ foreach (['', '/json'] as $option1) {
 }
 
 foreach ($options as $option) {
-  $app->get("/grapher/{width}/{xLabel}/{showZeroX}/{height}/{yLabel}/{showZeroY}/{xys}/{squareAspectRatio}$option", function(string $width, string $xLabel, string $showZeroX, string $height, string $yLabel, string $showZeroY, string $xys, string $squareAspectRatio, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+  $app->get("/grapher/{width}/{xLabel}/{showZeroX}/{height}/{yLabel}/{showZeroY}/{xys}/{squareAspectRatio}/{ratio}$option", function(string $width, string $xLabel, string $showZeroX, string $height, string $yLabel, string $showZeroY, string $xys, string $squareAspectRatio, string $ratio, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
     $data = [
       'width' => $width,
       'xLabel' => $xLabel,
@@ -139,6 +139,7 @@ foreach ($options as $option) {
       'showZeroY' => $showZeroY,
       'xys' => $xys,
       'squareAspectRatio' => $squareAspectRatio,
+      'ratio' => $ratio,
     ];
     $name = explode('/', $_SERVER['REQUEST_URI'])[1];
     require ("./utilities/{$name}/makeResponse.php");
