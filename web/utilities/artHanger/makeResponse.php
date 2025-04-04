@@ -61,8 +61,11 @@ function makeResponse($data) {
     $d = ($xRight / $xLeft) ** 2;
     $e = $xLeft ** 2;
     $urlFrag = "/" . $heightValidated . "/sqrt(y2+" . $a . ")+sqrt(" . $b . "y2+" . $c . ")+sqrt(" . $d . "y2+" . $e . ")-" . $lengthValidated;
+    echo $urlFrag;
 
     $url = 'https://basic-calculus.herokuapp.com/api/root-finding' . $urlFrag;
+
+    echo $url;
 
     $response = @file_get_contents($url);
 
