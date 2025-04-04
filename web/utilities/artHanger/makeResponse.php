@@ -55,6 +55,6 @@ function makeResponse($data) {
 
     return [
         'error' => '',
-        'message' => ['length' => $length],
+        'message' => ['length' => $lengthValidated],
     ];
 }
