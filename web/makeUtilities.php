@@ -15,5 +15,9 @@ function makeUtilities() {
     require("./utilities/{$name}/makeUtility.php");
     $utilities[$name] = makeGrapher($name);
 
+    $name = 'artHanger';
+    require("./utilities/{$name}/makeUtility.php");
+    $utilities[$name] = makeArtHanger($name);
+
     return $utilities;
 }

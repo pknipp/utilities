@@ -154,4 +154,37 @@ foreach ($options as $option) {
   });
 }
 
+foreach (['', '/json'] as $option1) {
+  foreach ($options as $option2) {
+    $app->get("/artHanger{$option1}/{}$option2", function(string $length, string $height, string $width, string $stud, string $offset, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+      $data = [
+        'length' => $length,
+        'height' => $height,
+        'width' => $width,
+        'stud' => $stud,
+        'offset' => $offset,
+      ];
+      $pathParts = explode('/', $_SERVER['REQUEST_URI']);
+      $logger->debug(json_encode($pathParts));
+      $isJson = $pathParts[2] == 'json';
+      $name = $pathParts[1];
+      require ("./utilities/{$name}/makeResponse.php");
+      $output = makeResponse($data);
+      if ($isJson) {
+        $response->getBody()->write(json_encode($output, JSON_UNESCAPED_UNICODE));
+        $response = $response->withHeader('Content-Type', 'application/json');
+        return $response;
+      } else {
+        if ($output['error']) {
+          $response->getBody()->write(json_encode(json_encode($output)));
+          $response = $response->withHeader('Content-Type', 'application/json');
+          return $response;
+        } else {
+          return $twig->render($response, "utilities/{$name}.twig", $output['message']);
+        }
+      }
+    });
+  }
+}
+
 $app->run();
