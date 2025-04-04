@@ -60,10 +60,28 @@ function makeResponse($data) {
     $c = $xMiddle ** 2;
     $d = ($xRight / $xLeft) ** 2;
     $e = $xLeft ** 2;
-    $url = "/" . $heightValidated . "/sqrt(y2+" . $a . ")+sqrt(" . $b . "y2+" . $c . ")+sqrt(" . $d . "y2+" . $e . ")-" . $lengthValidated;
+    $urlFrag = "/" . $heightValidated . "/sqrt(y2+" . $a . ")+sqrt(" . $b . "y2+" . $c . ")+sqrt(" . $d . "y2+" . $e . ")-" . $lengthValidated;
+
+    $url = 'https://basic-calculus.herokuapp.com/api/root-finding' . $urlFrag;
+
+    $response = @file_get_contents($url);
+
+    if ($response === FALSE) {
+        echo "Error fetching data.";
+    } else {
+        // Process the response
+        // echo $response; // Simple output
+        // or, for JSON responses
+        $data = json_decode($response, true);
+        if($data === null && json_last_error() !== JSON_ERROR_NONE){
+            echo "json decode error: " . json_last_error_msg();
+        } else {
+            print_r($data);
+        }
+    }
 
     return [
         'error' => '',
-        'message' => ['url' => $url],
+        'message' => ['data' => $data],
     ];
 }
