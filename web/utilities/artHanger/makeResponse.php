@@ -73,7 +73,7 @@ function makeResponse($data) {
         echo "Error fetching data.";
     } else {
         // Process the response
-        echo $response; // Simple output
+        // echo $response; // Simple output
         // or, for JSON responses
         $data = json_decode($response, true);
         if($data === null && json_last_error() !== JSON_ERROR_NONE){
