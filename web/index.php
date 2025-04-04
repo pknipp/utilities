@@ -156,7 +156,7 @@ foreach ($options as $option) {
 
 foreach (['', '/json'] as $option1) {
   foreach ($options as $option2) {
-    $app->get("/artHanger/{length}/{height}/{width}/{stud}/{offset}$option", function(string $length, string $height, string $width, string $stud, string $offset, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+    $app->get("/artHanger{$option1}/{length}/{height}/{width}/{stud}/{offset}$option2", function(string $length, string $height, string $width, string $stud, string $offset, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
       $data = [
         'length' => $length,
         'height' => $height,
