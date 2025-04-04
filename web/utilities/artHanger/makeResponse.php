@@ -65,8 +65,6 @@ function makeResponse($data) {
 
     $url = 'https://basic-calculus.herokuapp.com/api/root-finding' . $urlFrag;
 
-    echo $url;
-
     $response = @file_get_contents($url);
 
     if ($response === FALSE) {
@@ -78,7 +76,7 @@ function makeResponse($data) {
         }
         $y1 = sqrt($data['x']);
         $y2 = $xRight * $y1 / $xLeft;
-        
+
         return [
             'error' => '',
             'message' => [
