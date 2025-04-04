@@ -76,15 +76,15 @@ function makeResponse($data) {
         if($data === null && json_last_error() !== JSON_ERROR_NONE){
             echo "json decode error: " . json_last_error_msg();
         }
+        $y1 = sqrt($data['x']);
+        $y2 = $xRight * $y1 / $xLeft;
+        
+        return [
+            'error' => '',
+            'message' => [
+                'y1' => $y1,
+                'y2' => $y2,
+            ],
+        ];
     }
-    $y1 = sqrt($data['x']);
-    $y2 = $xRight * $y1 / $xLeft;
-
-    return [
-        'error' => '',
-        'message' => [
-            'y1' => $y1,
-            'y2' => $y2,
-        ],
-    ];
 }
