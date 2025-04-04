@@ -56,11 +56,11 @@ function makeResponse($data) {
     $xMiddle = $studValidated;
     $xRight = $widthValidated / 2 + $offsetValidated - $studValidated;
     $a = $xLeft ** 2;
-    $b = (1 - $xRight / $xLeft) ** 2;
+    $b = 1 - ($xRight / $xLeft) ** 2;
     $c = $xMiddle ** 2;
     $d = ($xRight / $xLeft) ** 2;
     $e = $xLeft ** 2;
-    $urlFrag = "/" . $heightValidated . "/sqrt(x+" . $a . ")+sqrt(" . $b . "x+" . $c . ")+sqrt(" . $d . "x+" . $e . ")-" . $lengthValidated;
+    $urlFrag = "/" . $heightValidated ** 2 . "/sqrt(x+" . $a . ")+sqrt(" . $b . "x+" . $c . ")+sqrt(" . $d . "x+" . $e . ")-" . $lengthValidated;
     echo $urlFrag;
 
     $url = 'https://basic-calculus.herokuapp.com/api/root-finding' . $urlFrag;
@@ -72,14 +72,9 @@ function makeResponse($data) {
     if ($response === FALSE) {
         echo "Error fetching data.";
     } else {
-        // Process the response
-        // echo $response; // Simple output
-        // or, for JSON responses
         $data = json_decode($response, true);
         if($data === null && json_last_error() !== JSON_ERROR_NONE){
             echo "json decode error: " . json_last_error_msg();
-        } else {
-            print_r($data);
         }
     }
     $y1 = sqrt($data['x']);
