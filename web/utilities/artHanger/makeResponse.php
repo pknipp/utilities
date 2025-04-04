@@ -52,9 +52,18 @@ function makeResponse($data) {
             'error' => "Param ({$offsetString}) cannot be negative.",
         ];
     }
+    $xLeft = $widthValidated / 2 - $offsetValidated;
+    $xMiddle = $studValidated;
+    $xRight = $widthValidated / 2 + $offsetValidated - $studValidated;
+    $a = $xLeft ** 2;
+    $b = (1 - $xRight / $xLeft) ** 2;
+    $c = $xMiddle ** 2;
+    $d = ($xRight / $xLeft) ** 2;
+    $e = $xLeft ** 2;
+    $url = "/" . $heightValidated . "/sqrt(y2+" . $a . ")+sqrt(" . $b . "y2+" . $c . ")+sqrt(" . $d . "y2+" . $e . ")-" . $lengthValidated;
 
     return [
         'error' => '',
-        'message' => ['length' => $lengthValidated],
+        'message' => ['url' => $url],
     ];
 }
