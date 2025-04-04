@@ -82,9 +82,14 @@ function makeResponse($data) {
             print_r($data);
         }
     }
+    $y1 = sqrt($data['x']);
+    $y2 = $xRight * $y1 / $xLeft;
 
     return [
         'error' => '',
-        'message' => ['data' => $data],
+        'message' => [
+            'y1' => $y1,
+            'y2' => $y2,
+        ],
     ];
 }
