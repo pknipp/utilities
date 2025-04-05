@@ -94,6 +94,7 @@ function makeResponse($data) {
                 'scale' => $scale,
                 'widthPx' => $widthPx,
                 'heightPx' => $heightPx,
+                'slope' => $slope,
             ],
         ];
     }
