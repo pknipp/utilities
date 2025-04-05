@@ -16,6 +16,14 @@ function makeArtHanger($name) {
         </ul>
         <b>NOTE</b> that these instructions do not restrict you to any particular set of units (eg inches or millimeters); you simply need to use the same set for all of your numbers."
         ,
-        'examples' => "WIP",
+        'examples' => "
+            <script>
+                const button = document.getElementsByTagName('button')[0];
+                const setExample = () => {
+                    window.location.href = 'https://utilities-3db59a13e37b.herokuapp.com/artHanger/31/5/28/16/4';
+                };
+                button.addEventListener('click', e => setExample());
+            </script>
+        ",
     ];
 }

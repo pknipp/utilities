@@ -1,115 +1,125 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div style="display: flex; flex-direction: column; align-items: center; ">
-    <b>Inputs</b>
-    <div style="display: flex; justify-content: space-evenly; ">
-        <div style="flex-grow: 1; ">
-            total length of wire <i>L</i> = {{length}}
+<div style="padding: 10px 40px;" >
+    <div style="display: flex; flex-direction: column; align-items: center; ">
+        <b>Inputs</b>
+        <div style="display: flex; justify-content: space-evenly; ">
+            <div style="padding: 0 40px;">
+                total length of wire <i>L</i> = {{length}}
+            </div>
+            <div style="padding: 0 40px;">
+                rectangle height <i>H</i> = {{height}}
+            </div>
+            <div style="padding: 0 40px;">
+                rectangle width <i>W</i> = {{width}}
+            </div>
+            <div style="padding: 0 40px;">
+                stud spacing (on centers) <i>S</i> = {{stud}}
+            </div>
+            <div style="padding: 0 40px;">
+                horizontal offset <i>O</i> = {{offset}}
+            </div>
         </div>
-        <div style="flex-grow: 1; ">
-            rectangle height <i>H</i> = {{height}}
+        <b>Location results</b>
+        <div style="display: flex; justify-content: space-evenly; ">
+            <div style="padding: 0 40px;">
+                left screw: {{(height - y1)|abs}} {{ y1 < height ? "below" : "above" }} top edge
+            </div>
+            <div style="padding: 0 40px;">
+                right screw: {{(height - y2)|abs}} {{ y2 > height ? "below" : "above" }} top edge
+            </div>
         </div>
-        <div style="flex-grow: 1; ">
-            rectangle width <i>W</i> = {{width}}
-        </div>
-        <div style="flex-grow: 1; ">
-            stud spacing (on centers) <i>S</i> = {{stud}}
-        </div>
-        <div style="flex-grow: 1; ">
-            horizontal offset <i>O</i> = {{offset}}
-        </div>
+        <svg width={{widthPx}} height={{heightPx}} style="display: block; margin: 0 auto;" >
+            <rect
+                id="art"
+                width={{widthPx}}
+                height={{scale * height}}
+                y={{heightPx - scale * height}}
+                fill="lightgray"
+            />
+            <line
+                id="left stud"
+                x1={{scale * (width / 2 - offset)}}
+                x2={{scale * (width / 2 - offset)}}
+                y2={{heightPx}}
+                stroke="gray"
+                stroke-width={{studWidth}}
+            />
+            <line
+                id="right stud"
+                x1={{scale * (width / 2 + stud - offset)}}
+                x2={{scale * (width / 2 + stud - offset)}}
+                y2={{heightPx}}
+                stroke="gray"
+                stroke-width={{studWidth}}
+            />
+            <line
+                id="left wire"
+                x1="0"
+                y1={{heightPx}}
+                x2={{scale * (width / 2 - offset)}}
+                y2={{heightPx - scale * y1}}
+                stroke="black"
+                stroke-width={{wireWidth}}
+            />
+            <circle
+                id="left screw"
+                cx={{scale * (width / 2 - offset)}}
+                cy={{heightPx - scale * y1}}
+                r={{screwRadius}}
+            />
+            <line
+                id="continuation of left wire"
+                x1={{scale * (width / 2 - offset)}}
+                y1={{heightPx - scale * y1}}
+                x2={{widthPx / 2}}
+                y2={{heightPx - slope * widthPx / 2}}
+                stroke="black"
+                stroke-dasharray="1, 2"
+            />
+            <line
+                id="middle wire"
+                x1={{scale * (width / 2 - offset)}}
+                y1={{heightPx - scale * y1}}
+                x2={{scale * (width / 2 + stud - offset)}}
+                y2={{heightPx - scale * y2}}
+                stroke="black"
+                stroke-width={{wireWidth}}
+            />
+            <line
+                id="continuation of right wire"
+                x1={{widthPx / 2}}
+                y1={{heightPx - slope * widthPx / 2}}
+                x2={{scale * (width / 2 + stud - offset)}}
+                y2={{heightPx - scale * y2}}
+                stroke="black"
+                stroke-dasharray="1, 2"
+            />
+            <circle
+                id="right screw"
+                cx={{scale * (width / 2 + stud - offset)}}
+                cy={{heightPx - scale * y2}}
+                r={{screwRadius}}
+            />
+            <line
+                id="right wire"
+                x1={{scale * (width / 2 + stud - offset)}}
+                y1={{heightPx - scale * y2}}
+                x2 = {{widthPx}}
+                y2 = {{heightPx}}
+                stroke="black"
+                stroke-width={{wireWidth}}
+            />
+        </svg>
     </div>
-    <div>
-    <b>Location results</b>
-    <div>
-        left screw: {{(height - y1)|abs}} {{ y1 < height ? "below" : "above" }} top edge
-    </div>
-    <div>
-        right screw: {{(height - y2)|abs}} {{ y2 > height ? "below" : "above" }} top edge
-    </div>
-    <svg width={{widthPx}} height={{heightPx}} style="display: block; margin: 0 auto;" >
-        <rect
-            id="art"
-            width={{widthPx}}
-            height={{scale * height}}
-            y={{heightPx - scale * height}}
-            fill="lightgray"
-        />
-        <line
-            id="left stud"
-            x1={{scale * (width / 2 - offset)}}
-            x2={{scale * (width / 2 - offset)}}
-            y2={{heightPx}}
-            stroke="gray"
-            stroke-width={{studWidth}}
-        />
-        <line
-            id="right stud"
-            x1={{scale * (width / 2 + stud - offset)}}
-            x2={{scale * (width / 2 + stud - offset)}}
-            y2={{heightPx}}
-            stroke="gray"
-            stroke-width={{studWidth}}
-        />
-        <line
-            id="left wire"
-            x1="0"
-            y1={{heightPx}}
-            x2={{scale * (width / 2 - offset)}}
-            y2={{heightPx - scale * y1}}
-            stroke="black"
-            stroke-width={{wireWidth}}
-        />
-        <circle
-            id="left screw"
-            cx={{scale * (width / 2 - offset)}}
-            cy={{heightPx - scale * y1}}
-            r={{screwRadius}}
-        />
-        <line
-            id="continuation of left wire"
-            x1={{scale * (width / 2 - offset)}}
-            y1={{heightPx - scale * y1}}
-            x2={{widthPx / 2}}
-            y2={{heightPx - slope * widthPx / 2}}
-            stroke="black"
-            stroke-dasharray="1, 2"
-        />
-        <line
-            id="middle wire"
-            x1={{scale * (width / 2 - offset)}}
-            y1={{heightPx - scale * y1}}
-            x2={{scale * (width / 2 + stud - offset)}}
-            y2={{heightPx - scale * y2}}
-            stroke="black"
-            stroke-width={{wireWidth}}
-        />
-        <line
-            id="continuation of right wire"
-            x1={{widthPx / 2}}
-            y1={{heightPx - slope * widthPx / 2}}
-            x2={{scale * (width / 2 + stud - offset)}}
-            y2={{heightPx - scale * y2}}
-            stroke="black"
-            stroke-dasharray="1, 2"
-        />
-        <circle
-            id="right screw"
-            cx={{scale * (width / 2 + stud - offset)}}
-            cy={{heightPx - scale * y2}}
-            r={{screwRadius}}
-        />
-        <line
-            id="right wire"
-            x1={{scale * (width / 2 + stud - offset)}}
-            y1={{heightPx - scale * y2}}
-            x2 = {{widthPx}}
-            y2 = {{heightPx}}
-            stroke="black"
-            stroke-width={{wireWidth}}
-        />
-    </svg>
 </div>
+<script>
+    const button = document.getElementsByTagName("button")[0];
+    const setExample = () => {
+        window.location.href = "https://utilities-3db59a13e37b.herokuapp.com/artHanger/31/5/28/16/4";
+    };
+    button.addEventListener("click", e => setExample());
+</script>
 
 {% endblock %}
