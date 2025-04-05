@@ -20,16 +20,16 @@
             <div style="padding: 0 40px;">
                 horizontal offset <i>O</i> = {{offset}}
             </div>
-        </div>
+        </div><br/>
         <b>Location results</b>
         <div style="display: flex; justify-content: space-evenly; ">
             <div style="padding: 0 40px;">
-                left screw: {{(height - y1)|abs}} {{ y1 < height ? "below" : "above" }} top edge
+                left screw: {{height - y1}} {{ y1 < height ? "below" : "above" }} top edge
             </div>
             <div style="padding: 0 40px;">
-                right screw: {{(height - y2)|abs}} {{ y2 > height ? "below" : "above" }} top edge
+                right screw: {{height - y2}} {{ y2 > height ? "below" : "above" }} top edge
             </div>
-        </div>
+        </div><br/>
         <svg width={{widthPx}} height={{heightPx}} style="display: block; margin: 0 auto;" >
             <rect
                 id="art"

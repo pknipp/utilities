@@ -16,7 +16,7 @@ function makeArtHanger($name) {
         </ul>
         <b>NOTE</b> that these instructions do not restrict you to any particular set of units (eg inches or millimeters); you simply need to use the same set for all of your numbers."
         ,
-        'examples' => "
+        'examples' => "<button>Click</button>
             <script>
                 const button = document.getElementsByTagName('button')[0];
                 const setExample = () => {
