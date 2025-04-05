@@ -4,7 +4,7 @@ function makeSignificanceFormatter($name) {
     return [
         'name' => $name,
         'pretty' => 'Significance Formatter',
-        'description' => 'This expresses a specified number with a specified number of <a href="https://en.wikipedia.org/wiki/Significant_figures" target="_blank">significant figures</a> (aka sigfigs), using metric prefixes as necessary.',
+        'description' => ' formats a specified number with a specified number of <a href="https://en.wikipedia.org/wiki/Significant_figures" target="_blank">significant figures</a> (aka sigfigs), using metric prefixes as necessary.',
         'background' => 'The number of significant figures (aka "sigfigs") in the value of a quantity reflects the accuracy with which it is known and/or the extent to which we <i>care</i> about its accuracy. Also, having fewer sigfigs enables more efficient use of real estate on a webpage.  Roughly speaking, the number of sigfigs equals the number of nonzero digits.  See <a href="https://en.wikipedia.org/wiki/Significant_figures" target="_blank">Wikipedia</a> for a more precise definition.',
         'instructions' => "type <tt>/number/digits</tt>, where <tt>number</tt> is the particular quantity's value, and <tt>digits</tt> is the number of sigfigs with which you want this value expressed.",
         'examples' => '
