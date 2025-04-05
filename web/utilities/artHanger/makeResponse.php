@@ -109,9 +109,14 @@ function makeResponse($data) {
         error_log(print_r($data, true));
         $y1 = sqrt($data['x']);
         $y2 = $xRight * $y1 / $xLeft;
+        error_log(print_r($y1, true));
+        error_log(print_r($y2, true));
+
         $widthPx = 1000;
         $scale = $widthPx / $width;
         $slope = $y1 / ($width / 2 - $offset);
+
+        error_log(print_r($y2 / $slope, true));
         $triangleHeight = $slope * $width / 2;
         $heightPx = $scale * max($triangleHeight, $height);
 
