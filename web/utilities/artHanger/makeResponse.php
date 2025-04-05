@@ -95,6 +95,9 @@ function makeResponse($data) {
                 'widthPx' => $widthPx,
                 'heightPx' => $heightPx,
                 'slope' => $slope,
+                'studWidth' => 16,
+                'wireWidth' => 4,
+                'screwRadius' => 20,
             ],
         ];
     }

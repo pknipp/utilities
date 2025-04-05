@@ -1,100 +1,102 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<b>Inputs</b>
-<ul>
-    <li> total length of wire <i>L</i>= {{length}}
-    <li> rectangle height <i>H</i> = {{height}}
-    <li> rectangle width <i>W</i> = {{width}}
-    <li> stud spacing (on centers) <i>S</i> = {{stud}}
-    <li> horizontal offset <i>O</i> = {{offset}}
-</ul>
-<b>Location results</b>
-<ul>
-    <li> left screw: {{height - y1}} {{ y1 > height ? "below" : "above" }} top edge
-    <li> right screw: {{height - y2}} {{ y2 > height ? "below" : "above" }} top edge
-</ul>
-<svg width={{widthPx}} height={{heightPx}} style="display: block; margin: 0 auto;" >
-    <rect
-        id="art"
-        width={{widthPx}}
-        height={{scale * height}}
-        y={{heightPx - scale * height}}
-        fill="lightgray"
-    />
-    <line
-        id="left stud"
-        x1={{scale * (width / 2 - offset)}}
-        x2={{scale * (width / 2 - offset)}}
-        y2={{heightPx}}
-        stroke="gray"
-        stroke-width="8"
-    />
-    <line
-        id="right stud"
-        x1={{scale * (width / 2 + stud - offset)}}
-        x2={{scale * (width / 2 + stud - offset)}}
-        y2={{heightPx}}
-        stroke="gray"
-        stroke-width="8"
-    />
-    <line
-        id="left wire"
-        x1="0"
-        y1={{heightPx}}
-        x2={{scale * (width / 2 - offset)}}
-        y2={{heightPx - scale * y1}}
-        stroke="black"
-        stroke-width="2"
-    />
-    <circle
-        id="left screw"
-        cx={{scale * (width / 2 - offset)}}
-        cy={{heightPx - scale * y1}}
-        r="10"
-    />
-    <line
-        id="continuation of left wire"
-        x1={{scale * (width / 2 - offset)}}
-        y1={{heightPx - scale * y1}}
-        x2={{widthPx / 2}}
-        y2={{heightPx - slope * widthPx / 2}}
-        stroke="black"
-        stroke-dasharray="1, 2"
-    />
-    <line
-        id="middle wire"
-        x1={{scale * (width / 2 - offset)}}
-        y1={{heightPx - scale * y1}}
-        x2={{scale * (width / 2 + stud - offset)}}
-        y2={{heightPx - scale * y2}}
-        stroke="black"
-        stroke-width="2"
-    />
-    <line
-        id="continuation of right wire"
-        x1={{widthPx / 2}}
-        y1={{heightPx - slope * widthPx / 2}}
-        x2={{scale * (width / 2 + stud - offset)}}
-        y2={{heightPx - scale * y2}}
-        stroke="black"
-        stroke-dasharray="1, 2"
-    />
-    <circle
-        id="right screw"
-        cx={{scale * (width / 2 + stud - offset)}}
-        cy={{heightPx - scale * y2}}
-        r="10"
-    />
-    <line
-        id="right wire"
-        x1={{scale * (width / 2 + stud - offset)}}
-        y1={{heightPx - scale * y2}}
-        x2 = {{widthPx}}
-        y2 = {{heightPx}}
-        stroke="black"
-        stroke-width="2"
-    />
-</svg>
+<div style="display: flex; flex-direction: column; align-items: center; ">
+    <b>Inputs</b>
+    <ul>
+        <li> total length of wire <i>L</i>= {{length}}
+        <li> rectangle height <i>H</i> = {{height}}
+        <li> rectangle width <i>W</i> = {{width}}
+        <li> stud spacing (on centers) <i>S</i> = {{stud}}
+        <li> horizontal offset <i>O</i> = {{offset}}
+    </ul>
+    <b>Location results</b>
+    <ul>
+        <li> left screw: {{height - y1}} {{ y1 < height ? "below" : "above" }} top edge
+        <li> right screw: {{height - y2}} {{ y2 > height ? "below" : "above" }} top edge
+    </ul>
+    <svg width={{widthPx}} height={{heightPx}} style="display: block; margin: 0 auto;" >
+        <rect
+            id="art"
+            width={{widthPx}}
+            height={{scale * height}}
+            y={{heightPx - scale * height}}
+            fill="lightgray"
+        />
+        <line
+            id="left stud"
+            x1={{scale * (width / 2 - offset)}}
+            x2={{scale * (width / 2 - offset)}}
+            y2={{heightPx}}
+            stroke="gray"
+            stroke-width={{studWidth}}
+        />
+        <line
+            id="right stud"
+            x1={{scale * (width / 2 + stud - offset)}}
+            x2={{scale * (width / 2 + stud - offset)}}
+            y2={{heightPx}}
+            stroke="gray"
+            stroke-width={{studWidth}}
+        />
+        <line
+            id="left wire"
+            x1="0"
+            y1={{heightPx}}
+            x2={{scale * (width / 2 - offset)}}
+            y2={{heightPx - scale * y1}}
+            stroke="black"
+            stroke-width={{wireWidth}}
+        />
+        <circle
+            id="left screw"
+            cx={{scale * (width / 2 - offset)}}
+            cy={{heightPx - scale * y1}}
+            r={{screwRadius}}
+        />
+        <line
+            id="continuation of left wire"
+            x1={{scale * (width / 2 - offset)}}
+            y1={{heightPx - scale * y1}}
+            x2={{widthPx / 2}}
+            y2={{heightPx - slope * widthPx / 2}}
+            stroke="black"
+            stroke-dasharray="1, 2"
+        />
+        <line
+            id="middle wire"
+            x1={{scale * (width / 2 - offset)}}
+            y1={{heightPx - scale * y1}}
+            x2={{scale * (width / 2 + stud - offset)}}
+            y2={{heightPx - scale * y2}}
+            stroke="black"
+            stroke-width={{wireWidth}}
+        />
+        <line
+            id="continuation of right wire"
+            x1={{widthPx / 2}}
+            y1={{heightPx - slope * widthPx / 2}}
+            x2={{scale * (width / 2 + stud - offset)}}
+            y2={{heightPx - scale * y2}}
+            stroke="black"
+            stroke-dasharray="1, 2"
+        />
+        <circle
+            id="right screw"
+            cx={{scale * (width / 2 + stud - offset)}}
+            cy={{heightPx - scale * y2}}
+            r={{screwRadius}}
+        />
+        <line
+            id="right wire"
+            x1={{scale * (width / 2 + stud - offset)}}
+            y1={{heightPx - scale * y2}}
+            x2 = {{widthPx}}
+            y2 = {{heightPx}}
+            stroke="black"
+            stroke-width={{wireWidth}}
+        />
+    </svg>
+</div>
 
 {% endblock %}
