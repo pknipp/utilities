@@ -75,7 +75,7 @@ function makeResponse($data) {
         }
         $y1 = sqrt($data['x']);
         $y2 = $xRight * $y1 / $xLeft;
-        $widthPx = 850;
+        $widthPx = 1000;
         $scale = $widthPx / $width;
         $slope = $y1 / ($width / 2 - $offset);
         $triangleHeight = $slope * $width / 2;

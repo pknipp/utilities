@@ -14,7 +14,7 @@ function makeArtHanger($name) {
         <li> <I>S</I>: <b>stud</b>-spacing, which is 16\" (but sometimes 24\") for the US and 600 mm for some of Europe.</li>
         <li> <I>O</I>: desired <b>offset</b> of the middle of the artwork, as measured horizontally from one of the studs</li>
         </ul>
-        <b>NOTES</b>
+        <b>note</b>
         <ul>
             <li>
                 These instructions do not restrict you to any particular set of units (eg inches or millimeters); you simply need to use the same set for all of your numbers.
@@ -24,7 +24,7 @@ function makeArtHanger($name) {
             </li>
         </ul>"
         ,
-        'examples' => "<button>Click here</button> to see the relationship between your browser's url and the inputs.
+        'examples' => "<button>Click here</button> to see the relationship between your inputs, the browser's url, and the results.
             <script>
                 const button = document.getElementsByTagName('button')[0];
                 const setExample = () => {

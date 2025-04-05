@@ -3,7 +3,7 @@
 {% block content %}
 <div style="padding: 10px 40px;" >
     <div style="display: flex; flex-direction: column; align-items: center; ">
-        <b>Inputs</b>
+        <h4>Inputs</h4>
         <div style="display: flex; justify-content: space-evenly; ">
             <div style="padding: 0 40px;">
                 wire length <i>L</i> = {{length}}
@@ -21,13 +21,13 @@
                 offset <i>O</i> = {{offset}}
             </div>
         </div><br/>
-        <b>Location results</b>
+        <h4>Location results</h4>
         <div style="display: flex; justify-content: space-evenly; ">
             <div style="padding: 0 40px;">
-                left screw: {{height - y1 | round(3)}} {{ y1 < height ? "below" : "above" }} top edge
+                left screw: {{height - y1 | abs | round(3)}} {{ y1 < height ? "below" : "above" }} top edge
             </div>
             <div style="padding: 0 40px;">
-                right screw: {{height - y2 | round(3)}} {{ y2 < height ? "below" : "above" }} top edge
+                right screw: {{height - y2 | abs | round(3)}} {{ y2 < height ? "below" : "above" }} top edge
             </div>
         </div><br/>
         <svg width={{widthPx}} height={{heightPx}} style="display: block; margin: 0 auto;" >
