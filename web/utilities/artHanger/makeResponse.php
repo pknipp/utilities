@@ -107,8 +107,14 @@ function makeResponse($data) {
             echo "json decode error: " . json_last_error_msg();
         }
         error_log(print_r($data, true));
+        $ySq = $data['x'];
+        $LLeft = sqrt($ySq + $a);
+        $LRight = sqrt($d * $ySq + $e);
+
         $y1 = sqrt($data['x']);
         $y2 = $xRight * $y1 / $xLeft;
+
+        $tensionRatio = $LLeft * $LRight / ($y1 * $LRight + $y2 * $LLeft);
         error_log(print_r($y1, true));
         error_log(print_r($y2, true));
 
@@ -141,6 +147,7 @@ function makeResponse($data) {
                 'studWidth' => 30,
                 'wireWidth' => 4,
                 'screwRadius' => 10,
+                'tensionRatio' => $tensionRatio,
             ],
         ];
     }
