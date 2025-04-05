@@ -20,7 +20,7 @@
         width={{widthPx}}
         height={{scale * height}}
         y={{heightPx - scale * height}}
-        fill="transparent"
+        fill="lightgray"
         stroke="black"
     />
     <line
@@ -30,12 +30,13 @@
         x2={{scale * (width / 2 - offset)}}
         y2={{heightPx - scale * y1}}
         stroke="black"
+        stroke-width="2"
     />
     <circle
         id="left screw"
         cx={{scale * (width / 2 - offset)}}
         cy={{heightPx - scale * y1}}
-        r="5"
+        r="10"
     />
     <line
         id="continuation of left wire"
@@ -53,13 +54,16 @@
         y2={{heightPx}}
         stroke="black"
         stroke-dasharray="1, 2"
+        stroke-width="4"
     />
     <line
+        id="middle wire"
         x1={{scale * (width / 2 - offset)}}
         y1={{heightPx - scale * y1}}
         x2={{scale * (width / 2 + stud - offset)}}
         y2={{heightPx - scale * y2}}
         stroke="black"
+        stroke-width="2"
     />
     <line
         id="right stud"
@@ -68,6 +72,7 @@
         y2={{heightPx}}
         stroke="black"
         stroke-dasharray="1, 2"
+        stroke-width="4"
     />
     <line
         id="continuation of right wire"
@@ -82,7 +87,7 @@
         id="right screw"
         cx={{scale * (width / 2 + stud - offset)}}
         cy={{heightPx - scale * y2}}
-        r="5"
+        r="10"
     />
     <line
         id="right wire"
@@ -91,6 +96,7 @@
         x2 = {{widthPx}}
         y2 = {{heightPx}}
         stroke="black"
+        stroke-width="2"
     />
 </svg>
 
