@@ -74,6 +74,13 @@ function makeResponse($data) {
             'error' => "Your width W ({$widthString}) cannot exceed your length L ({$lengthString}).",
         ];
     }
+    $lengthMax = abs($width / 2 - $offset) + $stud + abs($width / 2 + $offset - $stud);
+
+    if ($length > $lengthMax) {
+        return [
+            'error' => "Your length L ({$length}) cannot exceed {$lengthMax}, a quantity based on your specifications for O, S, and W.",
+        ];
+    }
 
     $height = ($heightString == '0' ? 0 : filter_var($heightString, FILTER_VALIDATE_FLOAT));
     if (!($height || $heightString == '0')) {
@@ -121,7 +128,7 @@ function makeResponse($data) {
         $t1 = sqrt($t1x * $t1x + $t1y * $t1y);
         $t2x = $tension * ($xRight / $LRight - $stud / $LMid);
         $t2y = $tension * ($y2 / $LRight + ($y2 - $y1) / $LMid);
-        $t2 = sqrt($t2x * $t2x + $t2y * $t2y);  
+        $t2 = sqrt($t2x * $t2x + $t2y * $t2y);
 
         $widthPx = 1000;
         $scale = $widthPx / $width;
