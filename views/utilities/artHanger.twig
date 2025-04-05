@@ -23,10 +23,10 @@
     <div>
     <b>Location results</b>
     <div>
-        left screw: {{abs(height - y1)}} {{ y1 < height ? "below" : "above" }} top edge
+        left screw: {{(height - y1)|abs}} {{ y1 < height ? "below" : "above" }} top edge
     </div>
     <div>
-        right screw: {{abs(height - y2)}} {{ y2 > height ? "below" : "above" }} top edge
+        right screw: {{(height - y2)|abs}} {{ y2 > height ? "below" : "above" }} top edge
     </div>
     <svg width={{widthPx}} height={{heightPx}} style="display: block; margin: 0 auto;" >
         <rect

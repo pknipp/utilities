@@ -1,21 +1,23 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h4>{{pretty}}</h4>
-<a href="https://utilities-3db59a13e37b.herokuapp.com/">Return</a>
-to utilities main page.
-<br/>
-<div>
+<div style="padding: 10px 40px;" >
+    <h4>{{pretty}}</h4>
+    <a href="https://utilities-3db59a13e37b.herokuapp.com/">Return</a>
+    to utilities main page.
+    <br/><br/>
     <div>
-        <b>Background</b>: {{background|raw}}
-    </div>
-    <br/>
-    <div>
-        <b>Instructions</b>: Immediately after <tt>/{{name}}</tt> in the url, {{instructions|raw}}
-    </div>
-    <br/>
-    <div>
-        <b>Example(s)</b>: {{examples|raw}}
+        <div>
+            <b>Background</b>: {{background|raw}}
+        </div>
+        <br/>
+        <div>
+            <b>Instructions</b>: Immediately after <tt>/{{name}}</tt> in the url, {{instructions|raw}}
+        </div>
+        <br/>
+        <div>
+            <b>Example(s)</b>: {{examples|raw}}
+        </div>
     </div>
 </div>
 
