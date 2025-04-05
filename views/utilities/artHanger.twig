@@ -3,25 +3,24 @@
 {% block content %}
 <b>Inputs</b>
 <ul>
-    <li> wire length = {{length}}
-    <li> rectangle height = {{height}}
-    <li> rectangle width = {{width}}
-    <li> stud spacing = {{stud}}
-    <li> horizontal offset = {{offset}}
+    <li> total length of wire <i>L</i>= {{length}}
+    <li> rectangle height <i>H</i> = {{height}}
+    <li> rectangle width <i>W</i> = {{width}}
+    <li> stud spacing (on centers) <i>S</i> = {{stud}}
+    <li> horizontal offset <i>O</i> = {{offset}}
 </ul>
-<b>Results</b> for screw locations (below top edge)
+<b>Location results</b>
 <ul>
-    <li> y<sub>1</sub> = {{height - y1}}
-    <li> y<sub>2</sub> = {{height - y2}}
+    <li> left screw: {{height - y1}} {{ y1 > height ? "below" : "above" }} top edge
+    <li> right screw: {{height - y2}} {{ y2 > height ? "below" : "above" }} top edge
 </ul>
-<svg width={{widthPx}} height={{heightPx}}>
+<svg width={{widthPx}} height={{heightPx}} style="display: block; margin: 0 auto;" >
     <rect
         id="art"
         width={{widthPx}}
         height={{scale * height}}
         y={{heightPx - scale * height}}
         fill="lightgray"
-        stroke="black"
     />
     <line
         id="left stud"
