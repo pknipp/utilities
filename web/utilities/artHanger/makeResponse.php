@@ -77,8 +77,8 @@ function makeResponse($data) {
         $y2 = $xRight * $y1 / $xLeft;
         $widthPx = 1400;
         $scale = $widthPx / $width;
-        $slope = $y1 / ($W / 2 - $offset);
-        $triangleHeight = $slope * $W / 2;
+        $slope = $y1 / ($width / 2 - $offset);
+        $triangleHeight = $slope * $width / 2;
         $heightPx = $scale * max($triangleHeight, $height);
 
         return [
