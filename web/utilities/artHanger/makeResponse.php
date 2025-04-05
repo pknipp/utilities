@@ -20,11 +20,26 @@ function makeResponse($data) {
 
     $stud = ($studString == '0' ? 0 : filter_var($studString, FILTER_VALIDATE_FLOAT));
     if (!($stud || $studString == '0')) {
-        return ['error' => "Param ({$studString}) cannot be parsed as a positive number."];
+        return [
+            'error' => "Param ({$studString}) cannot be parsed as a positive number.",
+        ];
     }
     if ($stud < 0) {
         return [
             'error' => "Param ({$studString}) cannot be negative.",
+        ];
+    }
+
+    if ($offset > $stud) {
+        return [
+            'error' => "Your value of the offset O ({$offsetString}) cannot        exceed>that of the stud-spacing S ({$studString}).",
+        ];
+    }
+
+    $complement = $stud - $offset;
+    if ($offset > $stud / 2) {
+        return ['error' => "Change your O value ({$offsetString}) to {$complement}.
+            From symmetry the results should be the same, and this seems to make the program happier.",
         ];
     }
 
@@ -45,6 +60,12 @@ function makeResponse($data) {
     if ($length < 0) {
         return [
             'error' => "Param ({$lengthString}) cannot be negative.",
+        ];
+    }
+
+    if ($width > $length) {
+        return [
+            'error' => "Your width W ({$widthString}) cannot exceed your length L ({$lengthString}).",
         ];
     }
 
