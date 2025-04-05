@@ -23,9 +23,10 @@
         stroke="black"
     />
     <line
+        x1="0"
         y1={{heightPx}}
         x2={{scale * (width / 2 - offset)}}
-        y2={{scale * y1}}
+        y2={{heightPx - scale * y1}}
         stroke="black"
     />
     <line
@@ -36,7 +37,7 @@
         stroke="black"
     />
     <line
-        x1={{scale * (W / 2 + stud - offset)}}
+        x1={{scale * (width / 2 + stud - offset)}}
         y1={{scale * y2}}
         x2 = {{widthPx}}
         y2 = {{heightPx}}
