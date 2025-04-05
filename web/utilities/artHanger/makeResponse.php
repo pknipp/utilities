@@ -56,10 +56,10 @@ function makeResponse($data) {
     $xMiddle = $studValidated;
     $xRight = $widthValidated / 2 + $offsetValidated - $studValidated;
     $a = $xLeft ** 2;
-    $b = 1 - ($xRight / $xLeft) ** 2;
+    $b = (1 - $xRight / $xLeft) ** 2;
     $c = $xMiddle ** 2;
     $d = ($xRight / $xLeft) ** 2;
-    $e = $xLeft ** 2;
+    $e = $xRight ** 2;
     $urlFrag = "/" . $heightValidated ** 2 . "/sqrt(x+" . $a . ")+sqrt(" . $b . "x+" . $c . ")+sqrt(" . $d . "x+" . $e . ")-" . $lengthValidated;
 
     $url = 'https://basic-calculus.herokuapp.com/api/root-finding' . $urlFrag;
