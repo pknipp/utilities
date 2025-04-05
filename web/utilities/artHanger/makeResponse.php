@@ -10,29 +10,29 @@ function makeResponse($data) {
     //This ternary seems necessary to catch this corner case.
     $offset = ($offsetString == '0' ? 0 : filter_var($offsetString, FILTER_VALIDATE_FLOAT));
     if (!($offset || $offsetString == '0')) {
-        return ['error' => "Param ({$offsetString}) cannot be parsed as a positive number."];
+        return ['error' => "Your offset O ({$offsetString}) cannot be parsed as a positive number."];
     }
     if ($offset < 0) {
         return [
-            'error' => "Param ({$offsetString}) cannot be negative.",
+            'error' => "Your offset O ({$offsetString}) cannot be negative.",
         ];
     }
 
     $stud = ($studString == '0' ? 0 : filter_var($studString, FILTER_VALIDATE_FLOAT));
     if (!($stud || $studString == '0')) {
         return [
-            'error' => "Param ({$studString}) cannot be parsed as a positive number.",
+            'error' => "Your stud-spacing ({$studString}) cannot be parsed as a positive number.",
         ];
     }
     if ($stud < 0) {
         return [
-            'error' => "Param ({$studString}) cannot be negative.",
+            'error' => "Your stud-spacing ({$studString}) cannot be negative.",
         ];
     }
 
     if ($offset > $stud) {
         return [
-            'error' => "Your value of the offset O ({$offsetString}) cannot        exceed>that of the stud-spacing S ({$studString}).",
+            'error' => "Your offset O ({$offsetString}) cannot exceed your stud-spacing S ({$studString}).",
         ];
     }
 
@@ -45,21 +45,27 @@ function makeResponse($data) {
 
     $width = ($widthString == '0' ? 0 : filter_var($widthString, FILTER_VALIDATE_FLOAT));
     if (!($width || $widthString == '0')) {
-        return ['error' => "Param ({$widthString}) cannot be parsed as a positive number."];
+        return ['error' => "Your width W ({$widthString}) cannot be parsed as a positive number."];
     }
     if ($width < 0) {
         return [
-            'error' => "Param ({$widthString}) cannot be negative.",
+            'error' => "Your width W ({$widthString}) cannot be negative.",
+        ];
+    }
+
+    if ($stud > $width) {
+        return [
+            'error' => "Your stud-spacing S  ({$studString}) cannot exceed your width W ({$widthString}).",
         ];
     }
 
     $length = ($lengthString == '0' ? 0 : filter_var($lengthString, FILTER_VALIDATE_FLOAT));
     if (!($length || $lengthString == '0')) {
-        return ['error' => "Param ({$lengthString}) cannot be parsed as a positive number."];
+        return ['error' => "Your length L ({$lengthString}) cannot be parsed as a positive number."];
     }
     if ($length < 0) {
         return [
-            'error' => "Param ({$lengthString}) cannot be negative.",
+            'error' => "Your length ({$lengthString}) cannot be negative.",
         ];
     }
 
@@ -71,11 +77,11 @@ function makeResponse($data) {
 
     $height = ($heightString == '0' ? 0 : filter_var($heightString, FILTER_VALIDATE_FLOAT));
     if (!($height || $heightString == '0')) {
-        return ['error' => "Param ({$heightString}) cannot be parsed as a positive number."];
+        return ['error' => "Your height ({$heightString}) cannot be parsed as a positive number."];
     }
     if ($height < 0) {
         return [
-            'error' => "Param ({$heightString}) cannot be negative.",
+            'error' => "Your height ({$heightString}) cannot be negative.",
         ];
     }
 
