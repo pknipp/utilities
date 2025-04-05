@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>Inputs</h1>
+<h4>Inputs</h4>
 <ul>
     <li> wire length = {{length}}
     <li> rectangle height = {{height}}
@@ -9,10 +9,39 @@
     <li> stud spacing = {{stud}}
     <li> horizontal offset = {{offset}}
 </ul>
-<h1>Outputs</h1>
+<h4>Outputs</h4>
 <ul>
     <li> y<sub>1</sub> = {{height - y1}}
     <li> y<sub>2</sub> = {{height - y2}}
 </ul>
+<svg width={{widthPx}} height={{heightPx}}>
+    <rect
+        width={{widthPx}}
+        height={{scale * height}}
+        y={{heightPx - scale * height}}
+        fill="transparent"
+        stroke="black"
+    />
+    <line
+        y1={{heightPx}}
+        x2={{scale * (W / 2 - offset)}}
+        y2={{scale * y1}}
+        stroke="black"
+    />
+    <line
+        x1={{scale * (W / 2 - offset)}}
+        y1={{scale * y1}}
+        x2={{scale * (W / 2 + stud - offset)}}
+        y2={{scale * y2}}
+        stroke="black"
+    />
+    <line
+        x1={{scale * (W / 2 + stud - offset)}}
+        y1={{scale * y2}}
+        x2 = {{widthPx}}
+        y2 = {{heightPx}}
+        stroke="black"
+    />
+</svg>
 
 {% endblock %}
