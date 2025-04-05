@@ -16,6 +16,7 @@
 </ul>
 <svg width={{widthPx}} height={{heightPx}}>
     <rect
+        id="art"
         width={{widthPx}}
         height={{scale * height}}
         y={{heightPx - scale * height}}
@@ -23,6 +24,7 @@
         stroke="black"
     />
     <line
+        id="left wire"
         x1="0"
         y1={{heightPx}}
         x2={{scale * (width / 2 - offset)}}
@@ -30,14 +32,16 @@
         stroke="black"
     />
     <line
+        id="continuation of left wire"
         x1={{scale * (width / 2 - offset)}}
-        y2={{heightPx - scale * y1}}
+        y1={{heightPx - scale * y1}}
         x2={{widthPx / 2}}
         y2={{heightPx - slope * widthPx / 2}}
         stroke="black"
         stroke-dasharray="1, 2"
     />
     <line
+        id="left stud"
         x1={{scale * (width / 2 - offset)}}
         x2={{scale * (width / 2 - offset)}}
         y2={{heightPx}}
@@ -52,6 +56,7 @@
         stroke="black"
     />
     <line
+        id="right stud"
         x1={{scale * (width / 2 + stud - offset)}}
         x2={{scale * (width / 2 + stud - offset)}}
         y2={{heightPx}}
@@ -64,6 +69,7 @@
         x2={{scale * (width / 2 + stud - offset)}}
         y2={{heightPx - scale * y2}}
     <line
+        id="right wire"
         x1={{scale * (width / 2 + stud - offset)}}
         y1={{heightPx - scale * y2}}
         x2 = {{widthPx}}
