@@ -1,48 +1,13 @@
 <?php
 
 function makeResponse($data) {
+    $offsetString = $data['offset'];
+    $studString = $data['stud'];
+    $widthString = $data['width'];
     $lengthString = $data['length'];
     $heightString = $data['height'];
-    $widthString = $data['width'];
-    $studString = $data['stud'];
-    $offsetString = $data['offset'];
+
     //This ternary seems necessary to catch this corner case.
-    $length = ($lengthString == '0' ? 0 : filter_var($lengthString, FILTER_VALIDATE_FLOAT));
-    if (!($length || $lengthString == '0')) {
-        return ['error' => "Param ({$lengthString}) cannot be parsed as a positive number."];
-    }
-    if ($length < 0) {
-        return [
-            'error' => "Param ({$lengthString}) cannot be negative.",
-        ];
-    }
-    $height = ($heightString == '0' ? 0 : filter_var($heightString, FILTER_VALIDATE_FLOAT));
-    if (!($height || $heightString == '0')) {
-        return ['error' => "Param ({$heightString}) cannot be parsed as a positive number."];
-    }
-    if ($height < 0) {
-        return [
-            'error' => "Param ({$heightString}) cannot be negative.",
-        ];
-    }
-    $width = ($widthString == '0' ? 0 : filter_var($widthString, FILTER_VALIDATE_FLOAT));
-    if (!($width || $widthString == '0')) {
-        return ['error' => "Param ({$widthString}) cannot be parsed as a positive number."];
-    }
-    if ($width < 0) {
-        return [
-            'error' => "Param ({$widthString}) cannot be negative.",
-        ];
-    }
-    $stud = ($studString == '0' ? 0 : filter_var($studString, FILTER_VALIDATE_FLOAT));
-    if (!($stud || $studString == '0')) {
-        return ['error' => "Param ({$studString}) cannot be parsed as a positive number."];
-    }
-    if ($stud < 0) {
-        return [
-            'error' => "Param ({$studString}) cannot be negative.",
-        ];
-    }
     $offset = ($offsetString == '0' ? 0 : filter_var($offsetString, FILTER_VALIDATE_FLOAT));
     if (!($offset || $offsetString == '0')) {
         return ['error' => "Param ({$offsetString}) cannot be parsed as a positive number."];
@@ -52,6 +17,47 @@ function makeResponse($data) {
             'error' => "Param ({$offsetString}) cannot be negative.",
         ];
     }
+
+    $stud = ($studString == '0' ? 0 : filter_var($studString, FILTER_VALIDATE_FLOAT));
+    if (!($stud || $studString == '0')) {
+        return ['error' => "Param ({$studString}) cannot be parsed as a positive number."];
+    }
+    if ($stud < 0) {
+        return [
+            'error' => "Param ({$studString}) cannot be negative.",
+        ];
+    }
+
+    $width = ($widthString == '0' ? 0 : filter_var($widthString, FILTER_VALIDATE_FLOAT));
+    if (!($width || $widthString == '0')) {
+        return ['error' => "Param ({$widthString}) cannot be parsed as a positive number."];
+    }
+    if ($width < 0) {
+        return [
+            'error' => "Param ({$widthString}) cannot be negative.",
+        ];
+    }
+
+    $length = ($lengthString == '0' ? 0 : filter_var($lengthString, FILTER_VALIDATE_FLOAT));
+    if (!($length || $lengthString == '0')) {
+        return ['error' => "Param ({$lengthString}) cannot be parsed as a positive number."];
+    }
+    if ($length < 0) {
+        return [
+            'error' => "Param ({$lengthString}) cannot be negative.",
+        ];
+    }
+
+    $height = ($heightString == '0' ? 0 : filter_var($heightString, FILTER_VALIDATE_FLOAT));
+    if (!($height || $heightString == '0')) {
+        return ['error' => "Param ({$heightString}) cannot be parsed as a positive number."];
+    }
+    if ($height < 0) {
+        return [
+            'error' => "Param ({$heightString}) cannot be negative.",
+        ];
+    }
+
     $xLeft = $width / 2 - $offset;
     $xMiddle = $stud;
     $xRight = $width / 2 + $offset - $stud;
@@ -84,17 +90,21 @@ function makeResponse($data) {
         return [
             'error' => '',
             'message' => [
-                'y1' => $y1,
-                'y2' => $y2,
+                // inputs
+                'offset' => $offset,
+                'stud' => $stud,
+                'width' => $width,
                 'length' => $length,
                 'height' => $height,
-                'width' => $width,
-                'stud' => $stud,
-                'offset' => $offset,
+                // two most important outputs
+                'y1' => $y1,
+                'y2' => $y2,
+                // useful for graphing
                 'scale' => $scale,
                 'widthPx' => $widthPx,
                 'heightPx' => $heightPx,
                 'slope' => $slope,
+                // css choices
                 'studWidth' => 30,
                 'wireWidth' => 4,
                 'screwRadius' => 10,

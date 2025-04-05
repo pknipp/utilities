@@ -156,13 +156,13 @@ foreach ($options as $option) {
 
 foreach (['', '/json'] as $option1) {
   foreach ($options as $option2) {
-    $app->get("/artHanger{$option1}/{length}/{height}/{width}/{stud}/{offset}$option2", function(string $length, string $height, string $width, string $stud, string $offset, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
+    $app->get("/artHanger{$option1}/{offset}/{stud}/{width}/{length}/{height}/$option2", function(string $offset, string $stud, string $width, string $length, string $height, Request $request, Response $response, LoggerInterface $logger, Twig $twig) {
       $data = [
+        'offset' => $offset,
+        'stud' => $stud,
+        'width' => $width,
         'length' => $length,
         'height' => $height,
-        'width' => $width,
-        'stud' => $stud,
-        'offset' => $offset,
       ];
       $pathParts = explode('/', $_SERVER['REQUEST_URI']);
       $logger->debug(json_encode($pathParts));

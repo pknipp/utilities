@@ -6,19 +6,19 @@
         <h3>Inputs</h3>
         <div style="display: flex; justify-content: space-evenly; ">
             <div style="padding: 0 20px;">
-                wire length <i>L</i> = {{length}}
-            </div>
-            <div style="padding: 0 20px;">
-                height <i>H</i> = {{height}}
-            </div>
-            <div style="padding: 0 20px;">
-                width <i>W</i> = {{width}}
+                offset <i>O</i> = {{offset}}
             </div>
             <div style="padding: 0 20px;">
                 stud spacing <i>S</i> = {{stud}}
             </div>
             <div style="padding: 0 20px;">
-                offset <i>O</i> = {{offset}}
+                width <i>W</i> = {{width}}
+            </div>
+            <div style="padding: 0 20px;">
+                wire length <i>L</i> = {{length}}
+            </div>
+            <div style="padding: 0 20px;">
+                height <i>H</i> = {{height}}
             </div>
         </div><br/>
         <h3>Location results</h3>
@@ -31,13 +31,6 @@
             </div>
         </div><br/>
         <svg width={{widthPx}} height={{heightPx}} style="display: block; margin: 0 auto;" >
-            <rect
-                id="art"
-                width={{widthPx}}
-                height={{scale * height}}
-                y={{heightPx - scale * height}}
-                fill="lightgray"
-            />
             <line
                 id="left stud"
                 x1={{scale * (width / 2 - offset)}}
@@ -111,6 +104,21 @@
                 stroke="black"
                 stroke-width={{wireWidth}}
             />
+            <rect
+                id="art"
+                width={{widthPx}}
+                height={{scale * height}}
+                y={{heightPx - scale * height}}
+                fill="fill="rgba(200, 200, 200, 0.5)"
+            />
+            <text
+                x={{widthPx / 2}}
+                y={{heightPx - scale * height / 2}}
+                text-anchor="middle"
+                dy="0.32em"
+            >
+                upper portion of art
+            </text>
         </svg>
     </div>
 </div>
