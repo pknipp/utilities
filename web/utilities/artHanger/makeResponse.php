@@ -7,60 +7,60 @@ function makeResponse($data) {
     $studString = $data['stud'];
     $offsetString = $data['offset'];
     //This ternary seems necessary to catch this corner case.
-    $lengthValidated = ($lengthString == '0' ? 0 : filter_var($lengthString, FILTER_VALIDATE_FLOAT));
-    if (!($lengthValidated || $lengthString == '0')) {
+    $length = ($lengthString == '0' ? 0 : filter_var($lengthString, FILTER_VALIDATE_FLOAT));
+    if (!($length || $lengthString == '0')) {
         return ['error' => "Param ({$lengthString}) cannot be parsed as a positive number."];
     }
-    if ($lengthValidated < 0) {
+    if ($length < 0) {
         return [
             'error' => "Param ({$lengthString}) cannot be negative.",
         ];
     }
-    $heightValidated = ($heightString == '0' ? 0 : filter_var($heightString, FILTER_VALIDATE_FLOAT));
-    if (!($heightValidated || $heightString == '0')) {
+    $height = ($heightString == '0' ? 0 : filter_var($heightString, FILTER_VALIDATE_FLOAT));
+    if (!($height || $heightString == '0')) {
         return ['error' => "Param ({$heightString}) cannot be parsed as a positive number."];
     }
-    if ($heightValidated < 0) {
+    if ($height < 0) {
         return [
             'error' => "Param ({$heightString}) cannot be negative.",
         ];
     }
-    $widthValidated = ($widthString == '0' ? 0 : filter_var($widthString, FILTER_VALIDATE_FLOAT));
-    if (!($widthValidated || $widthString == '0')) {
+    $width = ($widthString == '0' ? 0 : filter_var($widthString, FILTER_VALIDATE_FLOAT));
+    if (!($width || $widthString == '0')) {
         return ['error' => "Param ({$widthString}) cannot be parsed as a positive number."];
     }
-    if ($widthValidated < 0) {
+    if ($width < 0) {
         return [
             'error' => "Param ({$widthString}) cannot be negative.",
         ];
     }
-    $studValidated = ($studString == '0' ? 0 : filter_var($studString, FILTER_VALIDATE_FLOAT));
-    if (!($studValidated || $studString == '0')) {
+    $stud = ($studString == '0' ? 0 : filter_var($studString, FILTER_VALIDATE_FLOAT));
+    if (!($stud || $studString == '0')) {
         return ['error' => "Param ({$studString}) cannot be parsed as a positive number."];
     }
-    if ($studValidated < 0) {
+    if ($stud < 0) {
         return [
             'error' => "Param ({$studString}) cannot be negative.",
         ];
     }
-    $offsetValidated = ($offsetString == '0' ? 0 : filter_var($offsetString, FILTER_VALIDATE_FLOAT));
-    if (!($offsetValidated || $offsetString == '0')) {
+    $offset = ($offsetString == '0' ? 0 : filter_var($offsetString, FILTER_VALIDATE_FLOAT));
+    if (!($offset || $offsetString == '0')) {
         return ['error' => "Param ({$offsetString}) cannot be parsed as a positive number."];
     }
-    if ($offsetValidated < 0) {
+    if ($offset < 0) {
         return [
             'error' => "Param ({$offsetString}) cannot be negative.",
         ];
     }
-    $xLeft = $widthValidated / 2 - $offsetValidated;
-    $xMiddle = $studValidated;
-    $xRight = $widthValidated / 2 + $offsetValidated - $studValidated;
+    $xLeft = $width / 2 - $offset;
+    $xMiddle = $stud;
+    $xRight = $width / 2 + $offset - $stud;
     $a = $xLeft ** 2;
     $b = (1 - $xRight / $xLeft) ** 2;
     $c = $xMiddle ** 2;
     $d = ($xRight / $xLeft) ** 2;
     $e = $xRight ** 2;
-    $urlFrag = "/" . $heightValidated ** 2 . "/sqrt(x+" . $a . ")+sqrt(" . $b . "x+" . $c . ")+sqrt(" . $d . "x+" . $e . ")-" . $lengthValidated;
+    $urlFrag = "/" . $height ** 2 . "/sqrt(x+" . $a . ")+sqrt(" . $b . "x+" . $c . ")+sqrt(" . $d . "x+" . $e . ")-" . $length;
 
     $url = 'https://basic-calculus.herokuapp.com/api/root-finding' . $urlFrag;
 
@@ -75,12 +75,25 @@ function makeResponse($data) {
         }
         $y1 = sqrt($data['x']);
         $y2 = $xRight * $y1 / $xLeft;
+        $widthPx = 1400;
+        $scale = $widthPx / $width;
+        $slope = $y1 / ($W / 2 - $offset);
+        $triangleHeight = $slope * $W / 2;
+        $heightPx = $scale * max($triangleHeight, $height);
 
         return [
             'error' => '',
             'message' => [
                 'y1' => $y1,
                 'y2' => $y2,
+                'length' => $length,
+                'height' => $height,
+                'width' => $width,
+                'stud' => $stud,
+                'offset' => $offset,
+                'scale' => $scale,
+                'widthPx' => $widthPx,
+                'heightPx' => $heightPx,
             ],
         ];
     }

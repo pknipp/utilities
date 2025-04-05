@@ -1,11 +1,18 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div>
-    y1 = {{y1}}
-</div>
-<div>
-    y2 = {{y2}}
-</div>
+<h1>Inputs</h1>
+<ul>
+    <li> wire length = {{length}}
+    <li> rectangle height = {{height}}
+    <li> rectangle width = {{width}}
+    <li> stud spacing = {{stud}}
+    <li> horizontal offset = {{offset}}
+</ul>
+<h1>Outputs</h1>
+<ul>
+    <li> y<sub>1</sub> = {{height - y1}}
+    <li> y<sub>2</sub> = {{height - y2}}
+</ul>
 
 {% endblock %}
