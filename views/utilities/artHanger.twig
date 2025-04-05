@@ -24,6 +24,22 @@
         stroke="black"
     />
     <line
+        id="left stud"
+        x1={{scale * (width / 2 - offset)}}
+        x2={{scale * (width / 2 - offset)}}
+        y2={{heightPx}}
+        stroke="gray"
+        stroke-width="8"
+    />
+    <line
+        id="right stud"
+        x1={{scale * (width / 2 + stud - offset)}}
+        x2={{scale * (width / 2 + stud - offset)}}
+        y2={{heightPx}}
+        stroke="gray"
+        stroke-width="8"
+    />
+    <line
         id="left wire"
         x1="0"
         y1={{heightPx}}
@@ -48,14 +64,6 @@
         stroke-dasharray="1, 2"
     />
     <line
-        id="left stud"
-        x1={{scale * (width / 2 - offset)}}
-        x2={{scale * (width / 2 - offset)}}
-        y2={{heightPx}}
-        stroke="gray"
-        stroke-width="8"
-    />
-    <line
         id="middle wire"
         x1={{scale * (width / 2 - offset)}}
         y1={{heightPx - scale * y1}}
@@ -63,14 +71,6 @@
         y2={{heightPx - scale * y2}}
         stroke="black"
         stroke-width="2"
-    />
-    <line
-        id="right stud"
-        x1={{scale * (width / 2 + stud - offset)}}
-        x2={{scale * (width / 2 + stud - offset)}}
-        y2={{heightPx}}
-        stroke="gray"
-        stroke-width="8"
     />
     <line
         id="continuation of right wire"
