@@ -14,9 +14,17 @@ function makeArtHanger($name) {
         <li> <I>S</I>: <b>stud</b>-spacing, which is 16\" (but sometimes 24\") for the US and 600 mm for some of Europe.</li>
         <li> <I>O</I>: desired <b>offset</b> of the middle of the artwork, as measured horizontally from one of the studs</li>
         </ul>
-        <b>NOTE</b> that these instructions do not restrict you to any particular set of units (eg inches or millimeters); you simply need to use the same set for all of your numbers."
+        <b>NOTES</b>
+        <ul>
+            <li>
+                These instructions do not restrict you to any particular set of units (eg inches or millimeters); you simply need to use the same set for all of your numbers.
+            </li>
+            <li>
+                The artwork's weight is shared by the two screws, but this sharing is unequal.  The greater amount of weight is born by the screw that is (laterally) closer to the art's center of gravity.
+            </li>
+        </ul>"
         ,
-        'examples' => "<button>Click</button>
+        'examples' => "<button>Click here</button> to see the relationship between your browser's url and the inputs.
             <script>
                 const button = document.getElementsByTagName('button')[0];
                 const setExample = () => {
