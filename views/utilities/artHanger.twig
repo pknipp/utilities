@@ -31,6 +31,12 @@
         y2={{heightPx - scale * y1}}
         stroke="black"
     />
+    <circle
+        id="left screw"
+        cx={{scale * (width / 2 - offset)}}
+        cy={{heightPx - scale * y1}}
+        r="5"
+    />
     <line
         id="continuation of left wire"
         x1={{scale * (width / 2 - offset)}}
@@ -69,7 +75,14 @@
         y1={{heightPx - slope * widthPx / 2}}
         x2={{scale * (width / 2 + stud - offset)}}
         y2={{heightPx - scale * y2}}
+        stroke="black"
         stroke-dasharray="1, 2"
+    />
+    <circle
+        id="right screw"
+        cx={{scale * (width / 2 + stud - offset)}}
+        cy={{heightPx - scale * y2}}
+        r="5"
     />
     <line
         id="right wire"
