@@ -31,6 +31,14 @@
     />
     <line
         x1={{scale * (width / 2 - offset)}}
+        y2={{heightPx - scale * y1}}
+        x2={{widthPx / 2}}
+        y2={{heightPx - slope * widthPx / 2}}
+        stroke="black"
+        stroke-dasharray="1, 2"
+    />
+    <line
+        x1={{scale * (width / 2 - offset)}}
         x2={{scale * (width / 2 - offset)}}
         y2={{heightPx}}
         stroke="black"
@@ -50,6 +58,11 @@
         stroke="black"
         stroke-dasharray="1, 2"
     />
+    <line
+        x1={{widthPx / 2}}
+        y1={{y2={{heightPx - slope * widthPx / 2}}}}
+        x2={{scale * (width / 2 + stud - offset)}}
+        y2={{heightPx - scale * y2}}
     <line
         x1={{scale * (width / 2 + stud - offset)}}
         y1={{heightPx - scale * y2}}
