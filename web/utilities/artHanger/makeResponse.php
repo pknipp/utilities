@@ -110,11 +110,18 @@ function makeResponse($data) {
         $ySq = $data['x'];
         $LLeft = sqrt($ySq + $a);
         $LRight = sqrt($d * $ySq + $e);
+        $LMid = sqrt($b * $ySq + $c);
 
         $y1 = sqrt($data['x']);
         $y2 = $xRight * $y1 / $xLeft;
 
-        $tensionRatio = $LLeft * $LRight / ($y1 * $LRight + $y2 * $LLeft);
+        $tension = $LLeft * $LRight / ($y1 * $LRight + $y2 * $LLeft);
+        $t1x = $tension * (-$xLeft / $LLeft + $stud / $LMid);
+        $t1y = $tension * ($y1 / $LLeft + ($y1 - $y2) / $LMid);
+        $tx = sqrt($t1x * $t1x + $t1y * $t1y);
+        $t2x = $tension * ($xRight / $LRight - $stud / $LMid);
+        $t2y = $tension * ($y2 / $LRight + ($y2 - $y1) / $LMid);
+        $t2 = sqrt($t2x * $t2x + $t2y * $t2y);
         error_log(print_r($y1, true));
         error_log(print_r($y2, true));
 
@@ -148,6 +155,8 @@ function makeResponse($data) {
                 'wireWidth' => 4,
                 'screwRadius' => 10,
                 'tensionRatio' => $tensionRatio,
+                't1' => $t1,
+                't2' => $t2,
             ],
         ];
     }
