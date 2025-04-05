@@ -106,6 +106,7 @@ function makeResponse($data) {
         if($data === null && json_last_error() !== JSON_ERROR_NONE){
             echo "json decode error: " . json_last_error_msg();
         }
+        echo $data;
         $y1 = sqrt($data['x']);
         $y2 = $xRight * $y1 / $xLeft;
         $widthPx = 1000;
