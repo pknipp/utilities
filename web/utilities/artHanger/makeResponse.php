@@ -74,11 +74,11 @@ function makeResponse($data) {
             'error' => "Your width W ({$widthString}) cannot exceed your length L ({$lengthString}).",
         ];
     }
-    $lengthMax = abs($width / 2 - $offset) + $stud + abs($width / 2 + $offset - $stud);
+    $lengthMin = abs($width / 2 - $offset) + $stud + abs($width / 2 + $offset - $stud);
 
-    if ($length > $lengthMax) {
+    if ($length < $lengthMin) {
         return [
-            'error' => "Your length L ({$length}) cannot exceed {$lengthMax}, a quantity based on your specifications for O, S, and W.",
+            'error' => "Your length L ({$length}) must exceed {$lengthMin}, a value based on your values for O, S, and W.",
         ];
     }
 
