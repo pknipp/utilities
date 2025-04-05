@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h4>Inputs</h4>
+<b>Inputs</b>
 <ul>
     <li> wire length = {{length}}
     <li> rectangle height = {{height}}
@@ -9,7 +9,7 @@
     <li> stud spacing = {{stud}}
     <li> horizontal offset = {{offset}}
 </ul>
-<h4>Outputs</h4>
+<b>Results</b> for screw locations (below top edge)
 <ul>
     <li> y<sub>1</sub> = {{height - y1}}
     <li> y<sub>2</sub> = {{height - y2}}
@@ -52,9 +52,8 @@
         x1={{scale * (width / 2 - offset)}}
         x2={{scale * (width / 2 - offset)}}
         y2={{heightPx}}
-        stroke="black"
-        stroke-dasharray="10, 20"
-        stroke-width="10"
+        stroke="gray"
+        stroke-width="8"
     />
     <line
         id="middle wire"
@@ -70,9 +69,8 @@
         x1={{scale * (width / 2 + stud - offset)}}
         x2={{scale * (width / 2 + stud - offset)}}
         y2={{heightPx}}
-        stroke="black"
-        stroke-dasharray="10, 20"
-        stroke-width="10"
+        stroke="gray"
+        stroke-width="8"
     />
     <line
         id="continuation of right wire"
