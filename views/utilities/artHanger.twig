@@ -200,7 +200,7 @@
     const inputs = Array.from(topDiv.getElementsByTagName("input")).reduce(
         (inputs, input) => ({[input.getAttribute("id")]: input}), {},
     );
-    console.log("typeof(topDiv)/topDiv = ", typef(topDiv), topDiv);
+    console.log("typeof(topDiv)/topDiv = ", typeof(topDiv), topDiv);
     const button = topDiv.getElementById("submit");
 
     const changeInput = (name, value) => {
