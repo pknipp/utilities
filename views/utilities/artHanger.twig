@@ -195,7 +195,9 @@
 <script>
     const topDiv = document.getElementById("top-div");
     const keys = ["offset", "stud", "width", "length", "height"];
-    const inputs = Array.from(topDiv.getElementsByTagName("input")).reduce(
+    const inputs = Array.from(topDiv.getElementsByTagName("input"));
+    console.log("inputs = ", inputs);
+    inputs = inputs.reduce.reduce(
         (inputs, input) => input => {
             return {input.getAttribute("id"): input};
         }, {},
@@ -209,7 +211,7 @@
         const newData = keys.map(key => params[key]).join("-");
         topDiv.setAttribute("data-params", newData);
     };
-    Object.values(inputs).forEach(input => input.addEventListener("oninput", changeInput));
+    Object.values(inputs).forEach(input => input.addEventListener("oninput", changeInput))  ;
 </script>
 
 {% endblock %}
