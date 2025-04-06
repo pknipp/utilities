@@ -26,13 +26,25 @@
             <span style="padding-left: 15px; "><I>W</I> > 2(<I>S</I> - <I>O</I>)</span>
             <span style="padding-left: 15px; "><I>L</I> > <I>W</I></span>)
         </div><br/>
-        <h3>Location results (with same units as for inputs)</h3>
+        <h3>Results for locations (with same units as for inputs)</h3>
         <div style="display: flex; justify-content: space-evenly; ">
             <div style="padding: 0 20px;">
                 left screw: {{(height - y1) | abs | round(3)}} {{ y1 < height ? "below" : "above" }} top edge
             </div>
             <div style="padding: 0 20px;">
                 right screw: {{(height - y2) | abs | round(3)}} {{ y2 < height ? "below" : "above" }} top edge
+            </div>
+        </div><br/>
+        <h3>Results for forces <I>F</I> (relative to weight of artwork)</h3>
+        <div style="display: flex; justify-content: space-evenly; ">
+            <div style="padding: 0 20px;">
+                wire tension: {{tension | round(2)}}
+            </div>
+            <div style="padding: 0 20px;">
+                <I>F</I> on left screw: {{t1 | round(2)}}
+            </div>
+            <div style="padding: 0 20px;">
+                <I>F</I> on right screw: {{t2 | round(2)}}
             </div>
         </div><br/>
         <svg width={{widthPx}} height={{heightPx}} style="display: block; margin: 0 auto;" >

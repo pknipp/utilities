@@ -95,14 +95,14 @@ function makeResponse($data) {
         $y1 = sqrt($data['x']);
         $y2 = $xRight * $y1 / $xLeft;
 
-        // The following may be used to return info about wire tensions and forces on screws, expressed relative to artwork's weight.
-        // $tension = $LLeft * $LRight / ($y1 * $LRight + $y2 * $LLeft);
-        // $t1x = $tension * (-$xLeft / $LLeft + $stud / $LMid);
-        // $t1y = $tension * ($y1 / $LLeft + ($y1 - $y2) / $LMid);
-        // $t1 = sqrt($t1x * $t1x + $t1y * $t1y);
-        // $t2x = $tension * ($xRight / $LRight - $stud / $LMid);
-        // $t2y = $tension * ($y2 / $LRight + ($y2 - $y1) / $LMid);
-        // $t2 = sqrt($t2x * $t2x + $t2y * $t2y);
+        // The following return info about wire tensions and forces on screws, expressed relative to artwork's weight.
+        $tension = $LLeft * $LRight / ($y1 * $LRight + $y2 * $LLeft);
+        $t1x = $tension * (-$xLeft / $LLeft + $stud / $LMid);
+        $t1y = $tension * ($y1 / $LLeft + ($y1 - $y2) / $LMid);
+        $t1 = sqrt($t1x * $t1x + $t1y * $t1y);
+        $t2x = $tension * ($xRight / $LRight - $stud / $LMid);
+        $t2y = $tension * ($y2 / $LRight + ($y2 - $y1) / $LMid);
+        $t2 = sqrt($t2x * $t2x + $t2y * $t2y);
 
         $widthPx = 1000;
         $scale = $widthPx / $width;
@@ -133,9 +133,9 @@ function makeResponse($data) {
                 'wireWidth' => 4,
                 'screwRadius' => 10,
                 // The following may be used to take ratios of forces.
-                // 'tension' => $tension,
-                // 't1' => $t1,
-                // 't2' => $t2,
+                'tension' => $tension,
+                't1' => $t1,
+                't2' => $t2,
             ],
         ];
     }
