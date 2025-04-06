@@ -10,39 +10,18 @@ function makeResponse($data) {
     //This ternary seems necessary to catch this corner case.
     $offset = ($offsetString == '0' ? 0 : filter_var($offsetString, FILTER_VALIDATE_FLOAT));
     if (!($offset || $offsetString == '0')) {
-        return ['error' => "Your offset O ({$offsetString}) cannot be parsed as a positive number."];
+        return ['error' => "Your offset O ({$offsetString}) cannot be parsed as a nonzero number."];
     }
-    if ($offset < 0) {
-        return [
-            'error' => "Your offset O ({$offsetString}) cannot be negative.",
-        ];
-    }
+    if ($offset < 0) $offset = abs($offset);
 
     $stud = ($studString == '0' ? 0 : filter_var($studString, FILTER_VALIDATE_FLOAT));
     if (!($stud || $studString == '0')) {
         return [
-            'error' => "Your stud-spacing ({$studString}) cannot be parsed as a positive number.",
+            'error' => "Your stud-spacing ({$studString}) cannot be parsed as a nonzero number.",
         ];
     }
-    if ($stud < 0) {
-        return [
-            'error' => "Your stud-spacing ({$studString}) cannot be negative.",
-        ];
-    }
-
-    if ($offset >= $stud) {
-        return [
-            'error' => "Your offset O ({$offsetString}) cannot exceed your stud-spacing S ({$studString}).",
-        ];
-    }
-
-    $complement = $stud - $offset;
-    if ($offset >= $stud / 2) {
-        return [
-            'error' => "Change your O value ({$offsetString}) to {$complement}.
-            From symmetry the results should be the same, and this seems to make the program happier.",
-        ];
-    }
+    if ($stud < 0) $stud = abs($stud);
+    if ($offset >= $stud) $offset -= floor($offset / $stud);
 
     $width = ($widthString == '0' ? 0 : filter_var($widthString, FILTER_VALIDATE_FLOAT));
     if (!($width || $widthString == '0')) {
@@ -50,22 +29,19 @@ function makeResponse($data) {
             'error' => "Your width W ({$widthString}) cannot be parsed as a positive number.",
         ];
     }
-    if ($width < 0) {
+    if ($width < 0) $width = abs($width);
+
+    $halfWidth = $width / 2;
+    if ($halfWidth <= $offset) {
         return [
-            'error' => "Your width W ({$widthString}) cannot be negative.",
+            'error' => "Your width W ({$width}) is too small.  The half-width ({$halfWidth}) must exceed the distance ({$offset}) from the artwork's center of gravity to the left stud.",
         ];
     }
 
-    if ($stud >= $width) {
+    $otherDistance = $stud - $offset;
+    if ($halfWidth <= $otherDistance) {
         return [
-            'error' => "Your stud-spacing S ({$studString}) cannot exceed your width W ({$widthString}).",
-        ];
-    }
-
-    $widthMin = 2 * ($stud - $offset);
-    if ($width <= $widthMin) {
-        return [
-            'error' => "Your width W ({$width}) must exceed {$widthMin}, a value based upon your values of offset O and stud-spacing S.",
+            'error' => "Your width W ({$width}) is too small.  The half-width ({$halfWidth}) must exceed the distance ({$otherDistance}) from the artwork's center of gravity to the right stud.",
         ];
     }
 
@@ -73,22 +49,10 @@ function makeResponse($data) {
     if (!($length || $lengthString == '0')) {
         return ['error' => "Your length L ({$lengthString}) cannot be parsed as a positive number."];
     }
-    if ($length < 0) {
-        return [
-            'error' => "Your length ({$lengthString}) cannot be negative.",
-        ];
-    }
-
+    if ($length < 0) $length = abs($length);
     if ($width >= $length) {
         return [
-            'error' => "Your width W ({$widthString}) cannot exceed your length L ({$lengthString}).",
-        ];
-    }
-
-    $lengthMin = abs($width / 2 - $offset) + $stud + abs($width / 2 + $offset - $stud);
-    if ($length <= $lengthMin) {
-        return [
-            'error' => "Your length L ({$length}) must exceed {$lengthMin}, a value based on your values for O, S, and W.",
+            'error' => "Your wire length L ({$lengthString}) must exceed your artwork's length W ({$widthString}).",
         ];
     }
 
@@ -143,7 +107,6 @@ function makeResponse($data) {
         $scale = $widthPx / $width;
         $slope = $y1 / ($width / 2 - $offset);
 
-        //  error_log(print_r($y2 / $slope, true));
         $triangleHeight = $slope * $width / 2;
         $heightPx = $scale * max($triangleHeight, $height);
 

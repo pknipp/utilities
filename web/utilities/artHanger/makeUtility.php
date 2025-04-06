@@ -32,9 +32,10 @@ function makeArtHanger($name) {
             <li>
                 There are five inequalities that must be satisfied by your inputs:
                 <ul>
-                    <li>  <I>L</I> &gt; <I>W</I> &gt; <I>S</I> &gt; <I>O</I> </li>
-                    <li> <I>W</I> &gt; 2(<I>S</I> - <I>O</I>) </li>
-                    <li> <I>L</I> &gt; |<I>W</I> / 2 - <I>O</I>| + <I>S</I> + |<I>W</I> / 2 + <I>O</I> - <I>S</I>| </li>
+                    <li>  <I>O</I> &ne; 0 (Otherwise, the artwork can be supported by a single screw in a single stud, making this app unnecessary. Going forward, let's assume that <I>O</I> > 0.)</li>
+                    <li> <I>W</I> / 2 &gt; <I>O</I>, assuring that the artwork's left end overlaps with the left stud. </li>
+                    <li> <I>W</I> / 2 &gt; <I>S</I>| - <I>O</I>, assuring that the artwork's right end overlaps with the right stud. </li>
+                    <li> <I>L</I> > <I>W</I>, assuring that the wire suffices to connect the artwork's attachment points.
                 </ul>
                 In fact the calculation may even fail if you <I>almost</I> violate any of these constraints.
         </ul>"
