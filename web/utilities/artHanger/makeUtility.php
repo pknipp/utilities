@@ -36,7 +36,7 @@ function makeArtHanger($name) {
                     <li> <I>W</I> &gt; 2(<I>S</I> - <I>O</I>) </li>
                     <li> <I>L</I> &gt; |<I>W</I> / 2 - <I>O</I>| + <I>S</I> + |<I>W</I> / 2 + <I>O</I> - <I>S</I>| </li>
                 </ul>
-                In fact the calculation may fail if you <I>almost</I> violate any of these constraints.
+                In fact the calculation may even fail if you <I>almost</I> violate any of these constraints.
         </ul>"
         ,
         'examples' => "<button>Click here</button> to see the relationship between your inputs, the browser's url, and the results.
