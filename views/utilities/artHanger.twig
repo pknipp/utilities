@@ -211,7 +211,7 @@
         const newData = keys.map(key => params[key]).join("-");
         topDiv.setAttribute("data-params", newData);
     };
-    Object.values(inputs).forEach(input => input.addEventListener("oninput", changeInput))  ;
+    Object.values(inputs).forEach(input => input.addEventListener("input", changeInput))  ;
 </script>
 
 {% endblock %}
