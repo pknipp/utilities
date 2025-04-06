@@ -1,16 +1,25 @@
 <?php
 
 function makeResponse($data) {
+    $version = $data['version'];
     $offsetString = $data['offset'];
     $studString = $data['stud'];
     $widthString = $data['width'];
     $lengthString = $data['length'];
     $heightString = $data['height'];
 
+    if ($version != 'web') {
+        return [
+            'error' => "Your specified version ({$version}) is not one of our presently allowable ones ('web').",
+        ];
+    }
+
     //This ternary seems necessary to catch this corner case.
     $offset = ($offsetString == '0' ? 0 : filter_var($offsetString, FILTER_VALIDATE_FLOAT));
     if (!($offset || $offsetString == '0')) {
-        return ['error' => "Your offset O ({$offsetString}) cannot be parsed as a nonzero number."];
+        return [
+            'error' => "Your offset O ({$offsetString}) cannot be parsed as a nonzero number.",
+        ];
     }
     if ($offset < 0) $offset = abs($offset);
 
