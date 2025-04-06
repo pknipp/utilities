@@ -1,7 +1,6 @@
 <?php
 
 function makeArtHanger($name) {
-    $urlBase = 'https://utilities-3db59a13e37b.herokuapp.com/artHanger/4/16/28/31/5';
     return [
         'name' => $name,
 
@@ -54,7 +53,7 @@ function makeArtHanger($name) {
         <script>
             const buttons = Array.from(document.getElementsByTagName('button'));
             buttons.forEach(button => {
-                const url = $urlBase + '/' + button.getAttribute('class')};
+                const url = 'https://utilities-3db59a13e37b.herokuapp.com/artHanger/4/16/28/31/5' + '/' + button.getAttribute('class');
                 button.addEventListener(
                     'click',
                     () => window.location.href = url,
