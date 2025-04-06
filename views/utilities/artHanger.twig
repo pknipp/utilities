@@ -168,25 +168,41 @@
 {% else %}
 
     <div><b>Inputs:</b></div>
-    <div>
-        offset:
-        <input
-            type="text"
-            id="offset"
-            required
-            size="5"
-            value="{{offset}}"
-        />
+    <div style="display: flex; justify-content: start;" >
+        <div style="display: flex; flex-direction: column;" >
+            <div style="text-align: right; ">offset:</div>
+            <div style="text-align: right; ">stud-spacing:</div>
+            <div style="text-align: right; ">art width:</div>
+            <div style="text-align: right; ">wire length:</div>
+            <div style="text-align: right; ">art height:</div>
+        </div>
+        <div style="display: flex; flex-direction: column;" >
+            <div style="text-align: left; ">{{offset}}</div>
+            <div style="text-align: left; ">{{stud}}</div>
+            <div style="text-align: left; ">{{width}}</div>
+            <div style="text-align: left; ">{{length}}</div>
+            <div style="text-align: left; ">{{height}}</div>
+        </div>
     </div>
-    <div>stud-spacing = {{stud}}</div>
-    <div>art width = {{width}}</div>
-    <div>wire length = {{length}}</div>
-    <div>art height = {{height}}</div>
     <button id="submit" disabled>Submit</button>
     <br/>
     <div><b>Screw positions:</b></div>
     <div>left: {{height - y1 | round(3)}}</div>
     <div>right: {{height - y2 | round(3)}}</div>
+    <div style='display:"flex"; justify-content: "center"; '>
+    <div style='display: "flex"; flex-direction: "column"; '>
+        <div>a</div>
+        <div>bb</div>
+        <div>ccc</div>
+    </div>
+    <input
+        type="text"
+        id="offset"
+        required
+        size="5"
+        value="{{offset}}"
+    />
+</div>
 
 {% endif %}
 </div>
