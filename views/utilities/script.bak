@@ -1,0 +1,12 @@
+    
+
+    const changeInput = name => {
+        topDiv.setAttribute("data-have-been-edited", "true");
+        const params = topDiv.getAttribute("data-params").split("-").reduce(
+            (params, param, index) => ({...params, keys[index]: param}), {}
+        );
+        params[name] = inputs[name].getAttribute("id");
+        const newData = keys.map(key => params[key]).join("-");
+        topDiv.setAttribute("data-params", newData);
+    };
+    Object.values(inputs).forEach(input => input.addEventListener("input", changeInput))  ;
