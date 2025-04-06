@@ -21,7 +21,7 @@ function makeArtHanger($name) {
 
         </ul>
 
-        <b>Note:</b>
+        <b>Notes:</b>
         <ul>
             <li>
                 These instructions do not restrict you to any particular set of units (eg inches or millimeters); you simply need to use the same set for all of your numbers.

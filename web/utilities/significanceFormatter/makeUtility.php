@@ -9,7 +9,7 @@ function makeSignificanceFormatter($name) {
         'instructions' => "type <tt>/number/digits</tt>, where <tt>number</tt> is the particular quantity's value, and <tt>digits</tt> is the number of sigfigs with which you want this value expressed.",
         'examples' => '
             <div class="text-center">
-                <table>
+                <table border="1">
                     <thead>
                         <tr>
                             <th scope="col" rowspan="2">Input</th>
