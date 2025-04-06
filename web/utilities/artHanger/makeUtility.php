@@ -49,7 +49,7 @@ function makeArtHanger($name) {
             <script>
                 const button = document.getElementsByTagName('button')[0];
                 const setExample = () => {
-                    window.location.href = 'https://utilities-3db59a13e37b.herokuapp.com/artHanger/4/16/28/31/5';
+                    window.location.href = 'https://utilities-3db59a13e37b.herokuapp.com/artHanger/4/16/28/31/5/web';
                 };
                 button.addEventListener('click', e => setExample());
             </script>
