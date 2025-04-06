@@ -165,7 +165,23 @@
         "id"="top-div"
         "data-params"={{offset ~ "-" ~ stud ~ "-" ~ width ~ "-" ~ length ~ "-" ~ height}}
     >
-        WIP
+        <div>
+            <b>Inputs:</br>
+        </div>
+        <ul>
+            <li>offset = {{offset}}
+            <li>stud-spacing = {{stud}}
+            <li>art width = {{width}}
+            <li>wire length = {{length}}
+            <li>art height = {{height}}
+        </ul>
+        <div>
+            <b>Screw positions:</b>
+        </div>
+        <ul>
+            <li>left: {{height - y1}}
+            <li>right: {{height - y2}}
+        </ul>
     </div>
 
 {% endif %}
