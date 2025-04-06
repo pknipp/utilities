@@ -5,19 +5,19 @@
     <div style="display: flex; flex-direction: column; align-items: center; ">
         <div><b>Inputs</b></div>
         <div style="display: flex; justify-content: space-evenly; ">
-            <div style="padding: 0 20px;">
+            <div style="padding: 0 15px;">
                 offset <i>O</i> = {{offset}}
             </div>
-            <div style="padding: 0 20px;">
+            <div style="padding: 0 15px;">
                 stud spacing <i>S</i> = {{stud}}
             </div>
-            <div style="padding: 0 20px;">
+            <div style="padding: 0 15px;">
                 width <i>W</i> = {{width}}
             </div>
-            <div style="padding: 0 20px;">
+            <div style="padding: 0 15px;">
                 wire length <i>L</i> = {{length}}
             </div>
-            <div style="padding: 0 20px;">
+            <div style="padding: 0 15px;">
                 height <i>H</i> = {{height}}
             </div>
         </div>
@@ -25,25 +25,25 @@
             <span style="padding-left: 15px; "><I>W</I> > 2<I>O</I></span>
             <span style="padding-left: 15px; "><I>W</I> > 2(<I>S</I> - <I>O</I>)</span>
             <span style="padding-left: 15px; "><I>L</I> > <I>W</I></span>)
-        </div>
+        </div><br/>
         <div><b>Results for locations</b> (with same units as for inputs):</div>
         <div style="display: flex; justify-content: space-evenly; ">
-            <div style="padding: 0 20px;">
+            <div style="padding: 0 15px;">
                 left screw: {{(height - y1) | abs | round(3)}} {{ y1 < height ? "below" : "above" }} top edge
             </div>
-            <div style="padding: 0 20px;">
+            <div style="padding: 0 15px;">
                 right screw: {{(height - y2) | abs | round(3)}} {{ y2 < height ? "below" : "above" }} top edge
             </div>
-        </div>
+        </div><br/>
         <div><b>*Results for forces <I>F</I></b> (relative to artwork weight)</div>
         <div style="display: flex; justify-content: space-evenly; ">
-            <div style="padding: 0 20px;">
+            <div style="padding: 0 15px;">
                 wire tension: {{tension | round(2)}}
             </div>
-            <div style="padding: 0 20px;">
+            <div style="padding: 0 15px;">
                 <I>F</I> on left screw: {{t1 | round(2)}}
             </div>
-            <div style="padding: 0 20px;">
+            <div style="padding: 0 15px;">
                 <I>F</I> on right screw: {{t2 | round(2)}}
             </div>
         </div><br/>
@@ -146,7 +146,7 @@
             </text>
         </svg>
         <div>
-            * Don't expect these three numbers to satisfy a simple arithmetic consition.  Forces satisfy a vector sum, which is more complicated than the sum ("scalar" sum) that we learn in primary school.
+            * Don't expect these three numbers to satisfy a simple arithmetic condition.  Forces satisfy a vector sum, which is more complicated than the sum ("scalar" sum) that we learn in primary school.
         </div>
         <div>
             ** The dotted lines above are continuations of the left- and right wire segments.  The magnitudes of those lines' slopes are identical, and the lines themselves intersect directly above the artwork's center of gravity.
