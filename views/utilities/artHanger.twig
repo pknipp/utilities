@@ -198,7 +198,7 @@
     console.log("topDiv = ", topDiv);
     const inputs = Array.from(topDiv.getElementsByTagName("input"));
     console.log("inputs = ", inputs);
-    inputs = inputs.reduce.reduce(
+    inputs = inputs.reduce(
         (inputs, input) => input => {
             return {input.getAttribute("id"): input};
         }, {},
