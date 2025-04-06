@@ -122,7 +122,7 @@ function makeResponse($data) {
         $y1 = sqrt($data['x']);
         $y2 = $xRight * $y1 / $xLeft;
 
-        // $tension = $LLeft * $LRight / ($y1 * $LRight + $y2 * $LLeft);
+        $tension = $LLeft * $LRight / ($y1 * $LRight + $y2 * $LLeft);
         $t1x = $tension * (-$xLeft / $LLeft + $stud / $LMid);
         $t1y = $tension * ($y1 / $LLeft + ($y1 - $y2) / $LMid);
         $t1 = sqrt($t1x * $t1x + $t1y * $t1y);
