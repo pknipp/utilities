@@ -184,6 +184,7 @@
     <div>art width = {{width}}</div>
     <div>wire length = {{length}}</div>
     <div>art height = {{height}}</div>
+    <button id="submit">Submit</button>
     <br/>
     <div><b>Screw positions:</b></div>
     <div>left: {{height - y1 | round(3)}}</div>
@@ -194,22 +195,29 @@
 
 <script>
     const keys = ["offset", "stud", "width", "length", "height"];
+
     const topDiv = document.getElementById("top-div");
     const inputs = Array.from(topDiv.getElementsByTagName("input")).reduce(
         (inputs, input) => ({[input.getAttribute("id")]: input}), {},
     );
+    const button = topDiv.getElementById("submit");
+
     const changeInput = (name, value) => {
         topDiv.setAttribute("data-have-been-edited", "true");
         const params = topDiv.getAttribute("data-params").split("-").reduce(
             (params, param, index) => ({...params, [keys[index]]: param}), {}
         );
         params[name] = value;
-        console.log("params after changing one field: ", params);
         const newData = keys.map(key => params[key]).join("-");
-        console.log("newData = ", newData);
         topDiv.setAttribute("data-params", newData);
     };
+
     Object.values(inputs).forEach(input => input.addEventListener("input", e => changeInput(e.target.name, e.target.value)));
+    button.addEventListener("click", () => {
+        const base = 'https://utilities-3db59a13e37b.herokuapp.com/artHanger/mobile/';
+        const url = base + topDiv.getAttribute('data-params');
+        window.location.href = url;
+    });
 </script>
 
 {% endblock %}
