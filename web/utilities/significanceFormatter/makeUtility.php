@@ -26,7 +26,7 @@ function makeSignificanceFormatter($name) {
                             <td>
                                 <tt>/-9987/3</tt>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 <tt>-</tt>
                             </td>
                             <td>
