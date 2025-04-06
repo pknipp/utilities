@@ -49,8 +49,8 @@ function makeArtHanger($name) {
                 In fact the calculation may even fail if you <I>almost</I> violate any of these constraints.
         </ul>",
 
-        'examples' => "<button class='web'>Click here</button> to see the relationship between your inputs, the browser\'s url, and the results ...
-        <button class='mobile'>(WIP) or here</button> for a mobile-friendly version.
+        'examples' => "<button class='web'>Click here</button> to see the relationship between your inputs, the browser\'s url, and the results ...<br/>
+        <button class='mobile'>... or here (WIP)</button> for a mobile-friendly version.
         <script>
             const buttons = Array.from(document.getElementsByTagName('button'));
             base = 'https://utilities-3db59a13e37b.herokuapp.com/artHanger/';
