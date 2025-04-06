@@ -3,7 +3,7 @@
 {% block content %}
 <div style="padding: 10px 40px;" >
     <div style="display: flex; flex-direction: column; align-items: center; ">
-        <h3>Inputs</h3>
+        <h4>Inputs</h4>
         <div style="display: flex; justify-content: space-evenly; ">
             <div style="padding: 0 20px;">
                 offset <i>O</i> = {{offset}}
@@ -25,8 +25,8 @@
             <span style="padding-left: 15px; "><I>W</I> > 2<I>O</I></span>
             <span style="padding-left: 15px; "><I>W</I> > 2(<I>S</I> - <I>O</I>)</span>
             <span style="padding-left: 15px; "><I>L</I> > <I>W</I></span>)
-        </div><br/>
-        <h3>Results for locations (with same units as for inputs)</h3>
+        </div>
+        <h4>Results for locations (with same units as for inputs)</h4>
         <div style="display: flex; justify-content: space-evenly; ">
             <div style="padding: 0 20px;">
                 left screw: {{(height - y1) | abs | round(3)}} {{ y1 < height ? "below" : "above" }} top edge
@@ -34,8 +34,8 @@
             <div style="padding: 0 20px;">
                 right screw: {{(height - y2) | abs | round(3)}} {{ y2 < height ? "below" : "above" }} top edge
             </div>
-        </div><br/>
-        <h3>Results for forces <I>F</I> (relative to weight of artwork)</h3>
+        </div>
+        <h4>Results for forces <I>F</I> (relative to weight of artwork)</h4>
         <div style="display: flex; justify-content: space-evenly; ">
             <div style="padding: 0 20px;">
                 wire tension: {{tension | round(2)}}
@@ -46,7 +46,7 @@
             <div style="padding: 0 20px;">
                 <I>F</I> on right screw: {{t2 | round(2)}}
             </div>
-        </div><br/>
+        </div>
         <svg width={{widthPx}} height={{heightPx}} style="display: block; margin: 0 auto;" >
             <line
                 id="left stud"
