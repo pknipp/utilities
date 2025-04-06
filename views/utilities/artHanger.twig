@@ -4,7 +4,7 @@
 
 <div
     id="top-div"
-    data-params="{{offset ~ "-" ~ stud ~ "-" ~ width ~ "-" ~ length ~ "-" ~ height}}"
+    data-params="{{offset ~ "/" ~ stud ~ "/" ~ width ~ "/" ~ length ~ "/" ~ height}}"
     data-have-been-edited="false"
 >
 
@@ -204,19 +204,18 @@
 
     const changeInput = (name, value) => {
         topDiv.setAttribute("data-have-been-edited", "true");
-        const params = topDiv.getAttribute("data-params").split("-").reduce(
+        const params = topDiv.getAttribute("data-params").split("/").reduce(
             (params, param, index) => ({...params, [keys[index]]: param}), {}
         );
         params[name] = value;
-        const newData = keys.map(key => params[key]).join("-");
+        const newData = keys.map(key => params[key]).join("/");
         topDiv.setAttribute("data-params", newData);
     };
 
     Object.values(inputs).forEach(input => input.addEventListener("input", e => changeInput(e.target.name, e.target.value)));
     button.addEventListener("click", () => {
         const base = 'https://utilities-3db59a13e37b.herokuapp.com/artHanger/mobile/';
-        const url = base + topDiv.getAttribute('data-params');
-        window.location.href = url;
+        window.location.href = base + topDiv.getAttribute('data-params');
     });
 </script>
 
