@@ -195,7 +195,7 @@
 <script>
     const keys = ["offset", "stud", "width", "length", "height"];
     const topDiv = document.getElementById("top-div");
-    const inputs = Array.from(topDiv.getElementsByTagName("input"));
+    let inputs = Array.from(topDiv.getElementsByTagName("input"));
     inputs = inputs.reduce(
         (inputs, input) => ({[input.getAttribute("id")]: input}), {},
     );
