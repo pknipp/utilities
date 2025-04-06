@@ -27,7 +27,7 @@ function makeArtHanger($name) {
                 These instructions do not restrict you to any particular set of units (eg inches or millimeters); you simply need to use the same set for all of your numbers.
             </li>
             <li>
-                The artwork's weight is shared by the two screws, but this sharing is unequal.  The greater amount of weight is born by the screw that is (laterally) closer to the art's center of gravity.
+                The artwork's weight is shared by the two screws, but this sharing is unequal.  The greater amount of weight is born by the screw that is (laterally) closer to the art's center of gravity.  This app also returns more quantitative information about these forces and the tension in the wire, thereby providing guidance about mounting-hardware needs.
             </li>
             <li>
                 Your inputs must satisfy these four constraints:
