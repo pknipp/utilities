@@ -12,8 +12,8 @@ function makeSignificanceFormatter($name) {
                 <table border="1">
                     <thead>
                         <tr>
-                            <th scope="col" rowspan="2">Input</th>
-                            <th scope="col" colspan="3">Outputs</th>
+                            <th scope="col" rowspan="2">input</th>
+                            <th scope="col" colspan="3">output(s)</th>
                         </tr>
                         <tr>
                             <th scope="col"><tt>sign</tt></th>
@@ -23,16 +23,16 @@ function makeSignificanceFormatter($name) {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>
+                            <td style="text-align: center;" >
                                 <tt>/-9987/3</tt>
                             </td>
                             <td style="text-align: center;">
                                 <tt>-</tt>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 <tt>9.99</tt>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 <tt>k</tt>
                             </td>
                         </tr>
@@ -40,28 +40,28 @@ function makeSignificanceFormatter($name) {
                             <td>
                                 <tt>/9987/2</tt>
                             </td>
-                            <td>
-                                (nothing)
+                            <td style="text-align: center;">
+                                none
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 10
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 k
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td style="text-align: center;">
                                 <tt>/-99/3</tt>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 <tt>-</tt>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 99.0
                             </td>
-                            <td>
-                                (nothing)
+                            <td style="text-align: center;">
+                                none
                             </td>
                         </tr>
                     </tbody>
