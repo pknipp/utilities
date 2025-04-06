@@ -30,7 +30,12 @@ function makeArtHanger($name) {
                 The artwork's weight is shared by the two screws, but this sharing is unequal.  The greater amount of weight is born by the screw that is (laterally) closer to the art's center of gravity.
             </li>
             <li>
-                Your value of <I>O</I> should be substantially positive and substantially less than that of <I>S</I>, which should itself be substantially less than <I>W</I>, which should itself be substantially less than that of <I>L</I>.  Ignore these guidelines at your own risk!
+                There are several inequalities that must be satisfied:
+                <ul>
+                    <li>  <I>L</I> &gt; <I>W</> &gt; <I>S</I> &gt; <I>O</I> </li>
+                    <li> <I>W</I> &gt; 2(<I>S</I> - <I>O</I>) </li>
+                    <li> <I>L</I> &gt; |<I>W</I> / 2 - <I>O</I>| + <I>S</I> + |<I>W</I> / 2 + <I>O</I> - <I>S</I>| </li>
+                </ul>
         </ul>"
         ,
         'examples' => "<button>Click here</button> to see the relationship between your inputs, the browser's url, and the results.

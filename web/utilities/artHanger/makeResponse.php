@@ -38,14 +38,17 @@ function makeResponse($data) {
 
     $complement = $stud - $offset;
     if ($offset > $stud / 2) {
-        return ['error' => "Change your O value ({$offsetString}) to {$complement}.
+        return [
+            'error' => "Change your O value ({$offsetString}) to {$complement}.
             From symmetry the results should be the same, and this seems to make the program happier.",
         ];
     }
 
     $width = ($widthString == '0' ? 0 : filter_var($widthString, FILTER_VALIDATE_FLOAT));
     if (!($width || $widthString == '0')) {
-        return ['error' => "Your width W ({$widthString}) cannot be parsed as a positive number."];
+        return [
+            'error' => "Your width W ({$widthString}) cannot be parsed as a positive number.",
+        ];
     }
     if ($width < 0) {
         return [
@@ -55,7 +58,14 @@ function makeResponse($data) {
 
     if ($stud > $width) {
         return [
-            'error' => "Your stud-spacing S  ({$studString}) cannot exceed your width W ({$widthString}).",
+            'error' => "Your stud-spacing S ({$studString}) cannot exceed your width W ({$widthString}).",
+        ];
+    }
+
+    $widthMin = 2 * ($stud - $offset);
+    if ($width < $widthMin) {
+        return [
+            'error' => "Your width W ({$width}) must exceed {$widthMin}, a value based upon your values of offset O and stud-spacing S.",
         ];
     }
 
@@ -74,8 +84,8 @@ function makeResponse($data) {
             'error' => "Your width W ({$widthString}) cannot exceed your length L ({$lengthString}).",
         ];
     }
-    $lengthMin = abs($width / 2 - $offset) + $stud + abs($width / 2 + $offset - $stud);
 
+    $lengthMin = abs($width / 2 - $offset) + $stud + abs($width / 2 + $offset - $stud);
     if ($length < $lengthMin) {
         return [
             'error' => "Your length L ({$length}) must exceed {$lengthMin}, a value based on your values for O, S, and W.",
