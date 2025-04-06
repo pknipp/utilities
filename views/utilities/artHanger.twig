@@ -1,161 +1,170 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div style="padding: 10px 40px;" >
-    <div style="display: flex; flex-direction: column; align-items: center; ">
-        <div><b>Inputs</b></div>
-        <div style="display: flex; justify-content: space-evenly; ">
-            <div style="padding: 0 15px;">
-                offset <i>O</i> = {{offset}}
+{% if version == 'web' %}
+
+    <div style="padding: 10px 40px;" >
+        <div style="display: flex; flex-direction: column; align-items: center; ">
+            <div><b>Inputs</b></div>
+            <div style="display: flex; justify-content: space-evenly; ">
+                <div style="padding: 0 15px;">
+                    offset <i>O</i> = {{offset}}
+                </div>
+                <div style="padding: 0 15px;">
+                    stud spacing <i>S</i> = {{stud}}
+                </div>
+                <div style="padding: 0 15px;">
+                    width <i>W</i> = {{width}}
+                </div>
+                <div style="padding: 0 15px;">
+                    wire length <i>L</i> = {{length}}
+                </div>
+                <div style="padding: 0 15px;">
+                    height <i>H</i> = {{height}}
+                </div>
             </div>
-            <div style="padding: 0 15px;">
-                stud spacing <i>S</i> = {{stud}}
+            <div>(Review of input constraints:
+                <span style="padding-left: 15px; "><I>W</I> > 2<I>O</I></span>
+                <span style="padding-left: 15px; "><I>W</I> > 2(<I>S</I> - <I>O</I>)</span>
+                <span style="padding-left: 15px; "><I>L</I> > <I>W</I></span>)
+            </div><br/>
+            <div><b>Results for locations</b> (with same units as for inputs):</div>
+            <div style="display: flex; justify-content: space-evenly; ">
+                <div style="padding: 0 15px;">
+                    left screw: {{(height - y1) | abs | round(3)}} {{ y1 < height ? "below" : "above" }} top edge
+                </div>
+                <div style="padding: 0 15px;">
+                    right screw: {{(height - y2) | abs | round(3)}} {{ y2 < height ? "below" : "above" }} top edge
+                </div>
+            </div><br/>
+            <div><b>*Results for forces <I>F</I></b> (relative to artwork weight)</div>
+            <div style="display: flex; justify-content: space-evenly; ">
+                <div style="padding: 0 15px;">
+                    wire tension: {{tension | round(2)}}
+                </div>
+                <div style="padding: 0 15px;">
+                    <I>F</I> on left screw: {{t1 | round(2)}}
+                </div>
+                <div style="padding: 0 15px;">
+                    <I>F</I> on right screw: {{t2 | round(2)}}
+                </div>
+            </div><br/>
+            <svg width={{widthPx}} height={{heightPx}} style="display: block; margin: 0 auto;" >
+                <line
+                    id="left stud"
+                    x1={{scale * (width / 2 - offset)}}
+                    x2={{scale * (width / 2 - offset)}}
+                    y2={{heightPx}}
+                    stroke="gray"
+                    stroke-width={{studWidth}}
+                />
+                <line
+                    id="right stud"
+                    x1={{scale * (width / 2 + stud - offset)}}
+                    x2={{scale * (width / 2 + stud - offset)}}
+                    y2={{heightPx}}
+                    stroke="gray"
+                    stroke-width={{studWidth}}
+                />
+                <line
+                    id="left wire"
+                    x1="0"
+                    y1={{heightPx}}
+                    x2={{scale * (width / 2 - offset)}}
+                    y2={{heightPx - scale * y1}}
+                    stroke="black"
+                    stroke-width={{wireWidth}}
+                />
+                <circle
+                    id="left screw"
+                    cx={{scale * (width / 2 - offset)}}
+                    cy={{heightPx - scale * y1}}
+                    r={{screwRadius}}
+                />
+                <line
+                    id="continuation of left wire"
+                    x1={{scale * (width / 2 - offset)}}
+                    y1={{heightPx - scale * y1}}
+                    x2={{widthPx / 2}}
+                    y2={{heightPx - slope * widthPx / 2}}
+                    stroke="black"
+                    stroke-dasharray="1, 2"
+                />
+                <line
+                    id="middle wire"
+                    x1={{scale * (width / 2 - offset)}}
+                    y1={{heightPx - scale * y1}}
+                    x2={{scale * (width / 2 + stud - offset)}}
+                    y2={{heightPx - scale * y2}}
+                    stroke="black"
+                    stroke-width={{wireWidth}}
+                />
+                <line
+                    id="continuation of right wire"
+                    x1={{widthPx / 2}}
+                    y1={{heightPx - slope * widthPx / 2}}
+                    x2={{scale * (width / 2 + stud - offset)}}
+                    y2={{heightPx - scale * y2}}
+                    stroke="black"
+                    stroke-dasharray="1, 2"
+                />
+                <text
+                    id="**"
+                    x={{widthPx / 2}}
+                    y={{10 + heightPx - slope * widthPx / 2}}
+                    text-anchor="middle"
+                    dy="0.32em"
+                    font-size="25px"
+                >
+                    **
+                </text>
+                <circle
+                    id="right screw"
+                    cx={{scale * (width / 2 + stud - offset)}}
+                    cy={{heightPx - scale * y2}}
+                    r={{screwRadius}}
+                />
+                <line
+                    id="right wire"
+                    x1={{scale * (width / 2 + stud - offset)}}
+                    y1={{heightPx - scale * y2}}
+                    x2 = {{widthPx}}
+                    y2 = {{heightPx}}
+                    stroke="black"
+                    stroke-width={{wireWidth}}
+                />
+                <rect
+                    id="art"
+                    width={{widthPx}}
+                    height={{scale * height}}
+                    y={{heightPx - scale * height}}
+                    fill="rgba(200, 200, 200, 0.7)"
+                />
+                <text
+                    x={{widthPx / 2}}
+                    y={{heightPx - scale * height / 2}}
+                    text-anchor="middle"
+                    dy="0.32em"
+                >
+                    upper portion of art
+                </text>
+            </svg>
+            <div>
+                * Don't expect these three numbers to satisfy a simple arithmetic condition.  The "vector" sum that forces obey is more complicated than the "scalar" sum that we learn in primary school.
             </div>
-            <div style="padding: 0 15px;">
-                width <i>W</i> = {{width}}
-            </div>
-            <div style="padding: 0 15px;">
-                wire length <i>L</i> = {{length}}
-            </div>
-            <div style="padding: 0 15px;">
-                height <i>H</i> = {{height}}
+            <div>
+                ** These dotted lines are continuations of the left- and right wire segments.  The magnitudes of their slopes are identical, and the lines themselves intersect directly above the artwork's center of gravity.
             </div>
         </div>
-        <div>(Review of input constraints:
-            <span style="padding-left: 15px; "><I>W</I> > 2<I>O</I></span>
-            <span style="padding-left: 15px; "><I>W</I> > 2(<I>S</I> - <I>O</I>)</span>
-            <span style="padding-left: 15px; "><I>L</I> > <I>W</I></span>)
-        </div><br/>
-        <div><b>Results for locations</b> (with same units as for inputs):</div>
-        <div style="display: flex; justify-content: space-evenly; ">
-            <div style="padding: 0 15px;">
-                left screw: {{(height - y1) | abs | round(3)}} {{ y1 < height ? "below" : "above" }} top edge
-            </div>
-            <div style="padding: 0 15px;">
-                right screw: {{(height - y2) | abs | round(3)}} {{ y2 < height ? "below" : "above" }} top edge
-            </div>
-        </div><br/>
-        <div><b>*Results for forces <I>F</I></b> (relative to artwork weight)</div>
-        <div style="display: flex; justify-content: space-evenly; ">
-            <div style="padding: 0 15px;">
-                wire tension: {{tension | round(2)}}
-            </div>
-            <div style="padding: 0 15px;">
-                <I>F</I> on left screw: {{t1 | round(2)}}
-            </div>
-            <div style="padding: 0 15px;">
-                <I>F</I> on right screw: {{t2 | round(2)}}
-            </div>
-        </div><br/>
-        <svg width={{widthPx}} height={{heightPx}} style="display: block; margin: 0 auto;" >
-            <line
-                id="left stud"
-                x1={{scale * (width / 2 - offset)}}
-                x2={{scale * (width / 2 - offset)}}
-                y2={{heightPx}}
-                stroke="gray"
-                stroke-width={{studWidth}}
-            />
-            <line
-                id="right stud"
-                x1={{scale * (width / 2 + stud - offset)}}
-                x2={{scale * (width / 2 + stud - offset)}}
-                y2={{heightPx}}
-                stroke="gray"
-                stroke-width={{studWidth}}
-            />
-            <line
-                id="left wire"
-                x1="0"
-                y1={{heightPx}}
-                x2={{scale * (width / 2 - offset)}}
-                y2={{heightPx - scale * y1}}
-                stroke="black"
-                stroke-width={{wireWidth}}
-            />
-            <circle
-                id="left screw"
-                cx={{scale * (width / 2 - offset)}}
-                cy={{heightPx - scale * y1}}
-                r={{screwRadius}}
-            />
-            <line
-                id="continuation of left wire"
-                x1={{scale * (width / 2 - offset)}}
-                y1={{heightPx - scale * y1}}
-                x2={{widthPx / 2}}
-                y2={{heightPx - slope * widthPx / 2}}
-                stroke="black"
-                stroke-dasharray="1, 2"
-            />
-            <line
-                id="middle wire"
-                x1={{scale * (width / 2 - offset)}}
-                y1={{heightPx - scale * y1}}
-                x2={{scale * (width / 2 + stud - offset)}}
-                y2={{heightPx - scale * y2}}
-                stroke="black"
-                stroke-width={{wireWidth}}
-            />
-            <line
-                id="continuation of right wire"
-                x1={{widthPx / 2}}
-                y1={{heightPx - slope * widthPx / 2}}
-                x2={{scale * (width / 2 + stud - offset)}}
-                y2={{heightPx - scale * y2}}
-                stroke="black"
-                stroke-dasharray="1, 2"
-            />
-            <text
-                id="**"
-                x={{widthPx / 2}}
-                y={{10 + heightPx - slope * widthPx / 2}}
-                text-anchor="middle"
-                dy="0.32em"
-                font-size="25px"
-            >
-                **
-            </text>
-            <circle
-                id="right screw"
-                cx={{scale * (width / 2 + stud - offset)}}
-                cy={{heightPx - scale * y2}}
-                r={{screwRadius}}
-            />
-            <line
-                id="right wire"
-                x1={{scale * (width / 2 + stud - offset)}}
-                y1={{heightPx - scale * y2}}
-                x2 = {{widthPx}}
-                y2 = {{heightPx}}
-                stroke="black"
-                stroke-width={{wireWidth}}
-            />
-            <rect
-                id="art"
-                width={{widthPx}}
-                height={{scale * height}}
-                y={{heightPx - scale * height}}
-                fill="rgba(200, 200, 200, 0.7)"
-            />
-            <text
-                x={{widthPx / 2}}
-                y={{heightPx - scale * height / 2}}
-                text-anchor="middle"
-                dy="0.32em"
-            >
-                upper portion of art
-            </text>
-        </svg>
-        <div>
-            * Don't expect these three numbers to satisfy a simple arithmetic condition.  The "vector" sum that forces obey is more complicated than the "scalar" sum that we learn in primary school.
-        </div>
-        <div>
-            ** These dotted lines are continuations of the left- and right wire segments.  The magnitudes of their slopes are identical, and the lines themselves intersect directly above the artwork's center of gravity.
-        </div>
+        <a href="https://utilities-3db59a13e37b.herokuapp.com/artHanger">Return</a> to instructions page.
     </div>
-    <a href="https://utilities-3db59a13e37b.herokuapp.com/artHanger">Return</a> to instructions page.
-</div>
+
+{% else %}
+
+    <div>WIP</div>
+
+{% endif %}
+
 <script>
     const button = document.getElementsByTagName("button")[0];
     const setExample = () => {

@@ -8,9 +8,9 @@ function makeResponse($data) {
     $lengthString = $data['length'];
     $heightString = $data['height'];
 
-    if ($version != 'web') {
+    if ($version != 'web' && $version != 'mobile') {
         return [
-            'error' => "Your specified version ({$version}) is not one of our presently allowable ones ('web').",
+            'error' => "Your specified version ({$version}) is not one of our presently allowable ones ('web' and 'mobile').",
         ];
     }
 
