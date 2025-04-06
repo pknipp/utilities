@@ -1,6 +1,13 @@
 {% extends "layout.html" %}
 
 {% block content %}
+
+<div
+    "id"="top-div"
+    "data-params"={{offset ~ "-" ~ stud ~ "-" ~ width ~ "-" ~ length ~ "-" ~ height}}
+    "data-has-been-edited"="false"
+>
+
 {% if version == 'web' %}
 
     <div style="padding: 10px 40px;" >
@@ -161,41 +168,48 @@
 
 {% else %}
 
-    <div
-        "id"="top-div"
-        "data-params"={{offset ~ "-" ~ stud ~ "-" ~ width ~ "-" ~ length ~ "-" ~ height}}
-        display
-    >
-        <div><b>Inputs:</b></div>
-        <div>
-            offset:
-            <input
-                type="text"
-                id="offset"
-                name="offset"
-                required
-                size="5"
-                value={{offset}}
-            />
-        </div>
-        <div>stud-spacing = {{stud}}</div>
-        <div>art width = {{width}}</div>
-        <div>wire length = {{length}}</div>
-        <div>art height = {{height}}</div>
-        <br/>
-        <div><b>Screw positions:</b></div>
-        <div>left: {{height - y1 | round(3)}}</div>
-        <div>right: {{height - y2 | round(3)}}</div>
+    <div><b>Inputs:</b></div>
+    <div>
+        offset:
+        <input
+            type="text"
+            id="offset"
+            name="offset"
+            required
+            size="5"
+            value={{offset}}
+        />
     </div>
+    <div>stud-spacing = {{stud}}</div>
+    <div>art width = {{width}}</div>
+    <div>wire length = {{length}}</div>
+    <div>art height = {{height}}</div>
+    <br/>
+    <div><b>Screw positions:</b></div>
+    <div>left: {{height - y1 | round(3)}}</div>
+    <div>right: {{height - y2 | round(3)}}</div>
 
 {% endif %}
+</div>
 
 <script>
-    const button = document.getElementsByTagName("button")[0];
-    const setExample = () => {
-        window.location.href = "https://utilities-3db59a13e37b.herokuapp.com/artHanger/31/5/28/16/4";
+    const topDiv = document.getElementById("top-div");
+    const keys = ["offset", "stud", "width", "length", "height"];
+    const inputs = Array.from(topDiv.getElementsByTagName("input")).reduce(
+        (inputs, input) => input => {
+            return {input.getAttribute("id"): input};
+        }, {},
+    );
+    const changeInput = name => {
+        topDiv.setAttribute("data-have-been-edited", "true");
+        const params = topDiv.getAttribute("data-params").split("-").reduce(
+            (params, param, index) => ({...params, keys[index]: param}), {}
+        );
+        params[name] = inputs[name].getAttribute("id");
+        const newData = keys.map(key => params[key]).join("-");
+        topDiv.setAttribute("data-params", newData);
     };
-    button.addEventListener("click", e => setExample());
+    Object.values(inputs).forEach(input => input.addEventListener("oninput", changeInput));
 </script>
 
 {% endblock %}
