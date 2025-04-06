@@ -195,8 +195,7 @@
 <script>
     const keys = ["offset", "stud", "width", "length", "height"];
     const topDiv = document.getElementById("top-div");
-    let inputs = Array.from(topDiv.getElementsByTagName("input"));
-    inputs = inputs.reduce(
+    const inputs = Array.from(topDiv.getElementsByTagName("input")).reduce(
         (inputs, input) => ({[input.getAttribute("id")]: input}), {},
     );
     const changeInput = name => {
@@ -204,8 +203,11 @@
         const params = topDiv.getAttribute("data-params").split("-").reduce(
             (params, param, index) => ({...params, [keys[index]]: param}), {}
         );
+        console.log("params after creation: ", params);
         params[name] = inputs[name].getAttribute("id");
+        console.log("params after changing one field: ", params);
         const newData = keys.map(key => params[key]).join("-");
+        console.log("newData = ", newData);
         topDiv.setAttribute("data-params", newData);
     };
     Object.values(inputs).forEach(input => input.addEventListener("input", changeInput))  ;
