@@ -206,13 +206,13 @@
         console.log("name = ", name);
         console.log("inputs = ", inputs);
         console.log("inputs[name] = ", inputs[name]);
-        params[name] = inputs[name]?.getAttribute("id");
+        params[name] = inputs[name].getAttribute("value");
         console.log("params after changing one field: ", params);
         const newData = keys?.map(key => params?.[key]).join("-");
         console.log("newData = ", newData);
         topDiv.setAttribute("data-params", newData);
     };
-    Object.values(inputs).forEach(input => input.addEventListener("input", changeInput))  ;
+    Object.values(inputs).forEach(input => input.addEventListener("input", e => changeInput(e.target.name)))  ;
 </script>
 
 {% endblock %}
