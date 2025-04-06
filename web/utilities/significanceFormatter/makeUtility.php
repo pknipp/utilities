@@ -37,7 +37,7 @@ function makeSignificanceFormatter($name) {
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td style="text-align: center;">
                                 <tt>/9987/2</tt>
                             </td>
                             <td style="text-align: center;">
