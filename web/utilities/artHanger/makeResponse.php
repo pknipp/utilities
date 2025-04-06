@@ -30,14 +30,14 @@ function makeResponse($data) {
         ];
     }
 
-    if ($offset > $stud) {
+    if ($offset >= $stud) {
         return [
             'error' => "Your offset O ({$offsetString}) cannot exceed your stud-spacing S ({$studString}).",
         ];
     }
 
     $complement = $stud - $offset;
-    if ($offset > $stud / 2) {
+    if ($offset >= $stud / 2) {
         return [
             'error' => "Change your O value ({$offsetString}) to {$complement}.
             From symmetry the results should be the same, and this seems to make the program happier.",
@@ -56,14 +56,14 @@ function makeResponse($data) {
         ];
     }
 
-    if ($stud > $width) {
+    if ($stud >= $width) {
         return [
             'error' => "Your stud-spacing S ({$studString}) cannot exceed your width W ({$widthString}).",
         ];
     }
 
     $widthMin = 2 * ($stud - $offset);
-    if ($width < $widthMin) {
+    if ($width <= $widthMin) {
         return [
             'error' => "Your width W ({$width}) must exceed {$widthMin}, a value based upon your values of offset O and stud-spacing S.",
         ];
@@ -79,14 +79,14 @@ function makeResponse($data) {
         ];
     }
 
-    if ($width > $length) {
+    if ($width >= $length) {
         return [
             'error' => "Your width W ({$widthString}) cannot exceed your length L ({$lengthString}).",
         ];
     }
 
     $lengthMin = abs($width / 2 - $offset) + $stud + abs($width / 2 + $offset - $stud);
-    if ($length < $lengthMin) {
+    if ($length <= $lengthMin) {
         return [
             'error' => "Your length L ({$length}) must exceed {$lengthMin}, a value based on your values for O, S, and W.",
         ];
@@ -123,7 +123,6 @@ function makeResponse($data) {
         if($data === null && json_last_error() !== JSON_ERROR_NONE){
             echo "json decode error: " . json_last_error_msg();
         }
-        error_log(print_r($data, true));
         $ySq = $data['x'];
         $LLeft = sqrt($ySq + $a);
         $LRight = sqrt($d * $ySq + $e);
@@ -169,9 +168,10 @@ function makeResponse($data) {
                 'studWidth' => 30,
                 'wireWidth' => 4,
                 'screwRadius' => 10,
-                'tension' => $tension,
-                't1' => $t1,
-                't2' => $t2,
+                // The following may be used to take ratios of forces.
+                // 'tension' => $tension,
+                // 't1' => $t1,
+                // 't2' => $t2,
             ],
         ];
     }
