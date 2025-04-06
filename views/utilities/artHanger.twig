@@ -203,7 +203,9 @@
         const params = topDiv.getAttribute("data-params").split("-").reduce(
             (params, param, index) => ({...params, [keys[index]]: param}), {}
         );
-        console.log("name/inputs/inputs[name] = ", name, inputs, inputs[name]);
+        console.log("name = ", name);
+        console.log("inputs = ", inputs);
+        console.log("inputs[name] = ", inputs[name]);
         params[name] = inputs[name]?.getAttribute("id");
         console.log("params after changing one field: ", params);
         const newData = keys?.map(key => params?.[key]).join("-");
