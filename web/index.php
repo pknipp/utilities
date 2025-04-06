@@ -140,6 +140,7 @@ foreach ($options as $option) {
       'xys' => $xys,
       'squareAspectRatio' => $squareAspectRatio,
       'ratio' => $ratio,
+      'version' => $version,
     ];
     $name = explode('/', $_SERVER['REQUEST_URI'])[1];
     require ("./utilities/{$name}/makeResponse.php");
