@@ -1,7 +1,5 @@
+
     
-    inputs = inputs.reduce(
-        (inputs, input) => ({input.getAttribute("id"): input}), {},
-    );
 
     const changeInput = name => {
         topDiv.setAttribute("data-have-been-edited", "true");
