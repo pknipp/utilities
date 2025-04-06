@@ -124,6 +124,7 @@ function makeResponse($data) {
             'error' => '',
             'message' => [
                 // inputs
+                'version' => $version,
                 'offset' => $offset,
                 'stud' => $stud,
                 'width' => $width,
