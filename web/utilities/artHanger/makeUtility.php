@@ -53,7 +53,7 @@ function makeArtHanger($name) {
         <script>
             const buttons = Array.from(document.getElementsByTagName('button'));
             buttons.forEach(button => {
-                const url = 'https://utilities-3db59a13e37b.herokuapp.com/artHanger/4/16/28/31/5' + '/' + button.getAttribute('class');
+                const url = 'https://utilities-3db59a13e37b.herokuapp.com/artHanger/' + button.getAttribute('class') + '/   4/16/28/31/5' +
                 button.addEventListener(
                     'click',
                     () => window.location.href = url,
