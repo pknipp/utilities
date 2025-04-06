@@ -196,11 +196,19 @@
     const keys = ["offset", "stud", "width", "length", "height"];
     const topDiv = document.getElementById("top-div");
     const inputs = Array.from(topDiv.getElementsByTagName("input"));
-    console.log("inputs = ", inputs);
     inputs = inputs.reduce(
-        (inputs, input) => ({input.getAttribute("id"): input}), {},
+        (inputs, input) => ({[input.getAttribute("id")]: input}), {},
     );
-
+    const changeInput = name => {
+        topDiv.setAttribute("data-have-been-edited", "true");
+        const params = topDiv.getAttribute("data-params").split("-").reduce(
+            (params, param, index) => ({...params, keys[index]: param}), {}
+        );
+        params[name] = inputs[name].getAttribute("id");
+        const newData = keys.map(key => params[key]).join("-");
+        topDiv.setAttribute("data-params", newData);
+    };
+    Object.values(inputs).forEach(input => input.addEventListener("input", changeInput))  ;
 </script>
 
 {% endblock %}
