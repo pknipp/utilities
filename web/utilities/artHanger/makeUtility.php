@@ -30,9 +30,9 @@ function makeArtHanger($name) {
                 The artwork's weight is shared by the two screws, but this sharing is unequal.  The greater amount of weight is born by the screw that is (laterally) closer to the art's center of gravity.
             </li>
             <li>
-                There are several inequalities that must be satisfied:
+                There are five inequalities that must be satisfied by your inputs:
                 <ul>
-                    <li>  <I>L</I> &gt; <I>W</> &gt; <I>S</I> &gt; <I>O</I> </li>
+                    <li>  <I>L</I> &gt; <I>W</I> &gt; <I>S</I> &gt; <I>O</I> </li>
                     <li> <I>W</I> &gt; 2(<I>S</I> - <I>O</I>) </li>
                     <li> <I>L</I> &gt; |<I>W</I> / 2 - <I>O</I>| + <I>S</I> + |<I>W</I> / 2 + <I>O</I> - <I>S</I>| </li>
                 </ul>
