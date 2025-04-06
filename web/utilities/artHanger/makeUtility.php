@@ -52,8 +52,9 @@ function makeArtHanger($name) {
         'examples' => "<button class='web'>Click here</button> to see the relationship between your inputs, the browser\'s url, and the results.
         <script>
             const buttons = Array.from(document.getElementsByTagName('button'));
+            base = 'https://utilities-3db59a13e37b.herokuapp.com/artHanger/';
             buttons.forEach(button => {
-                const url = 'https://utilities-3db59a13e37b.herokuapp.com/artHanger/' + button.getAttribute('class') + '/   4/16/28/31/5' +
+                const url = base + button.getAttribute('class') + '/4/16/28/31/5';
                 button.addEventListener(
                     'click',
                     () => window.location.href = url,
