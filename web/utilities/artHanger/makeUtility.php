@@ -1,11 +1,16 @@
 <?php
 
 function makeArtHanger($name) {
+    $urlBase = 'https://utilities-3db59a13e37b.herokuapp.com/artHanger/4/16/28/31/5';
     return [
         'name' => $name,
+
         'pretty' => "Art Hanger",
+
         'description' => " calculates stud locations when hanging art asymmetrically with a wire and two screws.",
+
         'background' => "The most secure way to wall-mount artwork is to suspend it from one or more screws drilled into one or more studs.  However to do this from a <i>single</i> screw would limit you to a discrete set of lateral locations on the wall. This constraint is lifted if your artwork width significantly exceeds the    wall-stud spacing (16 inches in the USA).  If so, and if (a) the back of your art has a wire with ends attached symmetrically to it, and if (b) you want to hang your art at a location which is neither exactly on a stud nor exactly halfway between adjacent studs, then the laws of physics and geometry dictate a difference between the altitudes of the two screws which you sink into the (neighboring) studs.  This app solves the nonlinear equation for that altitude difference.",
+
         'instructions' => "type <tt>/O/S/W/L/H</tt>, in which each of the five letters represents a positive number as defined below.
         <ul>
 
@@ -43,16 +48,19 @@ function makeArtHanger($name) {
 
                 </ul>
                 In fact the calculation may even fail if you <I>almost</I> violate any of these constraints.
-        </ul>"
-        ,
-        'examples' => "<button>Click here</button> to see the relationship between your inputs, the browser's url, and the results.
-            <script>
-                const button = document.getElementsByTagName('button')[0];
-                const setExample = () => {
-                    window.location.href = 'https://utilities-3db59a13e37b.herokuapp.com/artHanger/4/16/28/31/5/web';
-                };
-                button.addEventListener('click', e => setExample());
-            </script>
+        </ul>",
+
+        'examples' => "<button class='web'>Click here</button> to see the relationship between your inputs, the browser\'s url, and the results.
+        <script>
+            const buttons = Array.from(document.getElementsByTagName('button'));
+            buttons.forEach(button => {
+                const url = $urlBase + '/' + button.getAttribute('class')};
+                button.addEventListener(
+                    'click',
+                    () => window.location.href = url,
+                );
+            });
+        </script>
         ",
     ];
 }
