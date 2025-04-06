@@ -184,7 +184,7 @@
     <div>art width = {{width}}</div>
     <div>wire length = {{length}}</div>
     <div>art height = {{height}}</div>
-    <button id="submit">Submit</button>
+    <button id="submit" disabled>Submit</button>
     <br/>
     <div><b>Screw positions:</b></div>
     <div>left: {{height - y1 | round(3)}}</div>
@@ -203,6 +203,7 @@
     const button = document.getElementById("submit");
 
     const changeInput = (name, value) => {
+        button.removeAttribute("disabled");
         topDiv.setAttribute("data-have-been-edited", "true");
         const params = topDiv.getAttribute("data-params").split("/").reduce(
             (params, param, index) => ({...params, [keys[index]]: param}), {}
