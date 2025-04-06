@@ -1,5 +1,4 @@
-    const inputs = Array.from(topDiv.getElementsByTagName("input"));
-    console.log("inputs = ", inputs);
+    
     inputs = inputs.reduce(
         (inputs, input) => ({input.getAttribute("id"): input}), {},
     );
