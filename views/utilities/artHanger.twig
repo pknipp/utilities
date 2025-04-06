@@ -3,7 +3,7 @@
 {% block content %}
 <div style="padding: 10px 40px;" >
     <div style="display: flex; flex-direction: column; align-items: center; ">
-        <h4>Inputs</h4>
+        <div><b>Inputs</b></div>
         <div style="display: flex; justify-content: space-evenly; ">
             <div style="padding: 0 20px;">
                 offset <i>O</i> = {{offset}}
@@ -26,7 +26,7 @@
             <span style="padding-left: 15px; "><I>W</I> > 2(<I>S</I> - <I>O</I>)</span>
             <span style="padding-left: 15px; "><I>L</I> > <I>W</I></span>)
         </div>
-        <h4>Results for locations (with same units as for inputs)</h4>
+        <div><b>Results for locations</b> (with same units as for inputs):</div>
         <div style="display: flex; justify-content: space-evenly; ">
             <div style="padding: 0 20px;">
                 left screw: {{(height - y1) | abs | round(3)}} {{ y1 < height ? "below" : "above" }} top edge
@@ -35,7 +35,7 @@
                 right screw: {{(height - y2) | abs | round(3)}} {{ y2 < height ? "below" : "above" }} top edge
             </div>
         </div>
-        <h4>Results for forces <I>F</I> (relative to weight of artwork)</h4>
+        <div><b>*Results for forces <I>F</I></b> (relative to artwork weight)</div>
         <div style="display: flex; justify-content: space-evenly; ">
             <div style="padding: 0 20px;">
                 wire tension: {{tension | round(2)}}
@@ -46,7 +46,7 @@
             <div style="padding: 0 20px;">
                 <I>F</I> on right screw: {{t2 | round(2)}}
             </div>
-        </div>
+        </div><br/>
         <svg width={{widthPx}} height={{heightPx}} style="display: block; margin: 0 auto;" >
             <line
                 id="left stud"
@@ -106,6 +106,14 @@
                 stroke="black"
                 stroke-dasharray="1, 2"
             />
+            <text
+                x={{widthPx / 2}}
+                y={{heightPx - slope * widthPx / 2}}
+                text-anchor="middle"
+                dy="0.32em"
+            >
+                **
+            </text>
             <circle
                 id="right screw"
                 cx={{scale * (width / 2 + stud - offset)}}
@@ -138,7 +146,10 @@
             </text>
         </svg>
         <div>
-            The dotted lines above are continuations of the left- and right wire segments.  The magnitudes of those lines' slopes are identical, and the lines themselves intersect directly above the artwork's center of gravity.
+            * Don't expect these three numbers to satisfy a simple arithmetic consition.  Forces satisfy a vector sum, which is more complicated than the sum ("scalar" sum) that we learn in primary school.
+        </div>
+        <div>
+            ** The dotted lines above are continuations of the left- and right wire segments.  The magnitudes of those lines' slopes are identical, and the lines themselves intersect directly above the artwork's center of gravity.
         </div>
     </div>
     <a href="https://utilities-3db59a13e37b.herokuapp.com/artHanger">Return</a> to instructions page.
