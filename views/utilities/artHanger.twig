@@ -166,7 +166,16 @@
         "data-params"={{offset ~ "-" ~ stud ~ "-" ~ width ~ "-" ~ length ~ "-" ~ height}}
     >
         <div><b>Inputs:</b></div>
-        <div>offset = {{offset}}</div>
+        <div>
+            offset:
+            <input
+                type="text"
+                id="offset"
+                name="offset"
+                required
+                size="5"
+            />
+        </div>
         <div>stud-spacing = {{stud}}</div>
         <div>art width = {{width}}</div>
         <div>wire length = {{length}}</div>
