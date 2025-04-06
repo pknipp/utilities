@@ -205,7 +205,7 @@
         );
         params[name] = value;
         console.log("params after changing one field: ", params);
-        const newData = keys.map(key => params.[key]).join("-");
+        const newData = keys.map(key => params[key]).join("-");
         console.log("newData = ", newData);
         topDiv.setAttribute("data-params", newData);
     };
