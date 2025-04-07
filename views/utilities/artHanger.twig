@@ -269,9 +269,7 @@
         });
         const params = paramStr.split("/");
         params[keys.indexOf(key)] = value;
-        return params.join("/") !== oldParamStr && params.every((param, index) => {
-            return index === currentIndex || isNumeric(param);
-        });
+        return params.every(param => isNumeric(param)) && (oldParamStr != params.join("/"));
     }
 
     const changeInput = (key, value) => {
