@@ -196,7 +196,7 @@
             /></td></tr>
             <tr><td>wire-length</td><td><input
                 type="text"
-                id="offset"
+                id="length"
                 required
                 size="5"
                 value="{{length}}"
@@ -238,7 +238,6 @@
     const button = document.getElementById("submit");
 
     const changeInput = (key, value) => {
-        console.log("changeInput for ", key);
         button.removeAttribute("disabled");
         const params = topDiv.getAttribute("data-params").split("/").reduce(
             (params, param, index) => ({...params, [keys[index]]: param}), {}
@@ -248,12 +247,10 @@
         topDiv.setAttribute("data-params", newData);
     };
 
-    Object.values(inputs).forEach(input => {
-        console.log("input = ", input);
-        input.addEventListener(
+    Object.values(inputs).forEach(input => input.addEventListener(
         "input",
-        e => changeInput(e.target.id, e.target.value),);
-    });
+        e => changeInput(e.target.id, e.target.value),
+    ));
     button.addEventListener("click", () => {
         const base = 'https://utilities-3db59a13e37b.herokuapp.com/artHanger/mobile/';
         window.location.href = base + topDiv.getAttribute('data-params');
