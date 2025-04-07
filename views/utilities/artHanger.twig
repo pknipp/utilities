@@ -5,6 +5,7 @@
 <div
     id="top-div"
     data-params="{{offset ~ "/" ~ stud ~ "/" ~ width ~ "/" ~ length ~ "/" ~ height}}"
+    data-version="none"
 >
 
 {% if version == 'web' %}
@@ -17,18 +18,44 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>
-                            <input
-                                type="text"
-                                id="offset"
-                                required
-                                size="5"
-                                value="{{offset}}"
-                            />
-                        </td>
-                        <td>{{stud}}</td><td>{{width}}</td><td>{{length}}</td><td>{{height}}</td></tr>
+                        <td><input
+                            type="text"
+                            id="offset"
+                            required
+                            size="5"
+                            value="{{offset}}"
+                        /></td>
+                        <td><input
+                            type="text"
+                            id="stud"
+                            required
+                            size="5"
+                            value="{{stud}}"
+                        /></td>
+                        <td><input
+                            type="text"
+                            id="width"
+                            required
+                            size="5"
+                            value="{{width}}"
+                        /></td>
+                        <td><input
+                            type="text"
+                            id="length"
+                            required
+                            size="5"
+                            value="{{length}}"
+                        /></td>
+                        <td><input
+                            type="text"
+                            id="height"
+                            required
+                            size="5"
+                            value="{{height}}"
+                        /></td>
+                    </tr>
                     <tr><td colspan="5"><button id="submit" disabled>
-                        submit
+                        Submit new inputs
                     </button></td></tr>
                 </tbody>
             </table>
@@ -230,6 +257,7 @@
     const keys = ["offset", "stud", "width", "length", "height"];
 
     const topDiv = document.getElementById("top-div");
+    topDiv.setAttribute("data-version", "data-" + {{version}});
     const inputs = Array.from(topDiv.getElementsByTagName("input")).reduce(
         (inputs, input) => ({...inputs, [input.getAttribute("id")]: input}), {},
     );
@@ -250,7 +278,7 @@
         e => changeInput(e.target.id, e.target.value),
     ));
     button.addEventListener("click", () => {
-        const base = 'https://utilities-3db59a13e37b.herokuapp.com/artHanger/mobile/';
+        const base = 'https://utilities-3db59a13e37b.herokuapp.com/artHanger/{{version}}/';
         window.location.href = base + topDiv.getAttribute('data-params');
     });
 </script>
