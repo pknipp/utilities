@@ -263,21 +263,19 @@
     );
     const button = document.getElementById("submit");
     const isNumeric = str => !isNaN(str) && !isNaN(parseFloat(str));
-    const otherParamsAreGood = key => {
+    const paramsAreGood = (key, value) => {
         const [paramStr, oldParamStr] = ["", "old-"].map(inner => {
             return topDiv.getAttribute(`data-${inner}params`);
         });
-        const currentIndex = keys.indexOf(key);
         const params = paramStr.split("/");
-        return paramStr !== oldParamStr && params.every((param, index) => {
+        params[keys.indexOf(key)] = value;
+        return params.join("/") !== oldParamStr && params.every((param, index) => {
             return index === currentIndex || isNumeric(param);
         });
     }
 
     const changeInput = (key, value) => {
-        if (isNumeric(value) && otherParamsAreGood(key)) {
-            button.removeAttribute("disabled");
-        }
+        if (paramsAreGood(key, value)) button.removeAttribute("disabled");
         const params = topDiv.getAttribute("data-params").split("/").reduce(
             (params, param, index) => ({...params, [keys[index]]: param}), {}
         );
