@@ -167,23 +167,50 @@
 
 {% else %}
 
-    <div><b>Inputs:</b></div>
-    <div style="display: flex; justify-content: start;" >
-        <div style="display: flex; flex-direction: column;" >
-            <div style="text-align: right; ">offset:</div>
-            <div style="text-align: right; ">stud-spacing:</div>
-            <div style="text-align: right; ">art width:</div>
-            <div style="text-align: right; ">wire length:</div>
-            <div style="text-align: right; ">art height:</div>
-        </div>
-        <div style="display: flex; flex-direction: column;" >
-            <div><input type="text" id="offset" required size="5" value="{{offset}}" /></div>
-            <div><input type="text" id="stud" required size="5" value="{{stud}}" /></div>
-            <div><input type="text" id="width" required size="5" value="{{width}}" /></div>
-            <div><input type="text" id="length" required size="5" value="{{length}}" /></div>
-            <div><input type="text" id="height" required size="5" value="{{height}}" /></div>
-        </div>
-    </div>
+    <table>
+        <thead>
+            <tr><th colspan="2">Inputs:</th></tr>
+            <tr><th>quantity</th><th>value</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>offset</td><td><input
+                type="text"
+                id="offset"
+                required
+                size="5"
+                value="{{offset}}"
+            /></td></tr>
+            <tr><td>stud-spacing</td><td><input
+                type="text"
+                id="stud"
+                required
+                size="5"
+                value="{{stud}}"
+            /></td></tr>
+            <tr><td>art width</td><td><input
+                type="text"
+                id="width"
+                required
+                size="5"
+                value="{{width}}"
+            /></td></tr>
+            <tr><td>wire-length</td><td><input
+                type="text"
+                id="offset"
+                required
+                size="5"
+                value="{{length}}"
+            /></td></tr>
+            <tr><td>(partial) art height</td><td><input
+                type="text"
+                id="height"
+                required
+                size="5"
+                value="{{height}}"
+            /></td></tr>
+        </tbody>
+    </table>
+
     <button id="submit" disabled>Submit</button>
     <br/>
     <div><b>Screw positions:</b></div>
