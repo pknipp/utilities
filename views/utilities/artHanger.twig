@@ -66,27 +66,25 @@
                 <span style="padding-left: 15px; "><I>W</I> > 2(<I>S</I> - <I>O</I>)</span>
                 <span style="padding-left: 15px; "><I>L</I> > <I>W</I></span>)
             </div><br/>
-            <div><b>Results for locations</b> (with same units as for inputs):</div>
-            <div style="display: flex; justify-content: space-evenly; ">
-                <div style="padding: 0 15px;">
-                    left screw: {{(height - y1) | abs | round(3)}} {{ y1 < height ? "below" : "above" }} top edge
-                </div>
-                <div style="padding: 0 15px;">
-                    right screw: {{(height - y2) | abs | round(3)}} {{ y2 < height ? "below" : "above" }} top edge
-                </div>
-            </div><br/>
-            <div><b>*Results for forces <I>F</I></b> (relative to artwork weight)</div>
-            <div style="display: flex; justify-content: space-evenly; ">
-                <div style="padding: 0 15px;">
-                    wire tension: {{tension | round(2)}}
-                </div>
-                <div style="padding: 0 15px;">
-                    <I>F</I> on left screw: {{t1 | round(2)}}
-                </div>
-                <div style="padding: 0 15px;">
-                    <I>F</I> on right screw: {{t2 | round(2)}}
-                </div>
-            </div><br/>
+
+            <div><b>Results</b></div>
+            <table border="1">
+                <thead>
+                    <tr><th colspan="2">locations (using same units as inputs)</th><th colspan="3">forces (relative to art's weight)</th></tr>
+                    <tr><th>left screw</th><th>right screw</th><th>wire tension</th><th>left screw</th><th>right screw</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{(height - y1) | abs | round(3)}} {{ y1 < height ? "below" : "above" }} top edge</td>
+                        <td>{{(height - y2) | abs | round(3)}} {{ y2 < height ? "below" : "above" }} top edge</td>
+                        <td>{{tension | round(2)}}</td>
+                        <td>{{t1 | round(2)}}</td>
+                        <td>{{t2 | round(2)}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+
             <svg width={{widthPx}} height={{heightPx}} style="display: block; margin: 0 auto;" >
                 <line
                     id="left stud"
