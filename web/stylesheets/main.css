@@ -31,6 +31,9 @@ td {
   border: 1px solid rgb(160 160 160);
   padding: 8px 10px;
 }
+td:first-child {
+  text-align: right;
+}
 
 td:last-of-type {
   text-align: center;
