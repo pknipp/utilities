@@ -277,7 +277,7 @@
     }
 
     const changeInput = (key, value) => {
-        if (paramsAreGood(key, value)) button.removeAttribute("disabled");
+        button.disabled = !paramsAreGood(key, value);
         const params = topDiv.getAttribute("data-params").split("/").reduce(
             (params, param, index) => ({...params, [keys[index]]: param}), {}
         );
