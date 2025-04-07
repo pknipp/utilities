@@ -209,21 +209,15 @@
                 value="{{height}}"
             /></td></tr>
         </tbody>
+        <tbody>
+            <tr><th colspan="2"><button id="submit" disabled>Submit</button></th></tr>
+            <tr><th colspan="2">Results</th></tr>
+        </tbody>
+        <tbody>
+            <tr><td>left screw</td><td>{{height - y1 | round(3)}}</td></tr>
+            <tr><td>right screw</td><td>{{height - y2 | round(3)}}</td></tr>
+        </tbody>
     </table>
-
-    <button id="submit" disabled>Submit</button>
-    <br/>
-    <div><b>Screw positions:</b></div>
-    <div style="display: flex; justify-content: start;" >
-        <div style="display: flex; flex-direction: column;" >
-            <div style="text-align: right; ">left:</div>
-            <div style="text-align: right; ">right:</div>
-        </div>
-        <div style="display: flex; flex-direction: column;" >
-            <div "style="text-align: left; ">{{height - y1 | round(3)}}</div>
-            <div "style="text-align: left; ">{{height - y2 | round(3)}}</div>
-        </div>
-    </div>
 
 {% endif %}
 </div>
