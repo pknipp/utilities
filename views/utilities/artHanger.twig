@@ -54,9 +54,9 @@
                             value="{{height}}"
                         /></td>
                     </tr>
-                    <tr><td colspan="5"><button id="submit" disabled>
+                    <tr><th colspan="5"><button id="submit" disabled>
                         Submit new inputs
-                    </button></td></tr>
+                    </button></th></tr>
                 </tbody>
             </table>
 
@@ -257,7 +257,7 @@
     const keys = ["offset", "stud", "width", "length", "height"];
 
     const topDiv = document.getElementById("top-div");
-    topDiv.setAttribute("data-version", "data-" + {{version}});
+    topDiv.setAttribute("data-version", "data-" + "{{version}}");
     const inputs = Array.from(topDiv.getElementsByTagName("input")).reduce(
         (inputs, input) => ({...inputs, [input.getAttribute("id")]: input}), {},
     );
