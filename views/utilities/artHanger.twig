@@ -264,7 +264,7 @@
     const button = document.getElementById("submit");
 
     const changeInput = (key, value) => {
-        if (value && !isNaN(str) && !isNaN(parseFloat(value))) {
+        if (value && !isNaN(value) && !isNaN(parseFloat(value))) {
             button.removeAttribute("disabled");
         }
         const params = topDiv.getAttribute("data-params").split("/").reduce(
