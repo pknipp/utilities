@@ -206,13 +206,11 @@
 
     const topDiv = document.getElementById("top-div");
     const inputs = Array.from(topDiv.getElementsByTagName("input")).reduce(
-        (inputs, input) => ({[input.getAttribute("id")]: input}), {},
+        (inputs, input) => ({...inputs, [input.getAttribute("id")]: input}), {},
     );
-    console.log("inputs = ", inputs);
     const button = document.getElementById("submit");
 
     const changeInput = (key, value) => {
-        console.log("top of changeInput");
         button.removeAttribute("disabled");
         const params = topDiv.getAttribute("data-params").split("/").reduce(
             (params, param, index) => ({...params, [keys[index]]: param}), {}
