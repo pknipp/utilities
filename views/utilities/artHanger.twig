@@ -238,6 +238,7 @@
     const button = document.getElementById("submit");
 
     const changeInput = (key, value) => {
+        console.log("changeInput for ", key);   
         button.removeAttribute("disabled");
         const params = topDiv.getAttribute("data-params").split("/").reduce(
             (params, param, index) => ({...params, [keys[index]]: param}), {}
