@@ -269,10 +269,6 @@
         });
         const params = paramStr.split("/");
         params[keys.indexOf(key)] = value;
-        console.log("allAreNumeric = ", params.every(param => isNumeric(param)));
-        console.log("oldParamStr = ", oldParamStr);
-        console.log("params.join('/') = ", params.join("/"));
-        console.log("paramStr has unchanged = ", oldParamStr !== params.join("/"))
         return params.every(param => isNumeric(param)) && (oldParamStr !== params.join("/"));
     }
 
